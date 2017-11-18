@@ -1,3 +1,26 @@
+# Compiled class file
+*.class
+
+# ER diagrams
+*.svg
+*.dia
+
+# Log file
+*.log
+
+# Package Files 
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# emacs backup files
+*~
+\#*\#
+
+# github maven defaults
 target/
 pom.xml.tag
 pom.xml.releaseBackup
