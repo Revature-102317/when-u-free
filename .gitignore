@@ -20,6 +20,9 @@
 *~
 \#*\#
 
+# files containing passwords
+hibernate.cfg.xml
+
 # github maven defaults
 target/
 pom.xml.tag
