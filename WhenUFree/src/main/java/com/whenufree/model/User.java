@@ -1,19 +1,23 @@
-package com.whenufree.model;
+package main.java.com.whenufree.model;
 
 import javax.persistence.Entity;
+
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Id;
 
 @Entity
-@Table(name="usr")
+@Table(name="user")
 public class User{
-    private long id;
+    private long userId;
     private String email;
     private String firstname;
     private String lastname;
     private String phone;
     private String passwordHash;
+    
+    //no args constructor
+    public User() {}
     
     /**
      * Gets the value of id
@@ -21,9 +25,9 @@ public class User{
      * @return the value of id
      */
     @Id
-    @Column(name="id")
-    public long getId() {
-	return this.id;
+    @Column(name="userid")
+    public long getUserId() {
+	return this.userId;
     }
 
     /**
@@ -31,8 +35,8 @@ public class User{
      *
      * @param argId Value to assign to this.id
      */
-    public void setId(final long argId) {
-	this.id = argId;
+    public void setuserId(final long argId) {
+	this.userId = argId;
     }
 
     /**
@@ -130,5 +134,13 @@ public class User{
 	this.passwordHash = argPasswordHash;
     }
 
+    //To String Method
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", email=" + email + ", firstname=" + firstname + ", lastname=" + lastname
+				+ ", phone=" + phone + ", passwordHash=" + passwordHash + "]";
+	}
+
+    
     
 }
