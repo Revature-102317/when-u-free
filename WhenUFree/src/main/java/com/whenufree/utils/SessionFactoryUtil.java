@@ -1,4 +1,4 @@
-package com.whenufree.utils;
+package main.java.com.whenufree.utils;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

@@ -1,10 +1,10 @@
-package com.whenufree.web;
+package main.java.com.whenufree.web;
     
-import com.whenufree.utils.SessionFactoryUtil;
-
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+
+import main.java.com.whenufree.utils.SessionFactoryUtil;
 
 
 @WebListener
