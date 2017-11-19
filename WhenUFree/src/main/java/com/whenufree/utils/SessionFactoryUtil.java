@@ -16,32 +16,48 @@ import java.util.EnumSet;
 
 
 public class SessionFactoryUtil{
+    
     private static SessionFactory sf;
     
+    //Used by main method for generating DDL
+    Metadata metadata;
+	
     static{
-	System.out.println(1);
 	// Create registry
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure("hibernate.cfg.xml")
             .build();
-	System.out.println(2);
         // Create MetadataSources
         MetadataSources sources = new MetadataSources(registry);
-	System.out.println(3);
         // Create Metadata
-        Metadata metadata = sources.getMetadataBuilder().build();
-	System.out.println(4);
-	SchemaExport export = new SchemaExport();
-	export.setOutputFile("create-database.ddl").create(EnumSet.of(TargetType.SCRIPT), metadata);
-	System.out.println(5);
+        metadata = sources.getMetadataBuilder().build();
         // Create SessionFactory
         sf = metadata.getSessionFactoryBuilder().build();
     }
 
+    /**
+     * Empty method used by the context listener to force static initialization
+     * upon start-up
+     */
+    public static void init(){
+    }
+
+    /**
+     * Gets a session from the SessionFactory
+     * @return a session
+     */
     public static Session getSession(){
 	return sf.openSession();
     }
 
+    /**
+     * Main method, used to automatically generated DDL from objects for 
+     * schema creation.
+     */
     public static void main(String[] args){
+	//Export DDL for schema
+	SchemaExport export = new SchemaExport();
+	export.setOutputFile("create-database.ddl").create(EnumSet.of(TargetType.SCRIPT), metadata);
+
     }
 }
