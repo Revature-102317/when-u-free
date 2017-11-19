@@ -20,7 +20,7 @@ public class SessionFactoryUtil{
     private static SessionFactory sf;
     
     //Used by main method for generating DDL
-    Metadata metadata;
+    private static Metadata metadata;
 	
     static{
 	// Create registry
@@ -44,10 +44,21 @@ public class SessionFactoryUtil{
 
     /**
      * Gets a session from the SessionFactory
+     *
      * @return a session
      */
     public static Session getSession(){
 	return sf.openSession();
+    }
+
+    /**
+     * Gets the SessionFactory, used by the ContextListener to close the
+     * factory upon destruction.
+     *
+     * @return the SessionFactory
+     */
+    public static SessionFactory getSessionFactory(){
+	return sf;
     }
 
     /**
