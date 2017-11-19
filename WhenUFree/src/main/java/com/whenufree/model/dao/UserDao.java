@@ -1,6 +1,6 @@
-package com.whenufree.model.dao;
+package main.java.com.whenufree.model.dao;
 
-import com.whenufree.model.dao.impl.BaseDao;
+import main.java.com.whenufree.model.dao.impl.BaseDao;
 
 public class UserDao extends BaseDao{
 
