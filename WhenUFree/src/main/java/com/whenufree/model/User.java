@@ -1,10 +1,19 @@
-package main.java.com.whenufree.model;
+package com.whenufree.model;
+
+import java.util.Set;
+import java.util.HashSet;
 
 import javax.persistence.Entity;
-
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
+import javax.persistence.CascadeType;
+
+import com.whenufree.model.PollOption;
 
 @Entity
 @Table(name="user")
@@ -15,9 +24,13 @@ public class User{
     private String lastname;
     private String phone;
     private String passwordHash;
+
+    private Set<PollOption> votes;
     
     //no args constructor
-    public User() {}
+    public User() {
+	votes = new HashSet<>();
+    }
     
     /**
      * Gets the value of id
@@ -134,12 +147,26 @@ public class User{
 	this.passwordHash = argPasswordHash;
     }
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "votes", joinColumns = {
+	    @JoinColumn(name = "userid", nullable = false, updatable = false)},
+	    inverseJoinColumns = {
+		@JoinColumn(name = "pollid", nullable = false, updatable = false, referencedColumnName = "poll_pollid"),
+		@JoinColumn(name = "poll_option_descrption", nullable = false, updatable = false, referencedColumnName = "description")})
+    public Set<PollOption> getVotes(){
+	return this.votes;
+    }
+
+    public void setVotes(Set<PollOption> votes){
+	this.votes = votes;
+    }
+
     //To String Method
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", email=" + email + ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", phone=" + phone + ", passwordHash=" + passwordHash + "]";
-	}
+    @Override
+    public String toString() {
+	return "User [userId=" + userId + ", email=" + email + ", firstname=" + firstname + ", lastname=" + lastname
+	    + ", phone=" + phone + ", passwordHash=" + passwordHash + "]";
+    }
 
     
     
