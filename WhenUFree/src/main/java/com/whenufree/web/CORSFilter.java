@@ -1,4 +1,4 @@
-package main.java.com.whenufree.web;
+package com.whenufree.web;
 
 import javax.servlet.*;
 

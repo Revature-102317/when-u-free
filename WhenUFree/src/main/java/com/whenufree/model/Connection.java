@@ -1,4 +1,4 @@
-package main.java.com.whenufree.model;
+package com.whenufree.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
