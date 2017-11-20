@@ -1,4 +1,4 @@
-package main.java.com.whenufree.utils;
+package com.whenufree.utils;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,7 +9,6 @@ import org.hibernate.boot.spi.MetadataImplementor;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.tool.schema.TargetType;
-//import org.hibernate.tool.hbm2ddl.Target;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
 import java.util.EnumSet;
