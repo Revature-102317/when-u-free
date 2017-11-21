@@ -3,6 +3,8 @@ package com.whenufree.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,7 +30,9 @@ public class Connection {
 	}
 	
 	//Getters and setters for the userid
-	@Column(name = "userid")
+	@OneToMany
+	@JoinColumn(name="userid", referencedColumnName="userid")
+	//declaring foreign key
 	public long getUserId() {
 		return userId;
 	}
@@ -37,7 +41,8 @@ public class Connection {
 		this.userId = userId;
 	}
 
-	@Column(name = "friendgroupid")
+	@OneToMany
+	@JoinColumn(name="friendgroupid", referencedColumnName="friendgroupid")
 	public long getFriendGroupId() {
 		return friendGroupId;
 	}
