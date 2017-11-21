@@ -16,7 +16,7 @@ import javax.persistence.CascadeType;
 import com.whenufree.model.PollOption;
 
 @Entity
-@Table(name="user")
+@Table(name="usr")
 public class User{
     private long userId;
     private String email;
