@@ -118,7 +118,7 @@ public class Message{
      *
      * @return the value of poll
      */
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pollid", referencedColumnName = "pollid", nullable = true)
     public final Poll getPoll() {
 	return this.poll;

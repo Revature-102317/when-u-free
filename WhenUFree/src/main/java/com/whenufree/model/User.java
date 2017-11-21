@@ -149,10 +149,8 @@ public class User{
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "votes", joinColumns = {
-	    @JoinColumn(name = "userid", nullable = false, updatable = false)},
-	    inverseJoinColumns = {
-		@JoinColumn(name = "pollid", nullable = false, updatable = false, referencedColumnName = "poll_pollid"),
-		@JoinColumn(name = "poll_option_descrption", nullable = false, updatable = false, referencedColumnName = "description")})
+	    @JoinColumn(name = "userid", referencedColumnName = "userid", nullable = false, updatable = false)},
+	    inverseJoinColumns = {@JoinColumn(name = "polloptionid", nullable = false, updatable = false, referencedColumnName = "polloptionid")})
     public Set<PollOption> getVotes(){
 	return this.votes;
     }
