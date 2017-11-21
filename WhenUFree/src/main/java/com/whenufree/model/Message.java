@@ -10,6 +10,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.whenufree.model.FriendGroup;
 import com.whenufree.model.Poll;
@@ -71,6 +75,7 @@ public class Message{
      * @return the value of timestamp
      */
     @Column(name = "timestamp")
+    @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     public LocalDateTime getTimestamp() {
 	return this.timestamp;
