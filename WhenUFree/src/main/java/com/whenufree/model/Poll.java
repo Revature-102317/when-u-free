@@ -15,9 +15,6 @@ import com.whenufree.model.FriendGroup;
 public class Poll{
     private Long pollId;
     private String description;
-
-    private FriendGroup friendGroup;
-
     
     
     /**
@@ -57,27 +54,6 @@ public class Poll{
      */
     public void setDescription(final String argDescription) {
 	this.description = argDescription;
-    }
-
-    
-    /**
-     * Gets the value of friendGroup
-     *
-     * @return the value of friendGroup
-     */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "friendgroupid")
-    public FriendGroup getFriendGroup() {
-	return this.friendGroup;
-    }
-
-    /**
-     * Sets the value of friendGroup
-     *
-     * @param argFriendGroup Value to assign to this.friendGroup
-     */
-    public void setFriendGroup(final FriendGroup argFriendGroup) {
-	this.friendGroup = argFriendGroup;
     }
 
 }
