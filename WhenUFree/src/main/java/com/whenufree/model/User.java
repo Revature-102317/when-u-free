@@ -18,7 +18,7 @@ import com.whenufree.model.PollOption;
 @Entity
 @Table(name="usr")
 public class User{
-    private long userId;
+    private Long userId;
     private String email;
     private String firstname;
     private String lastname;
@@ -40,7 +40,7 @@ public class User{
      */
     @Id
     @Column(name="userid")
-    public long getUserId() {
+    public Long getUserId() {
 	return this.userId;
     }
 
@@ -49,7 +49,7 @@ public class User{
      *
      * @param argId Value to assign to this.id
      */
-    public void setuserId(final long argId) {
+    public void setuserId(final Long argId) {
 	this.userId = argId;
     }
 
