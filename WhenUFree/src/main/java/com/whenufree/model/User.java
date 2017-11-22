@@ -133,7 +133,7 @@ public class User{
      *
      * @return the value of passwordHash
      */
-    @Column(name="password_hash")
+    @Column(name="passwordhash")
     public String getPasswordHash() {
 	return this.passwordHash;
     }
@@ -147,12 +147,12 @@ public class User{
 	this.passwordHash = argPasswordHash;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "votes", joinColumns = {
-	    @JoinColumn(name = "userid", nullable = false, updatable = false)},
-	    inverseJoinColumns = {
-		@JoinColumn(name = "pollid", nullable = false, updatable = false, referencedColumnName = "poll_pollid"),
-		@JoinColumn(name = "poll_option_descrption", nullable = false, updatable = false, referencedColumnName = "description")})
+    
+
+    // @JoinTable(name = "votes", joinColumns = {
+    // 	    @JoinColumn(name = "userid", referencedColumnName = "userid", nullable = false, updatable = false)},
+    // 	    inverseJoinColumns = {@JoinColumn(name = "polloptionid", nullable = false, updatable = false, referencedColumnName = "polloptionid")})
+    @ManyToMany(mappedBy = "voters", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Set<PollOption> getVotes(){
 	return this.votes;
     }
