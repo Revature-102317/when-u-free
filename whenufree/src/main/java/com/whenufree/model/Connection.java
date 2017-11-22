@@ -34,7 +34,7 @@ public class Connection {
 	@ManyToOne
 	@JoinColumn(name="userid", referencedColumnName="userid")
 	//declaring foreign key
-	public User getUserId() {
+	public User getUser() {
 		return user;
 	}
 
