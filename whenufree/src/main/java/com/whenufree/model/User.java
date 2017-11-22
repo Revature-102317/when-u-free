@@ -18,7 +18,7 @@ import com.whenufree.model.PollOption;
 @Entity
 @Table(name="usr")
 public class User{
-    private long userId;
+    private Long userId;
     private String email;
     private String firstname;
     private String lastname;
@@ -26,10 +26,11 @@ public class User{
     private String passwordHash;
 
     private Set<PollOption> votes;
-    
+
     //no args constructor
     public User() {
 	votes = new HashSet<>();
+	friendList = new HashSet<>();
     }
     
     /**
@@ -39,7 +40,7 @@ public class User{
      */
     @Id
     @Column(name="userid")
-    public long getUserId() {
+    public Long getUserId() {
 	return this.userId;
     }
 
@@ -48,7 +49,7 @@ public class User{
      *
      * @param argId Value to assign to this.id
      */
-    public void setuserId(final long argId) {
+    public void setuserId(final Long argId) {
 	this.userId = argId;
     }
 
@@ -160,6 +161,19 @@ public class User{
     public void setVotes(Set<PollOption> votes){
 	this.votes = votes;
     }
+
+    @ManyToMany(mappedBy= "friendList", fetch= FetchType.LAZY, cascade= CascadeType.ALL)
+    @JoinTable(name= "friendslist",
+            joinColumns = {@JoinColumn(name= "friendId", nullable= false)},
+            inverseJoinColumns =  {@JoinColumn(name= "userId")})
+    private Set<User> friendList = new HashSet<>();
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name= "friendslist",
+            joinColumns ={@JoinColumn(name= "userId", nullable= false)},
+            inverseJoinColumns = {@JoinColumn(name= "friendId")})
+    public Set<User> getFriendList() { return this.friendList; }
+
+    public void setFriendList(Set<User> friendList) { this.friendList = friendList; }
 
     //To String Method
     @Override
