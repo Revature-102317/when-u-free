@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Table(name = "timeslot")
 public class TimeSlot {
 	
-	private long timeSlotId;
+	private Long timeSlotId;
 	private String dateTime;
 	
 	//no args constructor
@@ -19,11 +19,11 @@ public class TimeSlot {
 	//Getters and setters for the time slot ID
 	@Id
 	@Column(name = "timeslotid")
-	public long getTimeSlotId() {
+	public Long getTimeSlotId() {
 		return timeSlotId;
 	}
 
-	public void setTimeSlotId(long timeSlotId) {
+	public void setTimeSlotId(Long timeSlotId) {
 		this.timeSlotId = timeSlotId;
 	}
 
