@@ -3,6 +3,8 @@ package com.whenufree.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -31,8 +33,8 @@ public class FreeTime {
 		this.freeTimeId = id;
 	}
 
-	@Id
-	@Column(name = "userId")
+	@OneToMany
+	@JoinColumn(name="userid", referencedColumnName="userid")
 	public long getUserId() {
 		return userId;
 	}
@@ -41,8 +43,8 @@ public class FreeTime {
 		this.userId = userId;
 	}
 
-	@Id
-	@Column(name = "timeSlotId")
+	@OneToMany
+	@JoinColumn(name="timeslotid", referencedColumnName="timeslotid")
 	public long getTimeSlotId() {
 		return timeSlotId;
 	}
