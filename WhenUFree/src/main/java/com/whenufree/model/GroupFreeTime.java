@@ -91,7 +91,7 @@ public class GroupFreeTime {
      *
      * @param friendGroup the value of the new friendGroup
      */
-    public void setFriendGroup(FriendGroup riendGroup) {
+    public void setFriendGroup(FriendGroup friendGroup) {
         this.friendGroup = friendGroup;
     }
 
