@@ -1,0 +1,31 @@
+
+<div>
+  {{errorMessage}}
+</div>
+
+<form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+  <div class="row">
+    
+    <div class = "col-4">
+      <label for="username">Username:</label>
+      <input type="text" class="form-control" id="username"
+	     required
+	     [(ngModel)]="username" name ="username">
+    </div>
+    
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control" id="password"
+	     required
+	     [(ngModel)]="password" name ="password">
+    </div>
+  </div>
+  <div>
+    <button type="submit" class="btn btn-success"
+	    [disabled]="!loginForm.form.valid">
+      Log In
+    </button>
+  </div>
+</form>
