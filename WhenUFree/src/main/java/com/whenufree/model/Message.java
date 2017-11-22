@@ -24,6 +24,7 @@ public class Message{
     private Long messageId;
     private String text;
     private LocalDateTime timestamp;
+    private Boolean pinned;
     
     private FriendGroup friendGroup;
     private Poll poll;
@@ -45,7 +46,7 @@ public class Message{
      *
      * @param argPollId Value to assign to this.pollId
      */
-    public void setMessageId(final Long argMessageId) {
+    public void setMessageId(Long argMessageId) {
 	this.messageId = argMessageId;
     }
 
@@ -64,7 +65,7 @@ public class Message{
      *
      * @param argDescription Value to assign to this.description
      */
-    public void setText(final String argText) {
+    public void setText(String argText) {
 	this.text = argText;
     }
 
@@ -74,8 +75,7 @@ public class Message{
      *
      * @return the value of timestamp
      */
-    @Column(name = "timestamp")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "tstamp")
     @CreationTimestamp
     public LocalDateTime getTimestamp() {
 	return this.timestamp;
@@ -90,6 +90,25 @@ public class Message{
 	this.timestamp = argTimestamp;
     }
 
+
+    /**
+     * Gets the value of pinned
+     *
+     * @return the value of pinned
+     */
+    @Column(name = "pinned")
+    public Boolean getPinned() {
+	return this.pinned;
+    }
+
+    /**
+     * Sets the value of pinned
+     *
+     * @param argPinned Value to assign to this.pinned
+     */
+    public void setPinned(Boolean argPinned) {
+	this.pinned = argPinned;
+    }
 
     
     /**
@@ -120,7 +139,7 @@ public class Message{
      */
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pollid", referencedColumnName = "pollid", nullable = true)
-    public final Poll getPoll() {
+    public Poll getPoll() {
 	return this.poll;
     }
 
