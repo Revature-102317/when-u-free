@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name = "Connection")
 public class Connection {
 
-	private long connectionId;
+	private Long connectionId;
 	private long userId;
 	private long friendGroupId;
 	private short isAdmin;
@@ -21,11 +21,11 @@ public class Connection {
 
 	@Id
 	@Column(name = "connectionId")
-	public long getConnectionId() {
+	public Long getConnectionId() {
 		return connectionId;
 	}
 
-	public void setConnectionId(long connectionId) {
+	public void setConnectionId(Long connectionId) {
 		this.connectionId = connectionId;
 	}
 	

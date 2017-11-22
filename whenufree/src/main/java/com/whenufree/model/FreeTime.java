@@ -12,24 +12,24 @@ import javax.persistence.Table;
 public class FreeTime {
 
 	//free time id
-	private long freeTimeId;
+	private Long freeTimeId;
 	//connections
 	private long userId;
 	private long timeSlotId;
 	//scheduled/default
-	private short scheduled;
-	private short isDefault;
+	private Short scheduled;
+	private Short isDefault;
 	
 	public FreeTime() {}
 
 	//getters and setters
 	@Id
 	@Column(name = "freetimeid")
-	public long getFreeTimeId() {
+	public Long getFreeTimeId() {
 		return freeTimeId;
 	}
 
-	public void setfreeTimeId(long id) {
+	public void setfreeTimeId(Long id) {
 		this.freeTimeId = id;
 	}
 
