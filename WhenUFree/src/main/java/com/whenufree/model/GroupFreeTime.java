@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
   * Created by Desmond George 11/20/2017
@@ -16,13 +17,13 @@ public class GroupFreeTime {
 
     @Id
     @Column(name= "groupfreetimeid")
-    private long groupFreeTimeId;
+    private Long groupFreeTimeId;
      /**
      * Gets the GroupFreeTime Id.
      *
      * @return the value of groupFreeTimeId
      */
-    public long getGroupFreeTimeId() {
+    public Long getGroupFreeTimeId() {
         return groupFreeTimeId;
     }
 
@@ -31,13 +32,13 @@ public class GroupFreeTime {
      *
      * @param groupFreeTimeId The new groupFreeTimeId value
      */
-    public void setGroupFreeTimeId(long groupFreeTimeId) { groupFreeTimeId = groupFreeTimeId;
+    public void setGroupFreeTimeId(Long groupFreeTimeId) { groupFreeTimeId = groupFreeTimeId;
     }
 
     @Column(name= "numusers")
-    private int numUsers;
+    private Integer numUsers;
     /**
-     * Gets the number of users in the friend group.
+     * Gets the number of users available at this particular free time.
      *
      * @return the value of numUsers
      */
@@ -45,71 +46,64 @@ public class GroupFreeTime {
         return numUsers;
     }
     /**
-     * Sets the number of users in the friend group.
+     * Sets the number of available users.
      *
-     * @param numUsers the new value of the number of users in the friend group
+     * @param numUsers the new value of available users
      */
-    public void setNumUsers(int numUsers) {
+    public void setNumUsers(Integer numUsers) {
         this.numUsers = numUsers;
     }
 
     // Associative table so we add the primary keys of
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name= "timeslotid", referencedColumnName= "timeslotid")
-    private long timeSlotId;
+    private TimeSlot timeSlot;
     /**
-     * Get the timeSlotId. This Colum contains a foreign key associated with the TimeSlot table.
-     * This is an associative entity.
+     * Get the timeSlotId column. This Column contains a foreign key associated with the TimeSlot table.
      *
-     * @return the value of timeSlotId
+     * @return the value of timeSlot
      */
-    public long getTimeslotId() {
-        return timeSlotId;
+    public TimeSlot getTimeslot() {
+        return timeSlot;
     }
     /**
      * Adds a new time slot to the list of available slots to use when determining potential free time.
      *
-     * @param timeSlotId the new time slot value we are adding to the group free time.
+     * @param timeSlot the new time slot value we are adding to the group free time.
      */
-    public void setTimeslotId(long timeSlotId) {
-        this.timeSlotId = timeSlotId;
+    public void setTimeslot(TimeSlot timeSlot) {
+        this.timeSlot = timeSlot;
     }
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name= "friendgroupid", referencedColumnName= "friendgroupid")
-    private long friendGroupId;
+    private FriendGroup friendGroup;
     /**
-     * Get the friendGroupId. This Colum contains a foregin key associated with the FriendGroup table.
-     * This is an associative entity.
+     * Get the friendGroupId column. This Column contains a foregin key associated with the FriendGroup table.
      *
-     * @return the value of friendGroupId
+     * @return the value of friendGroup
      */
-    public long getFriendGroupId() {
-        return friendGroupId;
+    public FriendGroup getFriendGroup() {
+        return friendGroup;
     }
     /**
-     * Set the value of the friend group Id that we are using.
+     * Set the friendGroup that we are using.
      *
-     * @param friendGroupId the value of the new friendGroupId
+     * @param friendGroup the value of the new friendGroup
      */
-    public void setFriendGroupId(long friendGroupId) {
-        this.friendGroupId = friendGroupId;
+    public void setFriendGroup(FriendGroup riendGroup) {
+        this.friendGroup = friendGroup;
     }
 
     public GroupFreeTime() { }
-
-    public GroupFreeTime(long groupFreeTimeId, int numUsers) {
-        this.groupFreeTimeId = groupFreeTimeId;
-        this.numUsers = numUsers;
-    }
 
     @Override
     public String toString() {
         return "groupFreeTime { " +
                 "groupFreeTimeId: " + groupFreeTimeId +
                 "numUsers: " + numUsers +
-                "timeSlotId: " + timeSlotId +
-                "friendGroupId: " + friendGroupId +
+                "timeSlotId: " + timeSlot +
+                "friendGroupId: " + friendGroup +
                 '}';
     }
 }
