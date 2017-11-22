@@ -26,10 +26,11 @@ public class User{
     private String passwordHash;
 
     private Set<PollOption> votes;
-    
+
     //no args constructor
     public User() {
 	votes = new HashSet<>();
+	friendList = new HashSet<>();
     }
     
     /**
@@ -160,6 +161,19 @@ public class User{
     public void setVotes(Set<PollOption> votes){
 	this.votes = votes;
     }
+
+    @ManyToMany(mappedBy= "friendList", fetch= FetchType.LAZY, cascade= CascadeType.ALL)
+    @JoinTable(name= "friendslist",
+            joinColumns = {@JoinColumn(name= "friendId", nullable= false)},
+            inverseJoinColumns =  {@JoinColumn(name= "userId")})
+    private Set<User> friendList = new HashSet<>();
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name= "friendslist",
+            joinColumns ={@JoinColumn(name= "userId", nullable= false)},
+            inverseJoinColumns = {@JoinColumn(name= "friendId")})
+    public Set<User> getFriendList() { return this.friendList; }
+
+    public void setFriendList(Set<User> friendList) { this.friendList = friendList; }
 
     //To String Method
     @Override
