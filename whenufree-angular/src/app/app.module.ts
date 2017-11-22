@@ -7,16 +7,20 @@ import {HttpClientModule} from '@angular/common/http';
 import {HomepageService} from './services/homepage.service';
 import { HomepageComponent } from './homepage/homepage.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { WhenufreeRoutingModule } from './whenufree-routing/whenufree-routing.module';
+import { SettimeComponent } from './settime/settime.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
-    NavbarComponent
+    NavbarComponent,
+    SettimeComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    WhenufreeRoutingModule
   ],
   providers: [HomepageService],
   bootstrap: [AppComponent]
