@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -14,8 +15,8 @@ public class FreeTime {
 	//free time id
 	private Long freeTimeId;
 	//connections
-	private long userId;
-	private long timeSlotId;
+	private User user;
+	private TimeSlot timeSlot;
 	//scheduled/default
 	private Short scheduled;
 	private Short isDefault;
@@ -33,24 +34,24 @@ public class FreeTime {
 		this.freeTimeId = id;
 	}
 
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name="userid", referencedColumnName="userid")
-	public long getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name="timeslotid", referencedColumnName="timeslotid")
-	public long getTimeSlotId() {
-		return timeSlotId;
+	public TimeSlot getTimeSlot() {
+		return timeSlot;
 	}
 
-	public void setTimeId(long timeSlotId) {
-		this.timeSlotId = timeSlotId;
+	public void setTime(TimeSlot timeSlot) {
+		this.timeSlot = timeSlot;
 	}
 
 	@Id
@@ -76,7 +77,7 @@ public class FreeTime {
 	//to String method
 	@Override
 	public String toString() {
-		return "FreeTime [freeTimeiId=" + freeTimeId + ", userId=" + userId + ", timeSlotId=" + timeSlotId + ", scheduled=" + scheduled
+		return "FreeTime [freeTimeiId=" + freeTimeId + ", userId=" + user.getUserId() + ", timeSlotId=" + timeSlot.getTimeSlotId() + ", scheduled=" + scheduled
 				+ ", isDefault=" + isDefault + "]";
 	}
 	
