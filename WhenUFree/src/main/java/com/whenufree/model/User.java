@@ -16,7 +16,7 @@ import javax.persistence.CascadeType;
 import com.whenufree.model.PollOption;
 
 @Entity
-@Table(name="user")
+@Table(name="usr")
 public class User{
     private long userId;
     private String email;
@@ -133,7 +133,7 @@ public class User{
      *
      * @return the value of passwordHash
      */
-    @Column(name="password_hash")
+    @Column(name="passwordhash")
     public String getPasswordHash() {
 	return this.passwordHash;
     }

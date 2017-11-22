@@ -148,7 +148,7 @@ public class PollOption{
      * @return the value of poll
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    //@MapsId("pollId")
+    @JoinColumn(name = "pollid", referencedColumnName = "pollid", nullable = false)
     public Poll getPoll() {
 	return this.poll;
     }
@@ -163,12 +163,8 @@ public class PollOption{
     }
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "votes", joinColumns = {
-	    @JoinColumn(name = "polloptionid", nullable = false, updatable = false, referencedColumnName = "polloptionid")},
-	inverseJoinColumns = { @JoinColumn(name = "userid",
-					   referencedColumnName = "userid",
-					   nullable = false, updatable = false)})
-					   public Set<User> getVoters(){
+    @JoinTable(name = "votes", joinColumns = { @JoinColumn(name = "polloptionid", nullable = false, updatable = false, referencedColumnName = "polloptionid")}, inverseJoinColumns = { @JoinColumn(name = "userid", referencedColumnName = "userid", nullable = false, updatable = false)})
+    public Set<User> getVoters(){
 	return this.voters;
     }
 
