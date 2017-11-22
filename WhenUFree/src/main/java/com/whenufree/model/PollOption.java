@@ -23,90 +23,132 @@ import com.whenufree.model.User;
 @Entity
 @Table(name = "polloption")
 public class PollOption{
- 
-    private PollOptionPk pk;
+
+    private Long pollOptionId;
+    private String description;
     private Poll poll;
     private Set<User> voters;
     
-    public static class PollOptionPk implements Serializable{
-	private Long pollId;
-	private String description;
+    // public static class PollOptionPk implements Serializable{
+    // 	private Long pollId;
+    // 	private String description;
 
-	private PollOptionPk(){
-	}
+    // 	private PollOptionPk(){
+    // 	}
 
-	private PollOptionPk(Long pollId, String description){
-	    this.pollId = pollId;
-	    this.description = description;
-	}
+    // 	private PollOptionPk(Long pollId, String description){
+    // 	    this.pollId = pollId;
+    // 	    this.description = description;
+    // 	}
 
-	@Column(name = "pollid")
-	public Long getPollId(){
-	    return this.pollId;
-	}
+    // 	@Column(name = "pollid")
+    // 	public Long getPollId(){
+    // 	    return this.pollId;
+    // 	}
 
-	public void setPollId(Long pollId){
-	    this.pollId = pollId;
-	}
+    // 	public void setPollId(Long pollId){
+    // 	    this.pollId = pollId;
+    // 	}
 
-	@Column(name = "description")
-	public String getDescription(){
-	    return this.description;
-	}
+    // 	@Column(name = "description")
+    // 	public String getDescription(){
+    // 	    return this.description;
+    // 	}
 
-	public void setDescription(String description){
-	    this.description = description;
-	}
+    // 	public void setDescription(String description){
+    // 	    this.description = description;
+    // 	}
 
-	@Override
-	public boolean equals(Object o){
-	    boolean ret = true;
-	    if (o == null || getClass() != o.getClass()){
-		ret = false;
-	    }
-	    else{
-		PollOptionPk that = (PollOptionPk) o;
-		ret = this.pollId.equals(that.getPollId()) &&
-		    this.description.equals(that.getDescription());
-	    }
-	    return ret;
-	}
-	@Override
-	public int hashCode(){
-	    return Objects.hash(this.pollId, this.description);
-	}
-    }
+    // 	@Override
+    // 	public boolean equals(Object o){
+    // 	    boolean ret = true;
+    // 	    if (o == null || getClass() != o.getClass()){
+    // 		ret = false;
+    // 	    }
+    // 	    else{
+    // 		PollOptionPk that = (PollOptionPk) o;
+    // 		ret = this.pollId.equals(that.getPollId()) &&
+    // 		    this.description.equals(that.getDescription());
+    // 	    }
+    // 	    return ret;
+    // 	}
+    // 	@Override
+    // 	public int hashCode(){
+    // 	    return Objects.hash(this.pollId, this.description);
+    // 	}
+    // }
 
     public PollOption(){
 	this.voters = new HashSet<>();
     }
     
+    // /**
+    //  * Gets the value of pk
+    //  *
+    //  * @return the value of pk
+    //  */
+    // @EmbeddedId
+    // public PollOptionPk getPk() {
+    // 	return this.pk;
+    // }
+
+    // /**
+    //  * Sets the value of pk
+    //  *
+    //  * @param argPk Value to assign to this.pk
+    //  */
+    // public void setPk(final PollOptionPk argPk) {
+    // 	this.pk = argPk;
+    // }
+
+    
     /**
-     * Gets the value of pk
+     * Gets the value of pollOptionId
      *
-     * @return the value of pk
+     * @return the value of pollOptionId
      */
-    @EmbeddedId
-    public PollOptionPk getPk() {
-	return this.pk;
+    @Id
+    @Column(name = "polloptionid")
+    public Long getPollOptionId() {
+	return this.pollOptionId;
     }
 
     /**
-     * Sets the value of pk
+     * Sets the value of pollOptionId
      *
-     * @param argPk Value to assign to this.pk
+     * @param argPollOptionId Value to assign to this.pollOptionId
      */
-    public void setPk(final PollOptionPk argPk) {
-	this.pk = argPk;
+    public void setPollOptionId(Long argPollOptionId) {
+	this.pollOptionId = argPollOptionId;
     }
 
+    /**
+     * Gets the value of description
+     *
+     * @return the value of description
+     */
+    @Column(name = "description")
+    public String getDescription() {
+	return this.description;
+    }
+
+    /**
+     * Sets the value of description
+     *
+     * @param argDescription Value to assign to this.description
+     */
+    public void setDescription(String argDescription) {
+	this.description = argDescription;
+    }
+
+    
     /**
      * Gets the value of poll
      *
      * @return the value of poll
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("pollId")
+    @JoinColumn(name = "pollid", referencedColumnName = "pollid", nullable = false)
     public Poll getPoll() {
 	return this.poll;
     }
@@ -121,11 +163,7 @@ public class PollOption{
     }
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "votes", joinColumns = {
-	    @JoinColumn(name = "pollid", nullable = false, updatable = false, referencedColumnName = "poll_pollid"),
-	    @JoinColumn(name = "poll_option_descrption", nullable = false, updatable = false, referencedColumnName = "description")},
-	    inverseJoinColumns = { @JoinColumn(name = "userid",
-					       nullable = false, updatable = false)})
+    @JoinTable(name = "votes", joinColumns = { @JoinColumn(name = "polloptionid", nullable = false, updatable = false, referencedColumnName = "polloptionid")}, inverseJoinColumns = { @JoinColumn(name = "userid", referencedColumnName = "userid", nullable = false, updatable = false)})
     public Set<User> getVoters(){
 	return this.voters;
     }
