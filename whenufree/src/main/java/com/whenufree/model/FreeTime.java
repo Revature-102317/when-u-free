@@ -50,11 +50,11 @@ public class FreeTime {
 		return timeSlot;
 	}
 
-	public void setTime(TimeSlot timeSlot) {
+	public void setTimeSlot(TimeSlot timeSlot) {
 		this.timeSlot = timeSlot;
 	}
 
-	@Id
+       
 	@Column(name = "scheduled")
 	public short getScheduled() {
 		return scheduled;
@@ -64,7 +64,7 @@ public class FreeTime {
 		this.scheduled = scheduled;
 	}
 
-	@Id
+	
 	@Column(name = "isdefault")
 	public short getIsDefault() {
 		return isDefault;
