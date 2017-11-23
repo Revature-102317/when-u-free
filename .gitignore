@@ -22,7 +22,7 @@
 
 # files containing passwords
 hibernate.cfg.xml
-application.properties
+whenufree/src/main/resources/application.properties
 
 # github maven defaults
 target/
