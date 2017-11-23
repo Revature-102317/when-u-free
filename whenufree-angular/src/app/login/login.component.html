@@ -1,31 +1,33 @@
+<div class="container">
+  <div>
+    {{errorMessage}}
+  </div>
 
-<div>
-  {{errorMessage}}
-</div>
-
-<form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-  <div class="row">
+  <div class="col-4 center">
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm" >
+  
     
-    <div class = "col-4">
+    
       <label for="username">Username:</label>
       <input type="text" class="form-control" id="username"
 	     required
 	     [(ngModel)]="username" name ="username">
-    </div>
     
-  </div>
-  <div class="row">
-    <div class="col-4">
+    
+    
       <label for="password">Password:</label>
       <input type="password" class="form-control" id="password"
 	     required
 	     [(ngModel)]="password" name ="password">
-    </div>
-  </div>
-  <div>
-    <button type="submit" class="btn btn-success"
+    
+
+    <div>
+      <button type="submit" class="btn btn-success"
 	    [disabled]="!loginForm.form.valid">
-      Log In
-    </button>
+	Log In
+      </button>
+      <a class="right">Register</a>
+    </div>
+  </form>
   </div>
-</form>
+</div>

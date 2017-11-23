@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
 
     username: string = '';
     password: string = '';
-    error: string = '';
+    errorMessage: string = '';
 
     
     constructor(private route: ActivatedRoute,
@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
     
     onSubmit(){
 	var loginObj = {'username': this.username, 'password': this.password};
-	this.router.navigateByUrl('/home_page(nav_outlet:nav_bar)');	
     }
 
 }
