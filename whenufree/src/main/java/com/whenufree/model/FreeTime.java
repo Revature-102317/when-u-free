@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -12,48 +13,48 @@ import javax.persistence.Table;
 public class FreeTime {
 
 	//free time id
-	private long freeTimeId;
+	private Long freeTimeId;
 	//connections
-	private long userId;
-	private long timeSlotId;
+	private User user;
+	private TimeSlot timeSlot;
 	//scheduled/default
-	private short scheduled;
-	private short isDefault;
+	private Short scheduled;
+	private Short isDefault;
 	
 	public FreeTime() {}
 
 	//getters and setters
 	@Id
 	@Column(name = "freetimeid")
-	public long getFreeTimeId() {
+	public Long getFreeTimeId() {
 		return freeTimeId;
 	}
 
-	public void setfreeTimeId(long id) {
+	public void setfreeTimeId(Long id) {
 		this.freeTimeId = id;
 	}
 
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name="userid", referencedColumnName="userid")
-	public long getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name="timeslotid", referencedColumnName="timeslotid")
-	public long getTimeSlotId() {
-		return timeSlotId;
+	public TimeSlot getTimeSlot() {
+		return timeSlot;
 	}
 
-	public void setTimeId(long timeSlotId) {
-		this.timeSlotId = timeSlotId;
+	public void setTimeSlot(TimeSlot timeSlot) {
+		this.timeSlot = timeSlot;
 	}
 
-	@Id
+       
 	@Column(name = "scheduled")
 	public short getScheduled() {
 		return scheduled;
@@ -63,7 +64,7 @@ public class FreeTime {
 		this.scheduled = scheduled;
 	}
 
-	@Id
+	
 	@Column(name = "isdefault")
 	public short getIsDefault() {
 		return isDefault;
@@ -76,7 +77,7 @@ public class FreeTime {
 	//to String method
 	@Override
 	public String toString() {
-		return "FreeTime [freeTimeiId=" + freeTimeId + ", userId=" + userId + ", timeSlotId=" + timeSlotId + ", scheduled=" + scheduled
+		return "FreeTime [freeTimeiId=" + freeTimeId + ", userId=" + user.getUserId() + ", timeSlotId=" + timeSlot.getTimeSlotId() + ", scheduled=" + scheduled
 				+ ", isDefault=" + isDefault + "]";
 	}
 	

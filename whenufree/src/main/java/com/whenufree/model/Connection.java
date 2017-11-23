@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -11,9 +12,9 @@ import javax.persistence.Table;
 @Table(name = "Connection")
 public class Connection {
 
-	private long connectionId;
-	private long userId;
-	private long friendGroupId;
+	private Long connectionId;
+	private User user;
+	private FriendGroup friendGroup;
 	private short isAdmin;
 	
 	//no args constructor
@@ -21,34 +22,34 @@ public class Connection {
 
 	@Id
 	@Column(name = "connectionId")
-	public long getConnectionId() {
+	public Long getConnectionId() {
 		return connectionId;
 	}
 
-	public void setConnectionId(long connectionId) {
+	public void setConnectionId(Long connectionId) {
 		this.connectionId = connectionId;
 	}
 	
 	//Getters and setters for the userid
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name="userid", referencedColumnName="userid")
 	//declaring foreign key
-	public long getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name="friendgroupid", referencedColumnName="friendgroupid")
-	public long getFriendGroupId() {
-		return friendGroupId;
+	public FriendGroup getFriendGroup() {
+		return friendGroup;
 	}
 
-	public void setFriendGroupId(long friendGroupId) {
-		this.friendGroupId = friendGroupId;
+	public void setFriendGroup(FriendGroup friendGroup) {
+		this.friendGroup = friendGroup;
 	}
 
 	@Column(name = "isadmin")
@@ -63,7 +64,7 @@ public class Connection {
 	//to String method
 	@Override
 	public String toString() {
-		return "Connection [connectionId=" + connectionId + ", userId=" + userId + ", friendGroupId=" + friendGroupId
+		return "Connection [connectionId=" + connectionId + ", userId=" + user.getUserId() + ", friendGroupId=" + friendGroup.getFriendGroupId()
 				+ ", isAdmin=" + isAdmin + "]";
 	}
 
