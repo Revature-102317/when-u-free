@@ -1,0 +1,43 @@
+<div class="container">
+  <form (ngSubmit)="onSubmit()" #selectRequests="ngForm" class="form-inline">
+  
+    <label for="searchStr" class ="control-label sr-only">Search String:</label>
+      <input type="search" class="form-control" id="searchStr"
+	     [(ngModel)]="searchStr" name ="searchStr">
+    
+      <div class="col-1">
+      </div>
+      <label for="searchType" class ="control-label">Filter By:</label>
+      <select name="searchType" class="form-control" id="searchType"
+	      [(ngModel)]="searchType" name ="searchType">
+	<option value="all" selected>all</option>
+	<option value="groups">groups</option>
+	<option value="people">people</option>
+      </select>      
+    
+      <div class="col-1">
+      </div>
+      
+      <button type="submit" class="btn btn-success"
+	  [disabled]="!selectRequests.form.valid">
+	Search
+      </button>
+    
+  </form>
+</div>
+
+<table class="table">
+  <tr *ngFor="let result of results ">
+    <td>{{result.name}}</td>
+    <td *ngIf="result.className === 'user'">
+      <button  (click)="onAddFriend(result.id)" type="add friend" class="btn">
+	Add Friend
+      </button>
+    </td>
+    <td *ngIf="result.className === 'group'">
+      <button  (click)="onJoinGroup(result.id)" type="join Group" class="btn">
+	Join Group
+      </button>
+    </td>
+  </tr>
+</table>
