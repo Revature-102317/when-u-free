@@ -45,6 +45,7 @@ public class SessionFactoryUtil{
      * Gets a session from the SessionFactory
      *
      * @return a session
+     * @throws HibernateException 
      */
     public static Session getSession(){
 	return sf.openSession();
@@ -66,8 +67,9 @@ public class SessionFactoryUtil{
      */
     public static void main(String[] args){
 	//Export DDL for schema
-	SchemaExport export = new SchemaExport();
-	export.setOutputFile("create-database.ddl").create(EnumSet.of(TargetType.SCRIPT), metadata);
+//	SchemaExport export = new SchemaExport();
+//	export.setOutputFile("create-database.ddl").create(EnumSet.of(TargetType.SCRIPT), metadata);
 
     }
+
 }
