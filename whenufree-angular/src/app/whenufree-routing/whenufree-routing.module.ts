@@ -4,13 +4,15 @@ import {RouterModule, Routes} from '@angular/router';
 import {HomepageComponent} from '../homepage/homepage.component';
 import {SettimeComponent} from '../settime/settime.component';
 import {LoginComponent} from '../login/login.component';
-import {SearchComponent} from '../search/search.component'
+import {SearchComponent} from '../search/search.component';
+import {RegistrationComponent} from '../registration/registration.component';
 
 const routes: Routes = [
     {path: 'homepage', component: HomepageComponent},
     {path: 'settime', component: SettimeComponent},
     {path: 'login', component: LoginComponent},
-    {path: 'search', component: SearchComponent}
+    {path: 'search', component: SearchComponent},
+    {path: 'registration', component: RegistrationComponent}
 ];
 
 @NgModule({

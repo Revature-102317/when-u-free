@@ -1,3 +1,54 @@
-<p>
-  registration works!
-</p>
+<div class ="container">
+  <h3>
+    Enter your information
+  </h3>
+  <div>
+    {{errorMessage}}
+  </div>
+  <form (ngSubmit)="onSubmit()" #registrationForm="ngForm" >
+    <div class="col-4">
+      <div> 
+	<label for="email">
+	  Email:
+	</label>
+	<input type="email" class="form-control" required
+	       [(ngModel)]="email" name ="email "placeholder="">
+
+      </div>
+      <div>
+	<label for="firstname">
+	  Firstname
+	</label>
+	<input type="text" class="form-control" required
+	       [(ngModel)]="firstname" name="firstname" placeholder="">
+	
+      </div>
+      <div>
+	<label for="lastname">
+	  Lastname
+	</label>
+	<input type="text" class="form-control" required
+	       [(ngModel)]="lastname" name ="lastname" placeholder="">
+	
+      </div>
+      <div>
+	<label for="phone">
+	  Phone number
+	</label>
+	<input type="tel" class="form-control" required
+	       [(ngModel)]="phone" name="phone" placeholder="">
+	
+      </div>
+      <div>
+	<label from="password">
+	  Password
+	</label>
+	  <input type="password" class="form-control" required
+		 [(ngModel)]="password" name="password" placeholder="">
+      </div>
+    </div>
+    <button type="submit" class="btn" [disabled]="!registrationForm.form.valid">
+      Register
+    </button>
+  </form>
+</div>

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import {GroupBestTime} from '../domain/groupBestTime'
+
 @Component({
   selector: 'app-group-right-bar',
   templateUrl: './group-right-bar.component.html',
@@ -9,7 +11,7 @@ export class GroupRightBarComponent implements OnInit {
 
     @Input() groupId: number;
 
-    bestTimes;
+    bestTimes: GroupBestTime[];
     
     constructor() { }
 

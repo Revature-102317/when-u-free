@@ -7,9 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor() { }
+    email: string;
+    firstname: string;
+    lastname: string;
+    phone: string;
+    password: string;
 
-  ngOnInit() {
-  }
+    errorMessage: string;
+    
+    constructor() { }
 
+    ngOnInit() {
+    }
+
+    onSubmit(){
+	var registrationObj = {'email': this.email, 'firstname': this.firstname, 'lastname': this.lastname, 'phone': this.phone, 'password': this.password};
+
+	console.log(JSON.stringify(registrationObj);
+    }
+
+    
 }
