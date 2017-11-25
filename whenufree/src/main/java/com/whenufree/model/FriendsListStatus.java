@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 @Table(name = "friendsliststatus")
 public class FriendsListStatus{
-    private Long statusId;
+    private Short statusId;
     private String statusName;
 
     
@@ -19,7 +19,7 @@ public class FriendsListStatus{
      */
     @Id
     @Column(name = "statusid")
-    public Long getStatusId() {
+    public Short getStatusId() {
 	return this.statusId;
     }
 
@@ -28,7 +28,7 @@ public class FriendsListStatus{
      *
      * @param argStatusId Value to assign to this.statusId
      */
-    public void setStatusId(Long argStatusId) {
+    public void setStatusId(Short argStatusId) {
 	this.statusId = argStatusId;
     }
 
@@ -37,7 +37,7 @@ public class FriendsListStatus{
      *
      * @return the value of statusName
      */
-    @Column(name = "statusname")
+    @Column(name = "statusname", nullable = false)
     public String getStatusName() {
 	return this.statusName;
     }
