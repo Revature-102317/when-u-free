@@ -9,7 +9,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Connection")
+@Table(name = "Connections")
 public class Connection {
 
 	private Long connectionId;
