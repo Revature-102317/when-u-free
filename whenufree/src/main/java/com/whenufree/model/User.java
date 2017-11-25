@@ -7,13 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
 
+import org.hibernate.annotations.NaturalId;
+
 import com.whenufree.model.PollOption;
+import com.whenufree.model.FriendsList;
 
 @Entity
 @Table(name="usr")
@@ -26,11 +28,12 @@ public class User{
     private String passwordHash;
 
     private Set<PollOption> votes;
-
+    private Set<FriendsList> friendsList; 
+    
     //no args constructor
     public User() {
 	votes = new HashSet<>();
-	friendList = new HashSet<>();
+	friendsList = new HashSet<>();
     }
     
     /**
@@ -58,6 +61,7 @@ public class User{
      *
      * @return the value of email
      */
+    @NaturalId
     @Column(name="email")
     public String getEmail() {
 	return this.email;
@@ -149,10 +153,6 @@ public class User{
     }
 
     
-
-    // @JoinTable(name = "votes", joinColumns = {
-    // 	    @JoinColumn(name = "userid", referencedColumnName = "userid", nullable = false, updatable = false)},
-    // 	    inverseJoinColumns = {@JoinColumn(name = "polloptionid", nullable = false, updatable = false, referencedColumnName = "polloptionid")})
     @ManyToMany(mappedBy = "voters", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Set<PollOption> getVotes(){
 	return this.votes;
@@ -162,18 +162,14 @@ public class User{
 	this.votes = votes;
     }
 
-    @ManyToMany(mappedBy= "friendList", fetch= FetchType.LAZY, cascade= CascadeType.ALL)
-    @JoinTable(name= "friendslist",
-            joinColumns = {@JoinColumn(name= "friendId", nullable= false)},
-            inverseJoinColumns =  {@JoinColumn(name= "userId")})
-    private Set<User> friendList = new HashSet<>();
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name= "friendslist",
-            joinColumns ={@JoinColumn(name= "userId", nullable= false)},
-            inverseJoinColumns = {@JoinColumn(name= "friendId")})
-    public Set<User> getFriendList() { return this.friendList; }
+    @OneToMany(mappedBy = "user")
+    public Set<FriendsList> getFriendsList() {
+	return this.friendsList;
+    }
 
-    public void setFriendList(Set<User> friendList) { this.friendList = friendList; }
+    public void setFriendsList(Set<FriendsList> friendList) {
+	this.friendsList = friendsList;
+    }
 
     //To String Method
     @Override
