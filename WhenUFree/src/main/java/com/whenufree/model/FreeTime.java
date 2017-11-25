@@ -3,9 +3,6 @@ package com.whenufree.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -13,48 +10,48 @@ import javax.persistence.Table;
 public class FreeTime {
 
 	//free time id
-	private Long freeTimeId;
+	private long freeTimeId;
 	//connections
-	private User user;
-	private TimeSlot timeSlot;
+	private long userId;
+	private long timeSlotId;
 	//scheduled/default
-	private Short scheduled;
-	private Short isDefault;
+	private short scheduled;
+	private short isDefault;
 	
 	public FreeTime() {}
 
 	//getters and setters
 	@Id
 	@Column(name = "freetimeid")
-	public Long getFreeTimeId() {
+	public long getFreeTimeId() {
 		return freeTimeId;
 	}
 
-	public void setfreeTimeId(Long id) {
+	public void setfreeTimeId(long id) {
 		this.freeTimeId = id;
 	}
 
-	@ManyToOne
-	@JoinColumn(name="userid", referencedColumnName="userid")
-	public User getUser() {
-		return user;
+	@Id
+	@Column(name = "userId")
+	public long getUserId() {
+		return userId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
-	@ManyToOne
-	@JoinColumn(name="timeslotid", referencedColumnName="timeslotid")
-	public TimeSlot getTimeSlot() {
-		return timeSlot;
+	@Id
+	@Column(name = "timeSlotId")
+	public long getTimeSlotId() {
+		return timeSlotId;
 	}
 
-	public void setTimeSlot(TimeSlot timeSlot) {
-		this.timeSlot = timeSlot;
+	public void setTimeId(long timeSlotId) {
+		this.timeSlotId = timeSlotId;
 	}
 
-       
+	@Id
 	@Column(name = "scheduled")
 	public short getScheduled() {
 		return scheduled;
@@ -64,7 +61,7 @@ public class FreeTime {
 		this.scheduled = scheduled;
 	}
 
-	
+	@Id
 	@Column(name = "isdefault")
 	public short getIsDefault() {
 		return isDefault;
@@ -77,7 +74,7 @@ public class FreeTime {
 	//to String method
 	@Override
 	public String toString() {
-		return "FreeTime [freeTimeiId=" + freeTimeId + ", userId=" + user.getUserId() + ", timeSlotId=" + timeSlot.getTimeSlotId() + ", scheduled=" + scheduled
+		return "FreeTime [freeTimeiId=" + freeTimeId + ", userId=" + userId + ", timeSlotId=" + timeSlotId + ", scheduled=" + scheduled
 				+ ", isDefault=" + isDefault + "]";
 	}
 	

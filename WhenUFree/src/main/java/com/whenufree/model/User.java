@@ -16,9 +16,9 @@ import javax.persistence.CascadeType;
 import com.whenufree.model.PollOption;
 
 @Entity
-@Table(name="usr")
+@Table(name="user")
 public class User{
-    private Long userId;
+    private long userId;
     private String email;
     private String firstname;
     private String lastname;
@@ -26,11 +26,10 @@ public class User{
     private String passwordHash;
 
     private Set<PollOption> votes;
-
+    
     //no args constructor
     public User() {
 	votes = new HashSet<>();
-	friendList = new HashSet<>();
     }
     
     /**
@@ -40,7 +39,7 @@ public class User{
      */
     @Id
     @Column(name="userid")
-    public Long getUserId() {
+    public long getUserId() {
 	return this.userId;
     }
 
@@ -49,7 +48,7 @@ public class User{
      *
      * @param argId Value to assign to this.id
      */
-    public void setuserId(final Long argId) {
+    public void setuserId(final long argId) {
 	this.userId = argId;
     }
 
@@ -134,7 +133,7 @@ public class User{
      *
      * @return the value of passwordHash
      */
-    @Column(name="passwordhash")
+    @Column(name="password_hash")
     public String getPasswordHash() {
 	return this.passwordHash;
     }
@@ -148,12 +147,12 @@ public class User{
 	this.passwordHash = argPasswordHash;
     }
 
-    
-
-    // @JoinTable(name = "votes", joinColumns = {
-    // 	    @JoinColumn(name = "userid", referencedColumnName = "userid", nullable = false, updatable = false)},
-    // 	    inverseJoinColumns = {@JoinColumn(name = "polloptionid", nullable = false, updatable = false, referencedColumnName = "polloptionid")})
-    @ManyToMany(mappedBy = "voters", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "votes", joinColumns = {
+	    @JoinColumn(name = "userid", nullable = false, updatable = false)},
+	    inverseJoinColumns = {
+		@JoinColumn(name = "pollid", nullable = false, updatable = false, referencedColumnName = "poll_pollid"),
+		@JoinColumn(name = "poll_option_descrption", nullable = false, updatable = false, referencedColumnName = "description")})
     public Set<PollOption> getVotes(){
 	return this.votes;
     }
@@ -162,24 +161,13 @@ public class User{
 	this.votes = votes;
     }
 
-    @ManyToMany(mappedBy= "friendList", fetch= FetchType.LAZY, cascade= CascadeType.ALL)
-    @JoinTable(name= "friendslist",
-            joinColumns = {@JoinColumn(name= "friendId", nullable= false)},
-            inverseJoinColumns =  {@JoinColumn(name= "userId")})
-    private Set<User> friendList = new HashSet<>();
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name= "friendslist",
-            joinColumns ={@JoinColumn(name= "userId", nullable= false)},
-            inverseJoinColumns = {@JoinColumn(name= "friendId")})
-    public Set<User> getFriendList() { return this.friendList; }
-
-    public void setFriendList(Set<User> friendList) { this.friendList = friendList; }
-
     //To String Method
     @Override
     public String toString() {
 	return "User [userId=" + userId + ", email=" + email + ", firstname=" + firstname + ", lastname=" + lastname
 	    + ", phone=" + phone + ", passwordHash=" + passwordHash + "]";
     }
+
+    
     
 }

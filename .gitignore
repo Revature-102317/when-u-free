@@ -106,11 +106,20 @@ local.properties
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 78cc519364ce84a24e404c29a15819d0438042fa
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+<<<<<<< HEAD
+=======
+>>>>>>> 7455236ffc92a37797a2b1541effa66be6a2f83d
+=======
+>>>>>>> 78cc519364ce84a24e404c29a15819d0438042fa
 # User-specific stuff:
 .idea/**/workspace.xml
 .idea/**/tasks.xml

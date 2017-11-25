@@ -4,12 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
-
-import java.util.Set;
-import java.util.HashSet;
 
 import com.whenufree.model.FriendGroup;
 
@@ -19,11 +16,9 @@ public class Poll{
     private Long pollId;
     private String description;
 
-    private Set<PollOption> options;
+    private FriendGroup friendGroup;
 
-    public Poll(){
-	this.options = new HashSet<>();
-    }
+    
     
     /**
      * Gets the value of pollId
@@ -60,19 +55,29 @@ public class Poll{
      *
      * @param argDescription Value to assign to this.description
      */
-    public void setDescription(String argDescription) {
+    public void setDescription(final String argDescription) {
 	this.description = argDescription;
     }
 
-    @OneToMany(mappedBy = "poll", fetch = FetchType.LAZY)
-    public Set<PollOption> getOptions(){
-	return this.options;
-    }
-
-    public void setOptions(Set<PollOption> options){
-	this.options = options;
-    }
-
     
+    /**
+     * Gets the value of friendGroup
+     *
+     * @return the value of friendGroup
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "friendgroupid")
+    public FriendGroup getFriendGroup() {
+	return this.friendGroup;
+    }
+
+    /**
+     * Sets the value of friendGroup
+     *
+     * @param argFriendGroup Value to assign to this.friendGroup
+     */
+    public void setFriendGroup(final FriendGroup argFriendGroup) {
+	this.friendGroup = argFriendGroup;
+    }
 
 }

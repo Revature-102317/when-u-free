@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Table(name="friendgroup")
 public class FriendGroup {
 
-    private Long friendGroupId;
+    private long friendGroupId;
     private String name;
 	
     //no args constructor
@@ -18,10 +18,10 @@ public class FriendGroup {
     //getters and setters for the friend group id
     @Id
     @Column(name = "friendgroupid")
-    public Long getFriendGroupId() {
+    public long getFriendGroupId() {
 	return friendGroupId;
     }
-    public void setFriendGroupId(Long friendGroupId) {
+    public void setFriendGroupId(long friendGroupId) {
 	this.friendGroupId = friendGroupId;
     }
 	
