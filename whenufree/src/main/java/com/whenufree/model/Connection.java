@@ -9,13 +9,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Connection")
+@Table(name = "Connections")
 public class Connection {
 
 	private Long connectionId;
 	private User user;
 	private FriendGroup friendGroup;
-	private short isAdmin;
+	private Short isAdmin;
+	private FriendGroupStatus status;
 	
 	//no args constructor
 	public Connection() {}
@@ -53,12 +54,22 @@ public class Connection {
 	}
 
 	@Column(name = "isadmin")
-	public short getIsAdmin() {
+	public Short getIsAdmin() {
 		return isAdmin;
 	}
 
-	public void setIsAdmin(short isAdmin) {
+	public void setIsAdmin(Short isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "status", referencedColumnName = "statusid")
+	public FriendGroupStatus getFriendGroupStatus() {
+		return status;
+	}
+
+	public void setFriendGroupStatus(FriendGroupStatus status) {
+		this.status = status;
 	}
 
 	//to String method
