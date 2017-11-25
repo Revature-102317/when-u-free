@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.JoinColumn;
@@ -14,6 +15,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import com.whenufree.model.FriendGroup;
 import com.whenufree.model.Poll;
@@ -27,6 +30,7 @@ public class Message{
     private Boolean pinned;
     
     private FriendGroup friendGroup;
+    private User author;
     private Poll poll;
     
     
@@ -36,6 +40,14 @@ public class Message{
      * @return the value of pollId
      */
     @Id
+    @GenericGenerator(name = "messageautoinc", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+		      parameters = {
+			  @Parameter(name = "sequence_name", value = "messageautoinc"),
+			  @Parameter(name = "optimizer", value = "hilo"),
+			  @Parameter(name = "initial_value", value = "1"),
+			  @Parameter(name = "increment_size", value = "1") }
+    )
+    @GeneratedValue(generator = "messageautoinc")
     @Column(name = "messageid")
     public Long getMessageId() {
 	return this.messageId;
@@ -55,7 +67,7 @@ public class Message{
      *
      * @return the value of description
      */
-    @Column(name = "text")
+    @Column(name = "text", nullable = false)
     public String getText() {
 	return this.text;
     }
@@ -75,7 +87,7 @@ public class Message{
      *
      * @return the value of timestamp
      */
-    @Column(name = "tstamp")
+    @Column(name = "tstamp", nullable = false)
     @CreationTimestamp
     public LocalDateTime getTimestamp() {
 	return this.timestamp;
@@ -96,7 +108,7 @@ public class Message{
      *
      * @return the value of pinned
      */
-    @Column(name = "pinned")
+    @Column(name = "pinned", nullable = false)
     public Boolean getPinned() {
 	return this.pinned;
     }
@@ -129,6 +141,28 @@ public class Message{
      */
     public void setFriendGroup(FriendGroup argFriendGroup) {
 	this.friendGroup = argFriendGroup;
+    }
+
+
+    
+    /**
+     * Gets the value of author
+     *
+     * @return the value of author
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "authorid", referencedColumnName = "userid", nullable = false)
+    public User getAuthor() {
+	return this.author;
+    }
+
+    /**
+     * Sets the value of author
+     *
+     * @param argAuthor Value to assign to this.author
+     */
+    public void setAuthor(User argAuthor) {
+	this.author = argAuthor;
     }
 
     

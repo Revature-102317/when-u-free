@@ -21,7 +21,7 @@ public class FriendGroupStatus {
 		this.statusId = statusId;
 	}
 	
-	@Column(name = "statusname")
+    @Column(name = "statusname", nullable = false)
 	public String getStatusName() {
 		return statusName;
 	}

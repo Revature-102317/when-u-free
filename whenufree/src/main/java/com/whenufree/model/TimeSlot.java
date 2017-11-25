@@ -28,7 +28,7 @@ public class TimeSlot {
 	}
 
 	//Getters and setters for the date time
-	@Column(name = "datetime")
+    @Column(name = "datetime", nullable = false)
 	public String getDateTime() {
 		return dateTime;
 	}

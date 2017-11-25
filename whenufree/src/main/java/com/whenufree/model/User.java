@@ -7,12 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
 import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
 
 import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import com.whenufree.model.PollOption;
 import com.whenufree.model.FriendsList;
@@ -42,6 +45,14 @@ public class User{
      * @return the value of id
      */
     @Id
+    @GenericGenerator(name = "userautoinc", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+		      parameters = {
+			  @Parameter(name = "sequence_name", value = "userautoinc"),
+			  @Parameter(name = "optimizer", value = "hilo"),
+			  @Parameter(name = "initial_value", value = "1"),
+			  @Parameter(name = "increment_size", value = "1") }
+    )
+    @GeneratedValue(generator = "userautoinc")
     @Column(name="userid")
     public Long getUserId() {
 	return this.userId;
@@ -62,7 +73,7 @@ public class User{
      * @return the value of email
      */
     @NaturalId
-    @Column(name="email")
+    @Column(name="email", nullable = false)
     public String getEmail() {
 	return this.email;
     }
@@ -81,7 +92,7 @@ public class User{
      *
      * @return the value of firstname
      */
-    @Column(name="firstname")
+    @Column(name="firstname", nullable = false)
     public String getFirstname() {
 	return this.firstname;
     }
@@ -100,7 +111,7 @@ public class User{
      *
      * @return the value of lastname
      */
-    @Column(name="lastname")
+    @Column(name="lastname", nullable = false)
     public String getLastname() {
 	return this.lastname;
     }
@@ -119,7 +130,7 @@ public class User{
      *
      * @return the value of phone
      */
-    @Column(name="phone")
+    @Column(name="phone", nullable = true)
     public String getPhone() {
 	return this.phone;
     }
@@ -138,7 +149,7 @@ public class User{
      *
      * @return the value of passwordHash
      */
-    @Column(name="passwordhash")
+    @Column(name="passwordhash", nullable = false)
     public String getPasswordHash() {
 	return this.passwordHash;
     }
