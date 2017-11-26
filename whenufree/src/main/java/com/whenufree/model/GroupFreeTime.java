@@ -4,9 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
 import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 /**
   * Created by Desmond George 11/20/2017
@@ -16,6 +20,14 @@ import javax.persistence.ManyToOne;
 public class GroupFreeTime {
 
     @Id
+    @GenericGenerator(name = "groupfreetimeautoinc", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+		      parameters = {
+			  @Parameter(name = "sequence_name", value = "groupfreetimeautoinc"),
+			  @Parameter(name = "optimizer", value = "hilo"),
+			  @Parameter(name = "initial_value", value = "1"),
+			  @Parameter(name = "increment_size", value = "1") }
+    )
+    @GeneratedValue(generator = "groupfreetimeautoinc")
     @Column(name= "groupfreetimeid")
     private Long groupFreeTimeId;
      /**
@@ -32,10 +44,11 @@ public class GroupFreeTime {
      *
      * @param groupFreeTimeId The new groupFreeTimeId value
      */
-    public void setGroupFreeTimeId(Long groupFreeTimeId) { groupFreeTimeId = groupFreeTimeId;
+    public void setGroupFreeTimeId(Long groupFreeTimeId) {
+	groupFreeTimeId = groupFreeTimeId;
     }
 
-    @Column(name= "numusers")
+    @Column(name= "numusers", nullable = false)
     private Integer numUsers;
     /**
      * Gets the number of users available at this particular free time.
@@ -56,7 +69,7 @@ public class GroupFreeTime {
 
     // Associative table so we add the primary keys of
     @ManyToOne
-    @JoinColumn(name= "timeslotid", referencedColumnName= "timeslotid")
+    @JoinColumn(name= "timeslotid", referencedColumnName= "timeslotid", nullable = false)
     private TimeSlot timeSlot;
     /**
      * Get the timeSlotId column. This Column contains a foreign key associated with the TimeSlot table.
@@ -76,7 +89,7 @@ public class GroupFreeTime {
     }
 
     @ManyToOne
-    @JoinColumn(name= "friendgroupid", referencedColumnName= "friendgroupid")
+    @JoinColumn(name= "friendgroupid", referencedColumnName= "friendgroupid", nullable = false)
     private FriendGroup friendGroup;
     /**
      * Get the friendGroupId column. This Column contains a foregin key associated with the FriendGroup table.

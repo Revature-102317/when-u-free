@@ -4,12 +4,16 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
 import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
 
 import java.util.Set;
 import java.util.HashSet;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import com.whenufree.model.FriendGroup;
 
@@ -31,6 +35,14 @@ public class Poll{
      * @return the value of pollId
      */
     @Id
+    @GenericGenerator(name = "pollautoinc", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+		      parameters = {
+			  @Parameter(name = "sequence_name", value = "pollautoinc"),
+			  @Parameter(name = "optimizer", value = "hilo"),
+			  @Parameter(name = "initial_value", value = "1"),
+			  @Parameter(name = "increment_size", value = "1") }
+    )
+    @GeneratedValue(generator = "pollautoinc")
     @Column(name = "pollid")
     public Long getPollId() {
 	return this.pollId;
@@ -50,7 +62,7 @@ public class Poll{
      *
      * @return the value of description
      */
-    @Column(name = "description")
+    @Column(name = "description", nullable = true)
     public String getDescription() {
 	return this.description;
     }
