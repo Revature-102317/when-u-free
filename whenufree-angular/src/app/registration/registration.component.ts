@@ -23,7 +23,7 @@ export class RegistrationComponent implements OnInit {
     onSubmit(){
 	var registrationObj = {'email': this.email, 'firstname': this.firstname, 'lastname': this.lastname, 'phone': this.phone, 'password': this.password};
 
-	console.log(JSON.stringify(registrationObj);
+	console.log(JSON.stringify(registrationObj));
     }
 
     

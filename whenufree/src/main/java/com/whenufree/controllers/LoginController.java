@@ -22,7 +22,7 @@ public class LoginController{
     @RequestMapping(path="/login", method= RequestMethod.POST)
     @ResponseBody
     public ResponseEntity login(){
-	return new ResponseEntity<>(HttpStatus.OK);
+	return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }
