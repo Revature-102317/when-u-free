@@ -1,4 +1,4 @@
-export interface Named{
+export interface Named {
     id: number;
     name: string;
     className: string;

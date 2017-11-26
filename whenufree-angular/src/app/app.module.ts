@@ -14,7 +14,6 @@ import { SearchComponent } from './search/search.component';
 import { GroupRightBarComponent } from './group-right-bar/group-right-bar.component';
 import { RegistrationComponent } from './registration/registration.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
