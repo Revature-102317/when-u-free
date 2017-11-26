@@ -21,7 +21,7 @@ import com.whenufree.model.PollOption;
 import com.whenufree.model.FriendsList;
 
 @Entity
-@Table(name="usr")
+@Table(name="usr", indexes = {@Index(columnList = "email", unique = true)})
 public class User{
     private Long userId;
     private String email;

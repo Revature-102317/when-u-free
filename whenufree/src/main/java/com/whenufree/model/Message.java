@@ -22,7 +22,7 @@ import com.whenufree.model.FriendGroup;
 import com.whenufree.model.Poll;
 
 @Entity
-@Table(name = "message")
+@Table(name = "message",  indexes = {@Index(columnList = "friendgroupid")})
 public class Message{
     private Long messageId;
     private String text;
