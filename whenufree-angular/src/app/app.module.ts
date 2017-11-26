@@ -6,7 +6,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import {HomepageService} from './services/homepage.service';
 import {AuthenticationService} from './services/authentication.service'
-import {SpringXsrfInterceptor} from './interceptors/springXsrfInterceptor' 
+import {SpringXsrfInterceptor} from './interceptors/springXsrfInterceptor'
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -17,6 +17,8 @@ import { SettimeComponent } from './settime/settime.component';
 import { SearchComponent } from './search/search.component';
 import { GroupRightBarComponent } from './group-right-bar/group-right-bar.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { GroupUserBarComponent } from './group-user-bar/group-user-bar.component';
+import {SettimeService} from "./services/settime.service";
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { RegistrationComponent } from './registration/registration.component';
     SettimeComponent,
     SearchComponent,
     GroupRightBarComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    GroupUserBarComponent
   ],
   imports: [
       BrowserModule,
@@ -36,7 +39,8 @@ import { RegistrationComponent } from './registration/registration.component';
       WhenufreeRoutingModule
   ],
     providers: [HomepageService,
-		AuthenticationService,
+      SettimeService,
+      AuthenticationService,
 		{provide: HTTP_INTERCEPTORS,
 		 useClass: SpringXsrfInterceptor,
 		 multi: true}],

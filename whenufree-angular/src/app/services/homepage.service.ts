@@ -9,6 +9,6 @@ export class HomepageService {
   constructor(private http: HttpClient) { }
 
   getCurrentUser(): Observable<User[]> {
-    return this.http.get<User[]>('http://localhost:8080/chinookstoredemo/albums');
+    return this.http.get<User[]>('http://localhost:8080/');
   }
 }

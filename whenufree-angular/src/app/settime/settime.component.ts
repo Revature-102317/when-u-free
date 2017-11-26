@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Location} from '@angular/common';
-//import { jqxSchedulerComponent } from '../../../jqwidgets-ts/angular_jqxscheduler';
+import {TimeSlot} from '../domain/timeSlot';
+import {SettimeService} from '../services/settime.service';
 
 @Component({
   selector: 'app-settime',
@@ -9,11 +8,15 @@ import {Location} from '@angular/common';
   styleUrls: ['./settime.component.css']
 })
 export class SettimeComponent implements OnInit {
+  timeslots: TimeSlot[] = [];
 
-  constructor(private route: ActivatedRoute,
-              private location: Location) { }
+  constructor(private settimeService: SettimeService) { }
 
   ngOnInit() {
+    this.getTimeSlots();
   }
 
+     getTimeSlots() {
+         this.settimeService.getTimes().subscribe(timeslots => this.timeslots = timeslots);
+  }
 }
