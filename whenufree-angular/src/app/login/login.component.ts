@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router'
 import {HttpClient} from '@angular/common/http';
 
+import {AuthenticationService} from '../services/authentication.service'
 
 @Component({
   selector: 'app-login',
@@ -17,14 +18,22 @@ export class LoginComponent implements OnInit {
     
     constructor(private route: ActivatedRoute,
 		private router: Router,
-		private http: HttpClient){
+		private http: HttpClient,
+		private authService: AuthenticationService){
     }
 
     ngOnInit() {
     }
     
     onSubmit(){
-	var loginObj = {'username': this.username, 'password': this.password};
+	this.authService.authenticate(this.username, this.password)
+	    .subscribe(
+		success =>{
+		    this.router.navigate(['homepage']);
+		},
+		error=> {
+		    this.errorMessage = "Wrong credentials, please try again."
+		});
     }
 
 }
