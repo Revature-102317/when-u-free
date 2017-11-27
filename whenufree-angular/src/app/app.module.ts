@@ -18,7 +18,7 @@ import { SearchComponent } from './search/search.component';
 import { GroupRightBarComponent } from './group-right-bar/group-right-bar.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { GroupUserBarComponent } from './group-user-bar/group-user-bar.component';
-import {SettimeService} from "./services/settime.service";
+import {SettimeService} from './services/settime.service';
 
 @NgModule({
   declarations: [

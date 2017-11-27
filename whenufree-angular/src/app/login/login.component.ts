@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router'
+import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 
-import {AuthenticationService} from '../services/authentication.service'
+import {AuthenticationService} from '../services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     password: string = '';
     errorMessage: string = '';
 
-    
+
     constructor(private route: ActivatedRoute,
 		private router: Router,
 		private http: HttpClient,
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
     }
-    
+
     onSubmit(){
 	this.authService.authenticate(this.username, this.password)
 	    .subscribe(

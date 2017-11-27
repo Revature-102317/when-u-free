@@ -10,7 +10,7 @@ import {RegistrationComponent} from '../registration/registration.component';
 const routes: Routes = [
     {path: 'homepage', component: HomepageComponent},
     {path: 'settime', component: SettimeComponent},
-    {path: 'login', component: LoginComponent},
+    {path: '', component: LoginComponent},
     {path: 'search', component: SearchComponent},
     {path: 'registration', component: RegistrationComponent}
 ];
