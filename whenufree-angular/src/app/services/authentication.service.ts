@@ -8,8 +8,8 @@ export class AuthenticationService {
     constructor(private http: HttpClient) { }
 
     authenticate(username: string, password: string): Observable<object>{
-	var loginUrl = "http://localhost:8085/login"
-	let headers = new HttpHeaders({ 
+	var loginUrl = "http://localhost:8080/login"
+	let headers = new HttpHeaders({
             'Authorization': 'Basic ' + btoa(username + ':' + password),
             'X-Requested-With': 'XMLHttpRequest' // to suppress 401 browser popup
 	});
@@ -18,7 +18,4 @@ export class AuthenticationService {
 
 	return this.http.post(loginUrl, {}, options)
     }
-    
-    
-    
 }
