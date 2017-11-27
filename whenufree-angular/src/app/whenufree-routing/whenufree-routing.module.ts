@@ -6,7 +6,7 @@ import {SettimeComponent} from '../settime/settime.component';
 import {LoginComponent} from '../login/login.component';
 import {SearchComponent} from '../search/search.component';
 import {RegistrationComponent} from '../registration/registration.component';
-import {FriendgroupsComponent} from "../friendgroups/friendgroups.component";
+import {FriendgroupsComponent} from '../friendgroups/friendgroups.component';
 
 const routes: Routes = [
     {path: 'homepage', component: HomepageComponent},

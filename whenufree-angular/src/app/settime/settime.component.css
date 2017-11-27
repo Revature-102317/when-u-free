@@ -1,0 +1,13 @@
+th:hover {
+  background-color: yellow;
+}
+td:hover {
+  background-color: lightgoldenrodyellow;
+}
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
