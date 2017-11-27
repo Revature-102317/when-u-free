@@ -6,5 +6,5 @@ import com.whenufree.model.FriendGroup;
 
 @Repository
 public interface FriendGroupDao extends JpaRepository<FriendGroup, Long>{
-
+	
 }
