@@ -3,6 +3,7 @@ package com.whenufree.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Table;
 
