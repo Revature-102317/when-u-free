@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {TimeSlot} from '../domain/timeSlot';
 import {SettimeService} from '../services/settime.service';
+import {Times} from './times';
+import {TIMES} from './times';
 
 @Component({
   selector: 'app-settime',
@@ -9,6 +11,8 @@ import {SettimeService} from '../services/settime.service';
 })
 export class SettimeComponent implements OnInit {
   timeslots: TimeSlot[] = [];
+
+  times: Times[] = TIMES;
 
   constructor(private settimeService: SettimeService) { }
 
