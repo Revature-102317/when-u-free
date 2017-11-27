@@ -10,7 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 @Entity
-@Table(name="friendgroup")
+@Table(name="friendgroup", indexes = {@Index(columnList = "name")})
 public class FriendGroup {
 
     private Long friendGroupId;
