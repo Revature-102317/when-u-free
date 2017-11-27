@@ -4,6 +4,7 @@
 <table class = "table">
   <thead>
   <tr>
+    <th>Time</th>
     <th>SUNDAY</th>
     <th>MONDAY</th>
     <th>TUESDAY</th>
@@ -16,12 +17,13 @@
   <tbody>
     <tr *ngFor="let times of times">
         <td>{{times.time}}</td>
-        <td>{{times.time}}</td>
-        <td>{{times.time}}</td>
-        <td>{{times.time}}</td>
-        <td>{{times.time}}</td>
-        <td>{{times.time}}</td>
-        <td>{{times.time}}</td>
+        <td id="SU"></td>
+        <td id="MO"></td>
+        <td id="TU"></td>
+        <td id="WE"></td>
+        <td id="TH"></td>
+        <td id="FR"></td>
+        <td id="SA"></td>
     </tr>
   </tbody>
   </table>

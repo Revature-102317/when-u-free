@@ -10,5 +10,4 @@ import com.whenufree.model.User;
 @Repository
 public interface UserDao extends JpaRepository<User, Long>{
     public User findByEmail(String email);
-    
 }
