@@ -107,7 +107,7 @@ public class FriendsList{
      *
      * @return the value of status
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "statusid", referencedColumnName = "statusid", nullable = false)
     public FriendsListStatus getStatus() {
 	return this.status;

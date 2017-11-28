@@ -16,14 +16,21 @@ export class SearchComponent implements OnInit {
     searchStr: string;
     searchType: string = "all";
 
-    onSubmit(){
-	var searchQuery = {'searchStr': this.searchStr, 'searchType': this.searchType};
-	console.log(JSON.stringify(searchQuery));
-    }
-    
-    constructor() { }
+    constructor(private http: HttpClient) { }
+      
 
     ngOnInit() {
     }
 
+    
+    onSubmit(){
+	var searchQuery = {'term': this.searchStr, 'type': this.searchType};
+	console.log(JSON.stringify(searchQuery));
+
+	let options = {withCredentials: true}
+	this.http.post("http://localhost:8085/search", searchQuery, options).subscribe(data => {
+	    console.log(JSON.stringify(data));
+	});
+    }
+  
 }

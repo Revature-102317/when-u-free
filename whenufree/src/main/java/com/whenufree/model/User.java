@@ -14,6 +14,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
 
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Field;
+
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -21,6 +24,7 @@ import org.hibernate.annotations.Parameter;
 import com.whenufree.model.PollOption;
 import com.whenufree.model.FriendsList;
 
+@Indexed
 @Entity
 @Table(name="usr", indexes = {@Index(columnList = "email", unique = true)})
 public class User{
@@ -93,6 +97,7 @@ public class User{
      *
      * @return the value of firstname
      */
+    @Field
     @Column(name="firstname", nullable = false)
     public String getFirstname() {
 	return this.firstname;
@@ -112,6 +117,7 @@ public class User{
      *
      * @return the value of lastname
      */
+    @Field
     @Column(name="lastname", nullable = false)
     public String getLastname() {
 	return this.lastname;

@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.whenufree.services.UserService;
 import com.whenufree.model.User;
 
+import java.util.List;
+
 @SpringBootApplication
 public class WhenufreeApplication {
 
@@ -26,14 +28,16 @@ public class WhenufreeApplication {
     @Bean
     public CommandLineRunner runner() {
 	return args -> {
-	    User u = new User();
-	    u.setEmail("max.wang376@gmail.com");
-	    u.setFirstname("Max");
-	    u.setLastname("Wang");
-	    u.setPhone("9173763581");
-	    u.setPasswordHash(bCryptPasswordEncoder.encode("correct horse battery staple"));    
-	    userService.save(u);
-	    System.out.println("Insertion successful");
+	    // Logic for sweeping the database and transforming passwords into hashes
+	    // List<User> allUsers = userService.findAll();
+	    // System.out.println(allUsers);
+	    // for(User u: allUsers){
+	    // 	String pass = u.getPasswordHash();
+	    // 	if(pass.length() < 30){
+	    // 	    u.setPasswordHash(bCryptPasswordEncoder.encode(pass));
+	    // 	    userService.save(u);
+	    // 	}
+	    // }
 	};
     }
 }
