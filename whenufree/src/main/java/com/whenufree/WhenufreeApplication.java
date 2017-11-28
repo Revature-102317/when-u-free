@@ -1,12 +1,15 @@
 package com.whenufree;
 
 import org.springframework.boot.SpringApplication;
+
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.boot.CommandLineRunner;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.whenufree.services.TimeSlotService;
 import com.whenufree.services.UserService;
 import com.whenufree.model.User;
 
@@ -15,6 +18,13 @@ public class WhenufreeApplication {
 
     @Autowired
     UserService userService;
+    
+    @Autowired
+    TimeSlotService timeSlotService;
+    
+  //  public TimeSlotService getTimeSlotService(){
+ //   	return timeSlotService;
+  //  }
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -35,14 +45,12 @@ public class WhenufreeApplication {
 	    u.setPasswordHash(bCryptPasswordEncoder.encode("correct horse battery staple"));    
 	    userService.save(u);
 	    System.out.println("Insertion successful");*/
-		/*
-		User j = new User();
-		j.setEmail("malizax@gmail.com");
-		j.setFirstname("Desmond");
-		j.setLastname("George");
-		j.setPhone("4568792849");
-		j.setPasswordHash(bCryptPasswordEncoder.encode("passw0rd"));
-		userService.save(j);*/
+		//System.out.println("adding freetimes: " + userService.findByEmail("junjie2412@gmail.com")+" " + timeSlotService.findById((long) 1));
+		userService.setTime(userService.findByEmail("junjie2412@gmail.com"), timeSlotService.findById((long) 2));
+		userService.setTime(userService.findByEmail("junjie2412@gmail.com"), timeSlotService.findById((long) 3));
+		userService.setTime(userService.findByEmail("junjie2412@gmail.com"), timeSlotService.findById((long) 4));
+		userService.setTime(userService.findByEmail("junjie2412@gmail.com"), timeSlotService.findById((long) 5));
+		userService.setTime(userService.findByEmail("junjie2412@gmail.com"), timeSlotService.findById((long) 6));
 	};
     }
 }
