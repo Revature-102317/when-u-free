@@ -1,24 +1,30 @@
+<app-navbar></app-navbar>
 <div style="text-align:center">
   <h1>Set yo time</h1>
-  <table>
-      <tr>
-        <th>Time</th>
-        <th>Monday</th>
-        <th>Tuesday</th>
-        <th>Wednesday</th>
-        <th>Thursday</th>
-        <th>Friday</th>
-        <th>Saturday</th>
-      </tr>
-    <div *ngFor="let timeslot of timeslots">
-      <th>{{timeslot.timeslot}}</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </div>
+<table class = "table">
+  <thead>
+  <tr>
+    <th>Time</th>
+    <th>SUNDAY</th>
+    <th>MONDAY</th>
+    <th>TUESDAY</th>
+    <th>WEDNESDAY</th>
+    <th>THURSDAY</th>
+    <th>FRIDAY</th>
+    <th>SATURDAY</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let times of times">
+        <td>{{times.time}}</td>
+        <td id="SU"></td>
+        <td id="MO"></td>
+        <td id="TU"></td>
+        <td id="WE"></td>
+        <td id="TH"></td>
+        <td id="FR"></td>
+        <td id="SA"></td>
+    </tr>
+  </tbody>
   </table>
 </div>

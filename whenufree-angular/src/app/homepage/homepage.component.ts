@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {HomepageService} from '../services/homepage.service';
 import {User} from '../domain/user';
+import {AuthenticationService} from "../services/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-homepage',
@@ -10,9 +12,16 @@ import {User} from '../domain/user';
 export class HomepageComponent implements OnInit {
   users: User[] = [];
 
-  constructor(private homepageService: HomepageService) { }
+  currentUser: User;
+  constructor(private homepageService: HomepageService,
+              private authService: AuthenticationService,
+              private router: Router) { }
 
   ngOnInit() {
+    this.authService.getUser().subscribe(
+      user => this.currentUser = user,
+      error => this.router.navigate([''])
+    );
     this.getUser();
   }
 

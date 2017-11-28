@@ -28,6 +28,7 @@ public class WhenufreeApplication {
     @Bean
     public CommandLineRunner runner() {
 	return args -> {
+
 	    // Logic for sweeping the database and transforming passwords into hashes
 	    // List<User> allUsers = userService.findAll();
 	    // System.out.println(allUsers);
@@ -38,6 +39,23 @@ public class WhenufreeApplication {
 	    // 	    userService.save(u);
 	    // 	}
 	    // }
+		/*
+	    User u = new User();
+	    u.setEmail("max.wang376@gmail.com");
+	    u.setFirstname("Max");
+	    u.setLastname("Wang");
+	    u.setPhone("9173763581");
+	    u.setPasswordHash(bCryptPasswordEncoder.encode("correct horse battery staple"));    
+	    userService.save(u);
+	    System.out.println("Insertion successful");*/
+		/*
+		User j = new User();
+		j.setEmail("malizax@gmail.com");
+		j.setFirstname("Desmond");
+		j.setLastname("George");
+		j.setPhone("4568792849");
+		j.setPasswordHash(bCryptPasswordEncoder.encode("passw0rd"));
+		userService.save(j);*/
 	};
     }
 }
