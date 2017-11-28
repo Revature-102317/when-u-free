@@ -28,7 +28,8 @@ export class SearchComponent implements OnInit {
 	console.log(JSON.stringify(searchQuery));
 
 	let options = {withCredentials: true}
-	this.http.post("http://localhost:8085/search", searchQuery, options).subscribe(data => {
+	this.http.post<Named[]>("http://localhost:8085/search", searchQuery, options).subscribe(data => {
+	    this.results = data;
 	    console.log(JSON.stringify(data));
 	});
     }

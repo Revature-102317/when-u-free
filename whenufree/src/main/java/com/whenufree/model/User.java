@@ -77,6 +77,7 @@ public class User{
      *
      * @return the value of email
      */
+    @Field
     @NaturalId
     @Column(name="email", nullable = false)
     public String getEmail() {

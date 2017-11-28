@@ -29,12 +29,12 @@
 <table class="table">
   <tr *ngFor="let result of results ">
     <td>{{result.name}}</td>
-    <td *ngIf="result.className === 'user'">
+    <td *ngIf="result.className === 'User'">
       <button  (click)="onAddFriend(result.id)" type="add friend" class="btn">
 	Add Friend
       </button>
     </td>
-    <td *ngIf="result.className === 'group'">
+    <td *ngIf="result.className === 'FriendGroup'">
       <button  (click)="onJoinGroup(result.id)" type="join Group" class="btn">
 	Join Group
       </button>
