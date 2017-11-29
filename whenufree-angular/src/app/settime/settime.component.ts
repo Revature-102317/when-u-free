@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, AfterContentInit} from '@angular/core';
 import {TimeSlot} from '../domain/timeSlot';
 import {SettimeService} from '../services/settime.service';
 import {Times} from './times';
@@ -12,13 +12,19 @@ import {User} from '../domain/user';
   templateUrl: './settime.component.html',
   styleUrls: ['./settime.component.css']
 })
-export class SettimeComponent implements OnInit {
+export class SettimeComponent implements OnInit, AfterContentInit {
   timeslots: TimeSlot[] = [];
 
   ts: TimeSlot;
 
   times: Times[] = TIMES;
-  days: String[] = ["SU/", "MO/", "TU/", "WE/", "TH/", "FR/", "SA/"];
+  days: String[] = ['SU/', 'MO/', 'TU/', 'WE/', 'TH/', 'FR/', 'SA/'];
+
+  // This will be subscribed to the current times set by the user
+  userDefaultTimes: TimeSlot[] = [];
+
+  selected = [];
+  defaultTime: string[] = [];
 
   currentUser: User;
 
@@ -31,23 +37,42 @@ export class SettimeComponent implements OnInit {
       user => this.currentUser = user,
       error => this.router.navigate([''])
     );
-    //this.getTimeSlots();
     this.getTime();
-    //this.setDefaultTime();
+    this.getTimeSlots();
+    console.log('beforeInit');
+    this.getUserDefaultTimes();
   }
 
+  ngAfterContentInit() {
+  }
+
+  // Gets a singular time
   getTime() {
         this.settimeService.getTime().subscribe(ts => this.ts = ts);
   }
+// Gets the entire timeslot
   getTimeSlots() {
          this.settimeService.getTimes().subscribe(timeslots => this.timeslots = timeslots);
   }
-
+// Setting each time individually. AJAX request
   setDefaultTime(weektime: string) {
           this.settimeService.setDefaultTime(weektime).subscribe(data => {});
   }
-
+// Submitting default to the database
   submitDefault(submit: string) {
           this.settimeService.submitDefaultTime(submit).subscribe(data => {});
   }
+// Subscribing the default user free times to the list userDefaultTimes
+  getUserDefaultTimes() {
+          this.settimeService.getUserDefaultTime().subscribe(defaultTimes => {
+            this.userDefaultTimes = defaultTimes;
+            for (let entry of this.userDefaultTimes) {
+              this.selected[entry.dateTime] = true;
+            }
+          });
+          return this.userDefaultTimes;
+  }
+
+  // Check if an element is in an array
+
 }

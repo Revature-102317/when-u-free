@@ -23,6 +23,10 @@ public class TimeSlotService{
 		return dao.findByTimeSlotId(i);
 	}
 	
+	public TimeSlot findByDateTime(String datetime){
+		return dao.findByDateTime(datetime);
+	}
+	
 	public List<TimeSlot> findAll(){
 		return dao.findAllByOrderByTimeSlotIdAsc();
 	}

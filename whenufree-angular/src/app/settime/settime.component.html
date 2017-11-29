@@ -17,23 +17,13 @@
   <tbody>
     <tr *ngFor="let time of times">
         <td>{{time.time}}</td>
-        <td *ngFor="let day of days" (click)="setDefaultTime(day+time.id)"></td>
+      <td *ngFor="let day of days"><label class="container">
+        <input type="checkbox" id="{{day+time.id}}" [(ngModel)]="this.selected[day+time.id]"
+               (click)="setDefaultTime(day+time.id)" *ngFor="let defaultTimes of userDefaultTimes"/>
+        <span class="checkmark"></span>
+      </label></td>
     </tr>
   </tbody>
   </table>
-  <h2>Submit</h2>
+  <h2 (click)="submitDefault('submitDefaultTimesToTheserver')">Submit</h2>
 </div>
-<script>
-  var count = 1;
-  function setColor(btn, color) {
-    var property = document.getElementById(btn);
-    if (count == 0) {
-      property.style.backgroundColor = "#FFFFFF"
-      count = 1;
-    }
-    else {
-      property.style.backgroundColor = "#7FFF00"
-      count = 0;
-    }
-  }
-</script>
