@@ -30,7 +30,7 @@ public class LoginController{
     @ResponseBody
     public ResponseEntity<UserJson> user(Principal user){
 	String username = user.getName();
-	User u = userService.findByEmail(username);
+	User u = userService.findByEmailAndInitializeFriendsList(username);
 	UserJson ujson = new UserJson(u);
 	return new ResponseEntity<>(ujson, HttpStatus.OK);
     }

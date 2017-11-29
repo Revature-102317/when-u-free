@@ -181,7 +181,7 @@ public class User{
 	this.votes = votes;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     public Set<FriendsList> getFriendsList() {
 	return this.friendsList;
     }

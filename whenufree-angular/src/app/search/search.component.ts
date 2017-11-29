@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
+import {AuthenticationService} from '../services/authentication.service'
 import {Named} from '../domain/named'
+import {User} from '../domain/user'
 
 @Component({
   selector: 'app-search',
@@ -13,13 +15,21 @@ export class SearchComponent implements OnInit {
 
     results: Named[];
 
+    currentUser: User;
+    
     searchStr: string;
     searchType: string = "all";
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient,
+		private authService: AuthenticationService) { }
       
 
     ngOnInit() {
+	this.authService.getUser().subscribe(
+	    data => {
+		this.currentUser = data;
+	    });
+	console.log(JSON.stringify(this.currentUser));
     }
 
     
@@ -30,8 +40,13 @@ export class SearchComponent implements OnInit {
 	let options = {withCredentials: true}
 	this.http.post<Named[]>("http://localhost:8085/search", searchQuery, options).subscribe(data => {
 	    this.results = data;
-	    console.log(JSON.stringify(data));
 	});
+    }
+
+    onAddFriend(id){
+    }
+
+    onJoinGroup(id){
     }
   
 }
