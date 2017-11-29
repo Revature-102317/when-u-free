@@ -19,7 +19,7 @@ export class SettimeService {
   }
 
   setDefaultTime(id: string): Observable<Object> {
-    return this.http.post('http://localhost:8080/setdefaulttime', {'id': id}, {withCredentials: true});
+    return this.http.post('http://localhost:8080/setdefaulttime', {id}, {withCredentials: true});
   }
 
   submitDefaultTime(submit: string): Observable<Object> {

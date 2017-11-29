@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
     }
 
-    onSubmit(){
-	this.authService.authenticate(this.username, this.password)
+    onSubmit() {
+	  this.authService.authenticate(this.username, this.password)
 	    .subscribe(
 		success =>{
 		    this.router.navigate(['homepage']);

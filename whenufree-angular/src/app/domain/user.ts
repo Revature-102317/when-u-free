@@ -1,4 +1,4 @@
-import {FriendsList} from './friendsList'
+import {FriendsList} from './friendsList';
 
 export interface User {
 
@@ -7,5 +7,5 @@ export interface User {
   firstname: string;
   lastname: string;
   phone: string;
-  friendsList: FriendsList[]
+  passwordHash: string;
 }

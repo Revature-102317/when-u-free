@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 
 import com.whenufree.dao.FreeTimeDao;
+import com.whenufree.dao.TimeSlotDao;
 import com.whenufree.dao.UserDao;
 import com.whenufree.model.FreeTime;
 import com.whenufree.model.TimeSlot;
@@ -25,11 +26,13 @@ import com.whenufree.model.FriendsList;
 public class UserService implements UserDetailsService{
     private UserDao dao;
     private FreeTimeDao freeTimeDao;
+    private TimeSlotService timeSlotService;
 
     @Autowired
-    public UserService(UserDao dao, FreeTimeDao freeTimeDao){
+    public UserService(UserDao dao, FreeTimeDao freeTimeDao, TimeSlotService timeSlotService){
 	this.dao = dao;
 	this.freeTimeDao = freeTimeDao;
+	this.timeSlotService = timeSlotService;
     }
 
     public List<User> findAll(){
@@ -69,13 +72,17 @@ public class UserService implements UserDetailsService{
 	    .build();
     }
     
-    public FreeTime setTime(User u, TimeSlot ts){
-    	FreeTime ft = new FreeTime();
-    	ft.setUser(u);
-    	ft.setTimeSlot(ts);
-    	ft.setScheduled(false);
-    	ft.setIsDefault(true);
-    	return freeTimeDao.save(ft);
+    public List<FreeTime> setDefaultTime(User u, List<String> weektimes){
+    	List<FreeTime> ft = new ArrayList<FreeTime>();
+    	for(int i = 0; i < weektimes.size(); i++){
+    		FreeTime freetime = new FreeTime();
+    		freetime.setIsDefault(true);
+    		freetime.setScheduled(false);
+    		freetime.setTimeSlot(timeSlotService.findByDateTime(weektimes.get(i)));
+    		freetime.setUser(u);
+    		freeTimeDao.save(freetime);
+    	}
+    	return freeTimeDao.findByUser(u);
     }
     
     public ArrayList<TimeSlot> getFreeTime(String user){

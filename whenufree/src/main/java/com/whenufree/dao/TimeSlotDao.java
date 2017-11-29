@@ -18,4 +18,6 @@ public interface TimeSlotDao extends JpaRepository<TimeSlot, Long>{
 	public List<TimeSlot> findAllByOrderByTimeSlotIdAsc();
 	
 	public List<TimeSlot> findByDateTimeStartingWithOrderByTimeSlotIdAsc(String week);
+
+	public TimeSlot findByDateTime(String datetime);
 }
