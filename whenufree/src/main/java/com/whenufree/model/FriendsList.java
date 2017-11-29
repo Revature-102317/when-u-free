@@ -45,7 +45,7 @@ public class FriendsList{
 	    this.friendId = friendId;
 	}
 	
-	@Column(name = "userid")
+	@JoinColumn(name = "userid", referencedColumnName = "userid")
 	public Long getUserId(){
 	    return this.userId;
 	}
@@ -54,7 +54,7 @@ public class FriendsList{
 	    this.userId = userId;
 	}
 	
-	@Column(name = "friendid")
+	@JoinColumn(name = "friendid", referencedColumnName = "userid")
 	public Long getFriendId(){
 	    return this.friendId;
 	}
@@ -107,7 +107,7 @@ public class FriendsList{
      *
      * @return the value of status
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "statusid", referencedColumnName = "statusid", nullable = false)
     public FriendsListStatus getStatus() {
 	return this.status;

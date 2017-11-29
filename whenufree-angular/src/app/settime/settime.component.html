@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div style="text-align:center">
   <h1>Set yo time</h1>
-<table class = "table">
+<table class = "table" id="settimestable">
   <thead>
   <tr>
     <th>Time</th>
@@ -15,16 +15,25 @@
   </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let times of times">
-        <td>{{times.time}}</td>
-        <td id="SU"></td>
-        <td id="MO"></td>
-        <td id="TU"></td>
-        <td id="WE"></td>
-        <td id="TH"></td>
-        <td id="FR"></td>
-        <td id="SA"></td>
+    <tr *ngFor="let time of times">
+        <td>{{time.time}}</td>
+        <td *ngFor="let day of days" (click)="setDefaultTime(day+time.id)"></td>
     </tr>
   </tbody>
   </table>
+  <h2>Submit</h2>
 </div>
+<script>
+  var count = 1;
+  function setColor(btn, color) {
+    var property = document.getElementById(btn);
+    if (count == 0) {
+      property.style.backgroundColor = "#FFFFFF"
+      count = 1;
+    }
+    else {
+      property.style.backgroundColor = "#7FFF00"
+      count = 0;
+    }
+  }
+</script>
