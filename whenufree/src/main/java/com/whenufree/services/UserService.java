@@ -25,7 +25,7 @@ import com.whenufree.model.FriendsList;
 @Service
 public class UserService implements UserDetailsService{
     private UserDao dao;
-    private FreeTimeDao freeTimeDao;
+    private static FreeTimeDao freeTimeDao;
     private TimeSlotService timeSlotService;
 
     @Autowired
@@ -37,6 +37,10 @@ public class UserService implements UserDetailsService{
 
     public List<User> findAll(){
 	return dao.findAll();
+    }
+    
+    public User findByUserId(Long id){
+    	return dao.findByUserId(id);
     }
 
     public User findByEmail(String email){
@@ -72,6 +76,19 @@ public class UserService implements UserDetailsService{
 	    .build();
     }
     
+    //The below Methods are supposed to help the user set their times
+    
+    //This gets all the free times of a user
+    public List<TimeSlot> getFreeTimesByUser(User u){
+    	List<TimeSlot> timeSlotList= new ArrayList<TimeSlot>();
+    	List<FreeTime> freeList = freeTimeDao.findByUser(u);
+    	for(int i = 0; i < freeList.size(); i++){
+    		timeSlotList.add(freeList.get(i).getTimeSlot());
+    	}
+    	return timeSlotList;
+    }
+
+    //This method adds the default times set by the user to the database
     public List<FreeTime> setDefaultTime(User u, List<String> weektimes){
     	List<FreeTime> ft = new ArrayList<FreeTime>();
     	for(int i = 0; i < weektimes.size(); i++){
@@ -80,9 +97,21 @@ public class UserService implements UserDetailsService{
     		freetime.setScheduled(false);
     		freetime.setTimeSlot(timeSlotService.findByDateTime(weektimes.get(i)));
     		freetime.setUser(u);
-    		freeTimeDao.save(freetime);
+    		if (!checkIfContains(u, timeSlotService.findByDateTime(weektimes.get(i)))){
+    			freeTimeDao.save(freetime);
+    		}
     	}
     	return freeTimeDao.findByUser(u);
+    }
+    
+    //This method checks if the freetime container already contains the said times
+    //This makes sure to not add duplicate times
+    public static Boolean checkIfContains(User u, TimeSlot t){
+    	FreeTime freetime = freeTimeDao.findByUserAndTimeSlot(u, t);
+    	if (freetime == null){
+    		return false;
+    	}
+    	return true;
     }
     
     public ArrayList<TimeSlot> getFreeTime(String user){

@@ -63,13 +63,23 @@ public class SetTimesController {
 		return new ResponseEntity<TimeSlot>(t, HttpStatus.OK);
 	}
 	
-	//The path that returns the default times set by the user
+	//The path that returns the default times set by the user by the Angular
 	@RequestMapping(path="/defaulttime", method={RequestMethod.GET, RequestMethod.POST},
 			consumes="*/*", produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<String>> getWeekTime(){
 		return new ResponseEntity<List<String>>(defaultTimes, HttpStatus.OK);
 	}
+	
+	//This path returns the default times of the current user
+	//The path that returns a timeslot by its id
+		@RequestMapping(path="/mydefaulttimes", method={RequestMethod.GET, RequestMethod.POST},
+				consumes="*/*", produces=MediaType.APPLICATION_JSON_VALUE)
+		@ResponseBody
+		public ResponseEntity<List<TimeSlot>> getDefaultTimesOfCurrentUser(Principal user){
+			User u = userService.findByEmail(user.getName());
+			return new ResponseEntity<List<TimeSlot>>(userService.getFreeTimesByUser(u), HttpStatus.OK);
+		}
 	
 	//The path that sets the default time
 	@RequestMapping(path="/setdefaulttime", method= RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
@@ -84,6 +94,7 @@ public class SetTimesController {
 		//This method submits the list to the database
 		if (weektime.substring(2, 8).equals("submit")){
 			userService.setDefaultTime(u, defaultTimes);
+			defaultTimes.removeAll(defaultTimes);
 		}
 		//This method adds the post request to the list(not database)
 		else{

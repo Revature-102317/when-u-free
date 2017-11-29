@@ -18,7 +18,10 @@ export class SettimeComponent implements OnInit {
   ts: TimeSlot;
 
   times: Times[] = TIMES;
-  days: String[] = ["SU/", "MO/", "TU/", "WE/", "TH/", "FR/", "SA/"];
+  days: String[] = ['SU/', 'MO/', 'TU/', 'WE/', 'TH/', 'FR/', 'SA/'];
+
+  // This will be subscribed to the current times set by the user
+  userDefaultTimes: TimeSlot[] = [];
 
   currentUser: User;
 
@@ -31,9 +34,8 @@ export class SettimeComponent implements OnInit {
       user => this.currentUser = user,
       error => this.router.navigate([''])
     );
-    //this.getTimeSlots();
     this.getTime();
-    //this.setDefaultTime();
+    this.getUserDefaultTimes();
   }
 
   getTime() {
@@ -42,12 +44,17 @@ export class SettimeComponent implements OnInit {
   getTimeSlots() {
          this.settimeService.getTimes().subscribe(timeslots => this.timeslots = timeslots);
   }
-
+// Setting each time individually. AJAX request
   setDefaultTime(weektime: string) {
           this.settimeService.setDefaultTime(weektime).subscribe(data => {});
   }
-
+// Submitting default to the database
   submitDefault(submit: string) {
           this.settimeService.submitDefaultTime(submit).subscribe(data => {});
   }
+// Subscribing the default user free times to the list userDefaultTimes
+  getUserDefaultTimes() {
+          this.settimeService.getUserDefaultTime().subscribe(defaultTimes => this.userDefaultTimes = defaultTimes);
+  }
+
 }

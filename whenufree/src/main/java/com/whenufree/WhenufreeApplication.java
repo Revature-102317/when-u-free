@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.whenufree.services.TimeSlotService;
 import com.whenufree.services.UserService;
 import com.whenufree.model.FreeTime;
+import com.whenufree.model.TimeSlot;
 import com.whenufree.model.User;
 
 import java.util.List;
@@ -39,6 +40,8 @@ public class WhenufreeApplication {
     @Bean
     public CommandLineRunner runner() {
 	return args -> {
+		User u = userService.findByEmail("junjie2412@gmail.com");
+
 	};
     }
 }

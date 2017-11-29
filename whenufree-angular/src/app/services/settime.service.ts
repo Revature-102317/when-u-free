@@ -18,11 +18,18 @@ export class SettimeService {
     return this.http.get<TimeSlot>('http://localhost:8080/timeslot/1', {withCredentials: true});
   }
 
+  //Sets default times
   setDefaultTime(id: string): Observable<Object> {
     return this.http.post('http://localhost:8080/setdefaulttime', {id}, {withCredentials: true});
   }
 
+  //Submit button
   submitDefaultTime(submit: string): Observable<Object> {
     return this.http.post('http://localhost:8080/setdefaulttime', {'submit': submit}, {withCredentials: true});
+  }
+
+  //gets the user default timeslots
+  getUserDefaultTime(): Observable<TimeSlot[]> {
+    return this.http.get<TimeSlot[]>('http://localhost:8080/mydefaulttimes', {withCredentials: true});
   }
 }

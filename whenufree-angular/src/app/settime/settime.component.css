@@ -10,6 +10,8 @@ table {
 
 table, th, td {
   border: 1px solid black;
+  min-width:185px;
+  max-width:185px;
 }
 
 h2 {
