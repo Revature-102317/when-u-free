@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, AfterContentInit} from '@angular/core';
 import {TimeSlot} from '../domain/timeSlot';
 import {SettimeService} from '../services/settime.service';
 import {Times} from './times';
@@ -12,7 +12,7 @@ import {User} from '../domain/user';
   templateUrl: './settime.component.html',
   styleUrls: ['./settime.component.css']
 })
-export class SettimeComponent implements OnInit {
+export class SettimeComponent implements OnInit, AfterContentInit {
   timeslots: TimeSlot[] = [];
 
   ts: TimeSlot;
@@ -22,6 +22,9 @@ export class SettimeComponent implements OnInit {
 
   // This will be subscribed to the current times set by the user
   userDefaultTimes: TimeSlot[] = [];
+
+  selected = [];
+  defaultTime: string[] = [];
 
   currentUser: User;
 
@@ -35,12 +38,19 @@ export class SettimeComponent implements OnInit {
       error => this.router.navigate([''])
     );
     this.getTime();
+    this.getTimeSlots();
+    console.log('beforeInit');
     this.getUserDefaultTimes();
   }
 
+  ngAfterContentInit() {
+  }
+
+  // Gets a singular time
   getTime() {
         this.settimeService.getTime().subscribe(ts => this.ts = ts);
   }
+// Gets the entire timeslot
   getTimeSlots() {
          this.settimeService.getTimes().subscribe(timeslots => this.timeslots = timeslots);
   }
@@ -54,7 +64,15 @@ export class SettimeComponent implements OnInit {
   }
 // Subscribing the default user free times to the list userDefaultTimes
   getUserDefaultTimes() {
-          this.settimeService.getUserDefaultTime().subscribe(defaultTimes => this.userDefaultTimes = defaultTimes);
+          this.settimeService.getUserDefaultTime().subscribe(defaultTimes => {
+            this.userDefaultTimes = defaultTimes;
+            for (let entry of this.userDefaultTimes) {
+              this.selected[entry.dateTime] = true;
+            }
+          });
+          return this.userDefaultTimes;
   }
+
+  // Check if an element is in an array
 
 }
