@@ -1,13 +1,19 @@
 package com.whenufree.jsonpojos;
 
+import java.util.Set;
+import java.util.HashSet;
+
 import com.whenufree.model.User;
+import com.whenufree.model.FriendsList;
+import com.whenufree.jsonpojos.FriendsListJson;
 
 public class UserJson{
     private String email;
     private String firstname;
     private String lastname;
     private String phone;
-
+    private Set<FriendsListJson> friendsList;
+    
     public UserJson(){
     }
 
@@ -16,6 +22,10 @@ public class UserJson{
 	this.firstname = u.getFirstname();
 	this.lastname = u.getLastname();
 	this.phone = u.getPhone();
+	this.friendsList = new HashSet<>();
+	for(FriendsList friend : u.getFriendsList()){
+	    this.friendsList.add(new FriendsListJson(friend));
+	}
     }
     
     /**
@@ -90,4 +100,12 @@ public class UserJson{
 	this.phone = argPhone;
     }
 
+    public Set<FriendsListJson> getFriendsList(){
+	return this.friendsList;
+    }
+
+    public void setFriendsList(Set<FriendsListJson> fl){
+	this.friendsList = fl;
+    }
+    
 }

@@ -7,9 +7,13 @@ import javax.persistence.Index;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Table;
 
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Field;
+
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+@Indexed
 @Entity
 @Table(name="friendgroup", indexes = {@Index(columnList = "name")})
 public class FriendGroup {
@@ -39,6 +43,7 @@ public class FriendGroup {
     }
 	
     //getters and setters for the name of the friend group
+    @Field
     @Column(name = "name", nullable = false)
     public String getName() {
 	return name;
