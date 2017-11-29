@@ -1,0 +1,58 @@
+<app-navbar></app-navbar>
+
+  <div><span>id: </span>{{ hero.id}}</div>
+  <div>
+	<label>name:
+	  <input [(ngModel)]="hero.name" placeholder="name"/>
+	</label>
+  </div>
+
+
+<h1>Settings</h1>
+  <label>First Name:
+	<input [(ngModel)]="user.firstname" placeholder="firstname" />
+  </label>
+  <label>Last Name:
+	<input [(ngModel)]="user.lastname" placeholder="lastname" />
+  </label>
+  <label>E-mail Address:
+	<input [(ngModel)]="user.email" placeholder="email" />
+  </label>
+  <label>Phone Number:
+	<input [(ngModel)]="user.phone" placeholder="phonenumber" />
+  </label>
+  <div>
+	<label>Old Password:
+	  <input type="password" #oldpassword />
+	</label>
+	<label>New Password:
+	  <input type="password" #newpassword />
+	</label>
+	<label>Confirm New Password:
+	  <input type="password" #cnewpassword />
+	</label>
+  </div>
+</div>
+<button (click)="goBack()">Go Back</button>
+
+<!--
+<h2> My Heroes </h2>
+<div>
+  <label>Hero name:
+	<input #heroName />
+  </label>
+  <button (click)="add(heroName.value);
+	heroName.value=''">
+	add
+  </button>
+</div>
+<ul class="heroes">
+  <li *ngFor="let hero of heroes">
+	<a routerLink= "/detail/{{hero.id}}">
+	  <span class="badge">{{hero.id}}</span>{{hero.name}}
+	</a>
+	<button class="delete" title="delete hero"
+	  (click)="delete(hero)">x</button>
+  </li>
+</ul>
+-->

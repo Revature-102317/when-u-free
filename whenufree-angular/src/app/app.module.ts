@@ -20,6 +20,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { GroupUserBarComponent } from './group-user-bar/group-user-bar.component';
 import {SettimeService} from './services/settime.service';
 import { FriendgroupsComponent } from './friendgroups/friendgroups.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { FriendgroupsComponent } from './friendgroups/friendgroups.component';
     GroupRightBarComponent,
     RegistrationComponent,
     GroupUserBarComponent,
-    FriendgroupsComponent
+    FriendgroupsComponent,
+    SettingsComponent
   ],
   imports: [
       BrowserModule,
