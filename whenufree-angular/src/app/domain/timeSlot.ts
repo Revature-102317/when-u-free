@@ -1,4 +1,4 @@
 export interface TimeSlot {
-  id: number;
-  timeslot: String;
+  timeSlotId: number;
+  dateTime: String;
 }
