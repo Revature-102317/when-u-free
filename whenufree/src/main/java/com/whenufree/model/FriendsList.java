@@ -54,7 +54,7 @@ public class FriendsList{
 	    this.userId = userId;
 	}
 	
-	@JoinColumn(name = "friendid", referencedColumnName= "friendid")
+	@JoinColumn(name = "friendid", referencedColumnName = "userid")
 	public Long getFriendId(){
 	    return this.friendId;
 	}

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 import java.security.Principal;
 
 
@@ -32,6 +33,7 @@ public class LoginController{
 	String username = user.getName();
 	User u = userService.findByEmailAndInitializeFriendsList(username);
 	UserJson ujson = new UserJson(u);
+
 	return new ResponseEntity<>(ujson, HttpStatus.OK);
     }
 
