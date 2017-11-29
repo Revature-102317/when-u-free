@@ -24,34 +24,34 @@ public class TimeSlotService{
 	}
 	
 	public List<TimeSlot> findAll(){
-		return dao.findAll();
+		return dao.findAllByOrderByTimeSlotIdAsc();
 	}
 	
 	public List<TimeSlot> findMondays(){
-		return dao.findByDateTimeStartingWith("MO");
+		return dao.findByDateTimeStartingWithOrderByTimeSlotIdAsc("MO");
 	}
 	
 	public List<TimeSlot> findTuesdays(){
-		return dao.findByDateTimeStartingWith("TU");
+		return dao.findByDateTimeStartingWithOrderByTimeSlotIdAsc("TU");
 	}
 	
 	public List<TimeSlot> findWednesdays(){
-		return dao.findByDateTimeStartingWith("WE");
+		return dao.findByDateTimeStartingWithOrderByTimeSlotIdAsc("WE");
 	}
 	
 	public List<TimeSlot> findThursdays(){
-		return dao.findByDateTimeStartingWith("TH");
+		return dao.findByDateTimeStartingWithOrderByTimeSlotIdAsc("TH");
 	}
 	
 	public List<TimeSlot> findFridays(){
-		return dao.findByDateTimeStartingWith("FR");
+		return dao.findByDateTimeStartingWithOrderByTimeSlotIdAsc("FR");
 	}
 	
 	public List<TimeSlot> findSaturdays(){
-		return dao.findByDateTimeStartingWith("SA");
+		return dao.findByDateTimeStartingWithOrderByTimeSlotIdAsc("SA");
 	}
 	
 	public List<TimeSlot> findSundays(){
-		return dao.findByDateTimeStartingWith("S");
+		return dao.findByDateTimeStartingWithOrderByTimeSlotIdAsc("SU");
 	}
 }

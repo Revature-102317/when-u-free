@@ -22,6 +22,7 @@
 
 # files containing passwords
 hibernate.cfg.xml
+USR.sql
 whenufree/src/main/resources/application.properties
 
 # github maven defaults
@@ -172,5 +173,7 @@ fabric.properties
 # Sonarlint plugin
 .idea/sonarlint
 
+#Lucene Index
+com.whenufree.model.*
 
 
