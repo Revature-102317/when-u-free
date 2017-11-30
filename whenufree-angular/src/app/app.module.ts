@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -21,6 +21,10 @@ import { GroupUserBarComponent } from './group-user-bar/group-user-bar.component
 import {SettimeService} from './services/settime.service';
 import { FriendgroupsComponent } from './friendgroups/friendgroups.component';
 import { SettingsComponent } from './settings/settings.component';
+import { UserService } from './services/user.service';
+import { UserFormComponent } from './settings/user-form.component';
+import { UserInfoComponent } from './settings/user-form.component';
+
 
 @NgModule({
   declarations: [
@@ -35,17 +39,21 @@ import { SettingsComponent } from './settings/settings.component';
     RegistrationComponent,
     GroupUserBarComponent,
     FriendgroupsComponent,
-    SettingsComponent
+    SettingsComponent,
+    UserFormComponent,
+	UserInfoComponent
   ],
   imports: [
       BrowserModule,
       HttpClientModule,
       FormsModule,
-      WhenufreeRoutingModule
+      WhenufreeRoutingModule,
+	  ReactiveFormsModule
   ],
     providers: [HomepageService,
-      SettimeService,
-      AuthenticationService,
+		UserService,
+		SettimeService,
+		AuthenticationService,
 		{provide: HTTP_INTERCEPTORS,
 		 useClass: SpringXsrfInterceptor,
 		 multi: true}],

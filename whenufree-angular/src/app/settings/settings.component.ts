@@ -1,24 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output} from '@angular/core';
 import { User } from '../domain/user';
-import { AuthenticationService } from '../services/authentication.service';
+import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css']
+	selector: 'app-settings',
+	templateUrl: './settings.component.html',
+	styleUrls: ['./settings.component.css'],
 })
 export class SettingsComponent implements OnInit {
-@Input() user: User;
+	user: User;
+	@Output('cancelEdit') editInfo: boolean = false;
+	constructor( private userService: UserService ) { }
 
-  constructor(
-	private authentication: AuthenticationService) { }
+	ngOnInit(): void {
+		this.getUser();
+	}
 
-  ngOnInit() {
-    this.getHero();
-  }
+	getUser(): void {
+		this.userService.getUser().subscribe( user => this.user = user);
+	}
 
-  getHero(): void {
-    authentication.getUser.subscribe(user => this.user = user);
-  }
-
+	onEdit(): void {
+		this.editInfo = true;
+	}
 }
