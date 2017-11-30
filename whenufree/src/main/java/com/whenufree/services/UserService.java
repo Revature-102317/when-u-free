@@ -114,6 +114,12 @@ public class UserService implements UserDetailsService{
     	return true;
     }
     
+    //This deletes all free time entries by a given user
+    @Transactional
+    public List<FreeTime> deleteByUser(User u){
+    	return freeTimeDao.removeByUser(u);
+    }
+    
     public ArrayList<TimeSlot> getFreeTime(String user){
 		return null;
     }

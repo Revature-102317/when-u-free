@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterContentInit} from '@angular/core';
+import {Component, OnInit, AfterContentInit, AfterViewInit} from '@angular/core';
 import {TimeSlot} from '../domain/timeSlot';
 import {SettimeService} from '../services/settime.service';
 import {Times} from './times';
@@ -12,7 +12,7 @@ import {User} from '../domain/user';
   templateUrl: './settime.component.html',
   styleUrls: ['./settime.component.css']
 })
-export class SettimeComponent implements OnInit, AfterContentInit {
+export class SettimeComponent implements OnInit, AfterContentInit, AfterViewInit {
   timeslots: TimeSlot[] = [];
 
   ts: TimeSlot;
@@ -33,17 +33,24 @@ export class SettimeComponent implements OnInit, AfterContentInit {
               private router: Router) { }
 
   ngOnInit() {
+    console.log('init');
     this.authService.getUser().subscribe(
       user => this.currentUser = user,
       error => this.router.navigate([''])
     );
     this.getTime();
     this.getTimeSlots();
-    console.log('beforeInit');
     this.getUserDefaultTimes();
+    console.log('init end');
   }
 
   ngAfterContentInit() {
+    console.log('init2');
+  }
+
+  ngAfterViewInit() {
+    console.log('init3');
+    this.populateDefault();
   }
 
   // Gets a singular time
@@ -57,22 +64,33 @@ export class SettimeComponent implements OnInit, AfterContentInit {
 // Setting each time individually. AJAX request
   setDefaultTime(weektime: string) {
           this.settimeService.setDefaultTime(weektime).subscribe(data => {});
+          console.log(weektime);
   }
 // Submitting default to the database
   submitDefault(submit: string) {
           this.settimeService.submitDefaultTime(submit).subscribe(data => {});
   }
+
 // Subscribing the default user free times to the list userDefaultTimes
   getUserDefaultTimes() {
           this.settimeService.getUserDefaultTime().subscribe(defaultTimes => {
             this.userDefaultTimes = defaultTimes;
             for (let entry of this.userDefaultTimes) {
               this.selected[entry.dateTime] = true;
+              this.settimeService.setDefaultTime(entry.dateTime).subscribe(data => {
+              });
             }
+            this.populateDefault();
           });
           return this.userDefaultTimes;
   }
 
-  // Check if an element is in an array
+  populateDefault() {
+    for (let entry of this.userDefaultTimes) {
+      var property = document.getElementById(entry.dateTime);
+      property.style.backgroundColor = '#86c6f9';
+      console.log('populted');
+    }
+  }
+  }
 
-}
