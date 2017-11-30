@@ -89,9 +89,15 @@ public class SetTimesController {
 	User u = userService.findByEmail(user.getName());
 	//checks to make sure the content is not refreshed
 	System.out.println("receiving " + weektime);
+	if (weektime.substring(7, 13).equals("delete")){
+		defaultTimes.removeAll(defaultTimes);
+		System.out.println("deleted " + weektime.substring(7, 13));
+		return null;
+	}
 	if (weektime.substring(11, 17).equals("submit")){
 		userService.deleteByUser(u);
 		userService.setDefaultTime(u, defaultTimes);
+		
 //		Set d = u.getFreeTimes();
 //		Set s = new HashSet<>();
 //		for(time : defaultTimes){
