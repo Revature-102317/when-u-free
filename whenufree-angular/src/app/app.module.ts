@@ -20,11 +20,17 @@ import { RegistrationComponent } from './registration/registration.component';
 import { GroupUserBarComponent } from './group-user-bar/group-user-bar.component';
 import {SettimeService} from './services/settime.service';
 import { FriendgroupsComponent } from './friendgroups/friendgroups.component';
+<<<<<<< HEAD
 import { SettingsComponent } from './settings/settings.component';
 import { UserService } from './services/user.service';
 import { UserFormComponent } from './settings/user-form.component';
 import { UserInfoComponent } from './settings/user-form.component';
 
+=======
+import { SettimescheduledComponent } from './settimescheduled/settimescheduled.component';
+import { SettimenavigatorComponent } from './settimenavigator/settimenavigator.component';
+import { LoadingpageComponent } from './loadingpage/loadingpage.component';
+>>>>>>> 4495ff3c46a6ead626e7529cacc9654f7c1eca86
 
 @NgModule({
   declarations: [
@@ -34,6 +40,8 @@ import { UserInfoComponent } from './settings/user-form.component';
     FriendgroupsComponent,
     NavbarComponent,
     SettimeComponent,
+    SettimescheduledComponent,
+    SettimenavigatorComponent,
     SearchComponent,
     GroupRightBarComponent,
     RegistrationComponent,
@@ -42,6 +50,7 @@ import { UserInfoComponent } from './settings/user-form.component';
     SettingsComponent,
     UserFormComponent,
 	UserInfoComponent
+    LoadingpageComponent
   ],
   imports: [
       BrowserModule,

@@ -1,7 +1,8 @@
 <app-navbar></app-navbar>
+<app-settimenavigator></app-settimenavigator>
 <div style="text-align:center">
-  <h1>Set yo time</h1>
-<table class = "table" id="settimestable">
+  <h1>Set your Default Time</h1>
+<table class = "table">
   <thead>
   <tr>
     <th>Time</th>
@@ -17,23 +18,17 @@
   <tbody>
     <tr *ngFor="let time of times">
         <td>{{time.time}}</td>
-        <td *ngFor="let day of days" (click)="setDefaultTime(day+time.id)"></td>
+      <td *ngFor="let day of days" id={{day+time.id}}><label class="container">
+        <input type="checkbox" [(ngModel)]="this.selected[day+time.id]"
+               (click)="setDefaultTime(day+time.id+selected[day+time.id])"/>
+        <span class="checkmark"></span>
+      </label></td>
     </tr>
   </tbody>
   </table>
-  <h2>Submit</h2>
+  <h2 (click)="submitDefault('submitDefaultTimesToTheserver');">Submit your Default Times</h2>
 </div>
-<script>
-  var count = 1;
-  function setColor(btn, color) {
-    var property = document.getElementById(btn);
-    if (count == 0) {
-      property.style.backgroundColor = "#FFFFFF"
-      count = 1;
-    }
-    else {
-      property.style.backgroundColor = "#7FFF00"
-      count = 0;
-    }
-  }
-</script>
+<label class="container">
+  <input type="checkbox">
+  <span class="checkmark"></span>
+</label>

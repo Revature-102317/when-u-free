@@ -24,7 +24,16 @@ export class AuthenticationService {
     }
 
     getUser(): Observable<User> {
+<<<<<<< HEAD
 		return this.userService.getUser();
+=======
+      let userUrl = 'http://localhost:8080/user';
+      let headers = new HttpHeaders()
+        .set('X-Requested-With', 'XMLHttpRequest'); // to suppress 401 browser popup
+
+      let options = {headers: headers, withCredentials: true};
+      return this.http.get<User>(userUrl, options);
+>>>>>>> 4495ff3c46a6ead626e7529cacc9654f7c1eca86
     }
 
     logout() {

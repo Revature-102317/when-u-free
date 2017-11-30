@@ -27,6 +27,11 @@ public class FreeTime {
 	
 	public FreeTime() {}
 
+	public FreeTime(User u, TimeSlot s) {
+		this.user = u;
+		this.timeSlot = s;
+	}
+
 	//getters and setters
     @Id
     @GenericGenerator(name = "freetimeautoinc", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
@@ -89,7 +94,7 @@ public class FreeTime {
 	//to String method
 	@Override
 	public String toString() {
-		return "FreeTime [freeTimeiId=" + freeTimeId + ", userId=" + user.getUserId() + ", timeSlotId=" + timeSlot.getTimeSlotId() + ", scheduled=" + scheduled
+		return "FreeTime [freeTimeId=" + freeTimeId + ", userId=" + user.getUserId() + ", timeSlotId=" + timeSlot.getTimeSlotId() + ", scheduled=" + scheduled
 				+ ", isDefault=" + isDefault + "]";
 	}
 	
