@@ -42,6 +42,7 @@ export class SettimeComponent implements OnInit, AfterContentInit, AfterViewInit
       error => this.router.navigate([''])
     );
     this.getTimeSlots();
+    this.setDefaultTime('deleteDefaultTimeToServerForAjaxList');
   }
 
   ngAfterContentInit() {
@@ -54,7 +55,12 @@ export class SettimeComponent implements OnInit, AfterContentInit, AfterViewInit
 
 // Gets the entire timeslot
   getTimeSlots() {
-         this.settimeService.getTimes().subscribe(timeslots => this.timeslots = timeslots);
+         this.settimeService.getTimes().subscribe(timeslots => {
+           this.timeslots = timeslots;
+           for (let entry of this.timeslots) {
+                this.selected[entry.dateTime] = false;
+           }
+         });
   }
 // Setting each time individually. AJAX request
   setDefaultTime(weektime: string) {
@@ -76,7 +82,7 @@ export class SettimeComponent implements OnInit, AfterContentInit, AfterViewInit
   getUserDefaultTimes() {
           this.settimeService.getUserDefaultTime().subscribe(defaultTimes => {
             this.settimeService.getTimes().subscribe(timeslots => {
-                this.timeslots = timeslots
+                this.timeslots = timeslots;
                 this.userDefaultTimes = defaultTimes;
                 for (let entry of this.timeslots) {
                   this.selected[entry.dateTime] = false;
