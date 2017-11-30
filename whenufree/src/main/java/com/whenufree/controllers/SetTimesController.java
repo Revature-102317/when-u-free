@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -81,26 +82,67 @@ public class SetTimesController {
 		}
 	
 	//The path that sets the default time
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(path="/setdefaulttime", method= RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<String> setdefaulttime(@RequestBody String weektime, Principal user){
+    public ResponseEntity setdefaulttime(@RequestBody String weektime, Principal user){
 	User u = userService.findByEmail(user.getName());
+	//checks to make sure the content is not refreshed
+	System.out.println("receiving " + weektime);
+	if (weektime.substring(11, 17).equals("submit")){
+		userService.deleteByUser(u);
+		userService.setDefaultTime(u, defaultTimes);
+//		Set d = u.getFreeTimes();
+//		Set s = new HashSet<>();
+//		for(time : defaultTimes){
+//			dbTime = new FreeTime(u, TimeSlotService.getByDateTime(time));
+//			//populate dbTime with time
+//			for(time2: d){
+//				if(time2.equals(dbTime)){
+//					dbTime.setFreeTimeId(time2.getFreeTimeId());
+//				}	
+//			}
+//			s.add(dbTime);
+//		}
+//		u.setFreeTimes(s);
+//		
+//		userService.save(u);
+		
+		defaultTimes.removeAll(defaultTimes);
+		System.out.println("submitted " + weektime.substring(11, 17));
+	} else if (weektime.substring(23, 27).equals("true")){
+		defaultTimes.remove(weektime.substring(7, 23));
+		System.out.println("removing "+ weektime.substring(7, 23));
+	} else if (weektime.substring(23, 27).equals("fals")){
+		if(defaultTimes.contains(weektime.substring(7, 23))){
+			System.out.println("tried to add but already contains");
+		} else {
+			defaultTimes.add(weektime.substring(7, 23));
+			System.out.println("adding "+ weektime.substring(7, 23));
+		}
+	}
+	
+	//Old Code
 	//This removes the post request from the list(not database) if the list already has it
+	/*
 	if (defaultTimes.contains(weektime.substring(7, 23))){
 		defaultTimes.remove(weektime.substring(7, 23));
+		System.out.println("removing "+ weektime.substring(7, 23));
 	}
-	else {
+		else {
 		//This method submits the list to the database
-		if (weektime.substring(2, 8).equals("submit")){
+		if (weektime.substring(11, 17).equals("submit")){
 			userService.deleteByUser(u);
 			userService.setDefaultTime(u, defaultTimes);
 			defaultTimes.removeAll(defaultTimes);
+			System.out.println("submitted " + weektime.substring(11, 17));
 		}
-		//This method adds the post request to the list(not database)
+			//This method adds the post request to the list(not database)
 		else{
-		defaultTimes.add(weektime.substring(7, 23));
+			defaultTimes.add(weektime.substring(7, 23));
+			System.out.println("adding "+ weektime.substring(7, 23));
 		}
-	}
+	}*/
 	return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 	

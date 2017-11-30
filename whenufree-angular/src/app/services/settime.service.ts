@@ -14,10 +14,6 @@ export class SettimeService {
     return this.http.get<TimeSlot[]>('http://localhost:8080/timeslots', {withCredentials: true});
   }
 
-  getTime(): Observable<TimeSlot> {
-    return this.http.get<TimeSlot>('http://localhost:8080/timeslot/1', {withCredentials: true});
-  }
-
   //Sets default times
   setDefaultTime(id: string): Observable<Object> {
     return this.http.post('http://localhost:8080/setdefaulttime', {id}, {withCredentials: true});

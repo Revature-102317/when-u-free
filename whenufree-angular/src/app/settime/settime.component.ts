@@ -7,6 +7,12 @@ import {AuthenticationService} from '../services/authentication.service';
 import {Router} from '@angular/router';
 import {User} from '../domain/user';
 
+/*****
+ *
+ * This component sets your default times
+ * If you want to set other things, things, we will set them
+ *
+ */
 @Component({
   selector: 'app-settime',
   templateUrl: './settime.component.html',
@@ -14,8 +20,6 @@ import {User} from '../domain/user';
 })
 export class SettimeComponent implements OnInit, AfterContentInit, AfterViewInit {
   timeslots: TimeSlot[] = [];
-
-  ts: TimeSlot;
 
   times: Times[] = TIMES;
   days: String[] = ['SU/', 'MO/', 'TU/', 'WE/', 'TH/', 'FR/', 'SA/'];
@@ -33,30 +37,21 @@ export class SettimeComponent implements OnInit, AfterContentInit, AfterViewInit
               private router: Router) { }
 
   ngOnInit() {
-    console.log('init');
     this.authService.getUser().subscribe(
       user => this.currentUser = user,
       error => this.router.navigate([''])
     );
-    this.getTime();
     this.getTimeSlots();
-    this.getUserDefaultTimes();
-    console.log('init end');
   }
 
   ngAfterContentInit() {
-    console.log('init2');
+
   }
 
   ngAfterViewInit() {
-    console.log('init3');
-    this.populateDefault();
+    this.getUserDefaultTimes();
   }
 
-  // Gets a singular time
-  getTime() {
-        this.settimeService.getTime().subscribe(ts => this.ts = ts);
-  }
 // Gets the entire timeslot
   getTimeSlots() {
          this.settimeService.getTimes().subscribe(timeslots => this.timeslots = timeslots);
@@ -68,29 +63,45 @@ export class SettimeComponent implements OnInit, AfterContentInit, AfterViewInit
   }
 // Submitting default to the database
   submitDefault(submit: string) {
-          this.settimeService.submitDefaultTime(submit).subscribe(data => {});
+          this.settimeService.submitDefaultTime(submit).subscribe(data => {
+            //this.reload();
+            this.router.navigate(['settime']);
+          });
+          this.router.navigate(['loadingpage']);
+          console.log(submit);
   }
 
 // Subscribing the default user free times to the list userDefaultTimes
+// This also sets and resets everything
   getUserDefaultTimes() {
           this.settimeService.getUserDefaultTime().subscribe(defaultTimes => {
-            this.userDefaultTimes = defaultTimes;
-            for (let entry of this.userDefaultTimes) {
-              this.selected[entry.dateTime] = true;
-              this.settimeService.setDefaultTime(entry.dateTime).subscribe(data => {
-              });
-            }
+            this.settimeService.getTimes().subscribe(timeslots => {
+                this.timeslots = timeslots
+                this.userDefaultTimes = defaultTimes;
+                for (let entry of this.timeslots) {
+                  this.selected[entry.dateTime] = false;
+                }
+                for (let entry of this.userDefaultTimes) {
+                  var property = document.getElementById(entry.dateTime);
+                  property.style.backgroundColor = '#86c6f9';
+                  this.selected[entry.dateTime] = true;
+                  this.setDefaultTime(entry.dateTime + false);
+                }
+            });
             this.populateDefault();
           });
           return this.userDefaultTimes;
   }
-
+// makes the default properties light blue
   populateDefault() {
     for (let entry of this.userDefaultTimes) {
       var property = document.getElementById(entry.dateTime);
       property.style.backgroundColor = '#86c6f9';
-      console.log('populted');
     }
   }
+// reloads the page
+  reload() {
+    window.location.reload();
   }
+}
 
