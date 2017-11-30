@@ -20,6 +20,9 @@ import { RegistrationComponent } from './registration/registration.component';
 import { GroupUserBarComponent } from './group-user-bar/group-user-bar.component';
 import {SettimeService} from './services/settime.service';
 import { FriendgroupsComponent } from './friendgroups/friendgroups.component';
+import { SettimescheduledComponent } from './settimescheduled/settimescheduled.component';
+import { SettimenavigatorComponent } from './settimenavigator/settimenavigator.component';
+import { LoadingpageComponent } from './loadingpage/loadingpage.component';
 
 @NgModule({
   declarations: [
@@ -29,11 +32,16 @@ import { FriendgroupsComponent } from './friendgroups/friendgroups.component';
     FriendgroupsComponent,
     NavbarComponent,
     SettimeComponent,
+    SettimescheduledComponent,
+    SettimenavigatorComponent,
     SearchComponent,
     GroupRightBarComponent,
     RegistrationComponent,
     GroupUserBarComponent,
-    FriendgroupsComponent
+    FriendgroupsComponent,
+    SettimescheduledComponent,
+    SettimenavigatorComponent,
+    LoadingpageComponent
   ],
   imports: [
       BrowserModule,
