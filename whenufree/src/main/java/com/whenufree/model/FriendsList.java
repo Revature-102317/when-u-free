@@ -37,10 +37,10 @@ public class FriendsList{
 	private Long userId;
 	private Long friendId;
 
-	private FriendsListPK(){
+        public FriendsListPK(){
 	}
 
-	private FriendsListPK(Long userId, Long friendId){
+	public FriendsListPK(Long userId, Long friendId){
 	    this.userId = userId;
 	    this.friendId = friendId;
 	}

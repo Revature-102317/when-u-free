@@ -8,6 +8,7 @@ import com.whenufree.model.FriendsList;
 import com.whenufree.jsonpojos.FriendsListJson;
 
 public class UserJson{
+    private Long userId;
     private String email;
     private String firstname;
     private String lastname;
@@ -18,6 +19,7 @@ public class UserJson{
     }
 
     public UserJson(User u){
+	this.userId = u.getUserId();
 	this.email = u.getEmail();
 	this.firstname = u.getFirstname();
 	this.lastname = u.getLastname();
@@ -28,6 +30,24 @@ public class UserJson{
 	}
     }
     
+    /**
+     * Gets the value of userId
+     *
+     * @return the value of userId
+     */
+    public final Long getUserId() {
+	return this.userId;
+    }
+
+    /**
+     * Sets the value of userId
+     *
+     * @param argUserId Value to assign to this.userId
+     */
+    public final void setUserId(final Long argUserId) {
+	this.userId = argUserId;
+    }
+
     /**
      * Gets the value of email
      *
