@@ -1,7 +1,5 @@
 package com.whenufree.controllers;
 
-import com.whenufree.services.SearchService;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+import com.whenufree.services.SearchService;
 import com.whenufree.jsonpojos.Named;
 
 @Controller
 public class SearchController{
     private SearchService searchService;
 
+    @Autowired
     public SearchController(SearchService searchService){
 	this.searchService = searchService;
     }

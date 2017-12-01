@@ -55,7 +55,11 @@ public class FriendGroupService {
 		this.groupFreeTimeDao = groupFreeTimeDao;
 		this.timeSlotService = timeSlotService;
 	}
-	
+
+    public FriendGroup findById(Long id){
+	return friendGroupDao.findOne(id);
+    }
+    
 	//Find a status by its id
 	public FriendGroupStatus findByStatusId(Short id){
 		return friendGroupStatusDao.findByStatusId(id);

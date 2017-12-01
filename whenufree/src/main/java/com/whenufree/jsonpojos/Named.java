@@ -8,6 +8,9 @@ public class Named{
     private String className;
     private String name;
 
+    public Named(){
+    }
+    
     public Named(User user){
 	this.className = "User";
 	this.id = user.getUserId();
@@ -33,7 +36,7 @@ public class Named{
      *
      * @param argId Value to assign to this.id
      */
-    public final void setId(final Long argId) {
+    public final void setId(Long argId) {
 	this.id = argId;
     }
 

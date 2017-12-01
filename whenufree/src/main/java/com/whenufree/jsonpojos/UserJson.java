@@ -17,6 +17,7 @@ public class UserJson{
     private String phone;
     private Set<FriendsListJson> friendsList;
     private Set<ConnectionJson> connections;
+    
     public UserJson(){
     }
 

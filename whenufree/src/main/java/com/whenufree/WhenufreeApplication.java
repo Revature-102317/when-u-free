@@ -46,18 +46,18 @@ public class WhenufreeApplication {
     @Bean
     public CommandLineRunner runner() {
 	return args -> {
-		User u = userService.findByUserId((long) 1);
-		FriendGroup fg = friendGroupService.findByFriendGroupId((long) 1);
-		List<TimeSlot> tsList = friendGroupService.getAllGroupTimeSlots(fg);
-		List<GroupFreeTime> gft = friendGroupService.timeSlotsToGroupFreeTimes(fg, tsList);
-		//friendGroupService.addUser(fg, u);
-		System.out.println(friendGroupService.findUsers(fg));
-		System.out.println(tsList);
-		System.out.println(tsList.size());
-		System.out.println(gft);
-		System.out.println(gft.size());
-		//friendGroupService.saveGroupFreeTimes(gft);
-		System.out.println(friendGroupService.getGroupFreeTimes(fg));
+		// User u = userService.findByUserId((long) 1);
+		// FriendGroup fg = friendGroupService.findByFriendGroupId((long) 1);
+		// List<TimeSlot> tsList = friendGroupService.getAllGroupTimeSlots(fg);
+		// List<GroupFreeTime> gft = friendGroupService.timeSlotsToGroupFreeTimes(fg, tsList);
+		// //friendGroupService.addUser(fg, u);
+		// System.out.println(friendGroupService.findUsers(fg));
+		// System.out.println(tsList);
+		// System.out.println(tsList.size());
+		// System.out.println(gft);
+		// System.out.println(gft.size());
+		// //friendGroupService.saveGroupFreeTimes(gft);
+		// System.out.println(friendGroupService.getGroupFreeTimes(fg));
 	};
     }
 }

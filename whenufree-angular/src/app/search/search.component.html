@@ -30,12 +30,12 @@
   <tr *ngFor="let result of results ">
     <td>{{result.name}}</td>
     <td *ngIf="displayAddFriend(result)">
-      <button  (click)="onAddFriend(result.id)" type="add friend" class="btn">
+      <button  (click)="onAddFriend(result)" type="add friend" class="btn">
 	Add Friend
       </button>
     </td>
     <td *ngIf="displayJoinGroup(result)">
-      <button  (click)="onJoinGroup(result.id)" type="join Group" class="btn">
+      <button  (click)="onJoinGroup(result)" type="join Group" class="btn">
 	Join Group
       </button>
     </td>

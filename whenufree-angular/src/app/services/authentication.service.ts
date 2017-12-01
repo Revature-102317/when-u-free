@@ -31,7 +31,7 @@ export class AuthenticationService {
       return this.http.get<User>(userUrl, options);
     }
 
-    logout() {
+    logout(): Observable<any> {
       let logOutUrl = 'http://localhost:8080/logout';
       let headers = new HttpHeaders()
         .set('X-Requested-With', 'XMLHttpRequest'); // to suppress 401 browser popup

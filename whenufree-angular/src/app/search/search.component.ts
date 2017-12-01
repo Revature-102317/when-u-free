@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
+import {SocialNetworkService} from '../services/social-network.service';
 import {AuthenticationService} from '../services/authentication.service'
 import {Named} from '../domain/named'
 import {FriendsList} from '../domain/friendsList'
@@ -22,15 +23,12 @@ export class SearchComponent implements OnInit {
     searchType: string = "all";
 
     constructor(private http: HttpClient,
-		private authService: AuthenticationService) { }
+		private authService: AuthenticationService,
+		private snService: SocialNetworkService) { }
       
 
     ngOnInit() {
-	this.authService.getUser().subscribe(
-	    data => {
-		this.currentUser = data;
-	    });
-	console.log(JSON.stringify(this.currentUser));
+	this.getCurrentUser();
     }
 
     
@@ -44,6 +42,14 @@ export class SearchComponent implements OnInit {
 	});
     }
 
+    getCurrentUser(){
+	this.authService.getUser().subscribe(
+	    data => {
+		this.currentUser = data;
+	    });
+	console.log(JSON.stringify(this.currentUser));
+    }
+    
     displayAddFriend(n: Named){
 	let ret = true;
 	if(n.className !== 'User'){
@@ -74,10 +80,20 @@ export class SearchComponent implements OnInit {
 	return ret;
     }
 
-    onAddFriend(id){
+    onJoinGroup(n){
+	this.snService.joinGroup(n).subscribe(
+	    data => {
+		this.getCurrentUser();
+	    }
+	);
     }
 
-    onJoinGroup(id){
+    onAddFriend(n){
+	this.snService.addFriend(n).subscribe(
+	    data => {
+		this.getCurrentUser();
+	    }
+	);
     }
-  
+
 }
