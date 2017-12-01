@@ -19,7 +19,7 @@ export class AuthenticationService {
 
 	let options = {headers: headers, withCredentials: true}
 
-	return this.http.post(loginUrl, {}, options)
+	return this.http.post(loginUrl, {}, options);
     }
 
     getUser(): Observable<User> {

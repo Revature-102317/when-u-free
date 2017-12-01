@@ -27,7 +27,7 @@ import { LoadingpageComponent } from './loadingpage/loadingpage.component';
 @NgModule({
   declarations: [
     AppComponent,
-      LoginComponent,
+    LoginComponent,
     HomepageComponent,
     FriendgroupsComponent,
     NavbarComponent,
@@ -39,8 +39,6 @@ import { LoadingpageComponent } from './loadingpage/loadingpage.component';
     RegistrationComponent,
     GroupUserBarComponent,
     FriendgroupsComponent,
-    SettimescheduledComponent,
-    SettimenavigatorComponent,
     LoadingpageComponent
   ],
   imports: [
@@ -52,9 +50,9 @@ import { LoadingpageComponent } from './loadingpage/loadingpage.component';
     providers: [HomepageService,
       SettimeService,
       AuthenticationService,
-		{provide: HTTP_INTERCEPTORS,
-		 useClass: SpringXsrfInterceptor,
-		 multi: true}],
+{provide: HTTP_INTERCEPTORS,
+useClass: SpringXsrfInterceptor,
+multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
