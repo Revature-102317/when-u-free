@@ -20,17 +20,14 @@ import { RegistrationComponent } from './registration/registration.component';
 import { GroupUserBarComponent } from './group-user-bar/group-user-bar.component';
 import {SettimeService} from './services/settime.service';
 import { FriendgroupsComponent } from './friendgroups/friendgroups.component';
-<<<<<<< HEAD
 import { SettingsComponent } from './settings/settings.component';
 import { UserService } from './services/user.service';
 import { UserFormComponent } from './settings/user-form.component';
 import { UserInfoComponent } from './settings/user-form.component';
-
-=======
 import { SettimescheduledComponent } from './settimescheduled/settimescheduled.component';
 import { SettimenavigatorComponent } from './settimenavigator/settimenavigator.component';
 import { LoadingpageComponent } from './loadingpage/loadingpage.component';
->>>>>>> 4495ff3c46a6ead626e7529cacc9654f7c1eca86
+import { MessageService } from './message.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +46,7 @@ import { LoadingpageComponent } from './loadingpage/loadingpage.component';
     FriendgroupsComponent,
     SettingsComponent,
     UserFormComponent,
-	UserInfoComponent
+	UserInfoComponent,
     LoadingpageComponent
   ],
   imports: [
@@ -63,6 +60,7 @@ import { LoadingpageComponent } from './loadingpage/loadingpage.component';
 		UserService,
 		SettimeService,
 		AuthenticationService,
+		MessageService,
 		{provide: HTTP_INTERCEPTORS,
 		 useClass: SpringXsrfInterceptor,
 		 multi: true}],

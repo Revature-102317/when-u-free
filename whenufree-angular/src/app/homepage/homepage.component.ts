@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HomepageService} from '../services/homepage.service';
 import {User} from '../domain/user';
-import {AuthenticationService} from '../services/authentication.service';
+import { UserService } from '../services/user.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -14,11 +14,11 @@ export class HomepageComponent implements OnInit {
 
   currentUser: User;
   constructor(private homepageService: HomepageService,
-              private authService: AuthenticationService,
+              private userService: UserService,
               private router: Router) { }
 
   ngOnInit() {
-    this.authService.getUser().subscribe(
+    this.userService.getUser().subscribe(
       user => this.currentUser = user,
       error => this.router.navigate([''])
     );

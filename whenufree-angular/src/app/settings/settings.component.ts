@@ -9,7 +9,7 @@ import { UserService } from '../services/user.service';
 })
 export class SettingsComponent implements OnInit {
 	user: User;
-	@Output('cancelEdit') editInfo: boolean = false;
+	editInfo: boolean = false;
 	constructor( private userService: UserService ) { }
 
 	ngOnInit(): void {
@@ -22,5 +22,10 @@ export class SettingsComponent implements OnInit {
 
 	onEdit(): void {
 		this.editInfo = true;
+	}
+
+	onCancel( clicked: boolean): void {
+		console.log(' the value of clicked was ' + clicked);
+		clicked ? this.editInfo = false: this.editInfo = true;
 	}
 }

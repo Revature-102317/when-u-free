@@ -1,6 +1,6 @@
 <h2> User Info </h2>
 <h3> A FormGroup w/ multiple FormControls </h3>
-<form [formGroup]="defaultUserForm" novalidate>
+<form [formGroup]="userForm" novalidate>
   <div formGroupName= "user" id="UserFormId" *ngIf="user">
     <div class="form-group">
       <label class="center-block" for="firstname">First Name:
@@ -53,7 +53,7 @@
 </form>
 <div>
   <button (click)="onDelete()">Delete Account</button>
-  <button (click)="onCancel()">Cancel</button>
+  <button (click)="cancelEdit(true)">Cancel</button>
   <button (click)="onSave()">Save</button>
 </div>
-  <p> FormValue: {{ defaultUserForm.value | json }}</p>
+  <p> FormValue: {{ userForm.value | json }}</p>

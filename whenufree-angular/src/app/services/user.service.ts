@@ -2,31 +2,47 @@ import { Injectable } from '@angular/core';
 import { User } from '../domain/user'
 import { Observable } from 'rxjs/Observable'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthenticationService } from './authentication.service';
+import { MessageService } from '../message.service';
 
 
 @Injectable()
 export class UserService {
+	userUrl = 'http://localhost:8080/user';
+	headers = new HttpHeaders()
+		.set('X-Requested-With', 'XMLHttpRequest'); // to suppress 401 browser popup
+	options = {headers: this.headers, withCredentials: true};
 
-	constructor( private http: HttpClient) { }
+
+	constructor( private http: HttpClient,
+			   private authService: AuthenticationService,
+			   private messageService: MessageService) { }
 
 	getUser(): Observable<User> {
-		let userUrl = 'http://localhost:8080/user';
-		let headers = new HttpHeaders()
-		.set('X-Requested-With', 'XMLHttpRequest'); // to suppress 401 browser popup
-
-		let options = {headers: headers, withCredentials: true};
-		return this.http.get<User>(userUrl, options);
+		return this.http.get<User>(this.userUrl, this.options);
 	}
 
-	/*
-	updateUser(): void {
-		let userUrl = 'http://localhost:8085/
+	updateUser( user: User): void {
+		this.authService.authenticate( user.firstname, user.password)
+			.subscribe(
+				success => {
+					return this.http.put<User>(this.userUrl, {user},
+											   this.options);
+				},
+				error => {
+					this.messageService.add( "Error sending info over network");
+				});
 	}
-	*/
 
-   /*
-	* deleteUser(): void {
-	* }
-	*/
-
+	updateUserNewPassword( user: User, newPassword: string): void {
+		this.authService.authenticate( user.firstname, newPassword)
+			.subscribe(
+				success => {
+					return this.http.put<User>(this.userUrl, {user, newPassword},
+											   this.options);
+				},
+				error => {
+					this.messageService.add( "Error sending info over network");
+				});
+	}
 }

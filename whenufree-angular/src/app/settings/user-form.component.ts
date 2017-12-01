@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, Input} from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output, OnDestroy} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { User } from '../domain/user';
 import { UserService } from '../services/user.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { MessageService } from '../message.service';
 
 @Component({
 	selector: 'app-user-info',
@@ -28,20 +29,25 @@ export class UserInfoComponent implements OnInit {
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.css']
 })
-export class UserFormComponent extends UserInfoComponent {
-	@Input('editInfo') cancelEdit: boolean;
-	userFormTemplate: User;
-	defaultUserForm: FormGroup;
+export class UserFormComponent extends UserInfoComponent implements OnDestroy {
+	@Output() onCancel = new EventEmitter<boolean>();
+	userForm: FormGroup;
 	extendForm: boolean = false;
 
 	constructor( private formBuilder: FormBuilder,
-				protected userService: UserService ) {
+				protected userService: UserService,
+			   private authService: AuthenticationService,
+			   private messageService: MessageService) {
 		super( userService);
 		this.createForm();
 	}
 
+	ngOnDestroy() {
+		this.messageService.clear();
+	}
+
 	createForm() {
-		this.defaultUserForm = this.formBuilder.group({
+		this.userForm = this.formBuilder.group({
 			user: this.formBuilder.group({
 				firstname: '', // <--- the FormControl called "name"
 				lastname: '',
@@ -49,7 +55,7 @@ export class UserFormComponent extends UserInfoComponent {
 				phone: ''
 			}),
 			passwords: this.formBuilder.group({
-				currentPassword: ' ',
+				currentPassword: '',
 				newPassword: '',
 				confirmPassword: ''
 			})
@@ -57,15 +63,24 @@ export class UserFormComponent extends UserInfoComponent {
 	}
 
 	onSave(): void {
-		//this.userService.updateUser();
+		if( this.extendForm) {
+			if( this.userForm.get('newPassword').value == this.userForm.get('confirmPassword').value)
+				this.userService.updateUserNewPassword( this.user,
+													   this.userForm.value.newPassword);
+			else
+				this.messageService.add( "New passwords don't match, please try again.");
+		}
+		else
+			this.userService.updateUser( this.user);
 	}
 
 	onDelete(): void {
 		//this.userService.deleteUser();
 	}
 
-	onCancel():void {
-		this.cancelEdit = false;
+	cancelEdit( clicked: boolean) {
+		this.onCancel.emit( clicked);
+		this.extendForm = false;
 	}
 
 	onChangePassword(): void {
