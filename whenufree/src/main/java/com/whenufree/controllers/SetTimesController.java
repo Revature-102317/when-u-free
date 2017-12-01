@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,7 @@ import com.whenufree.model.TimeSlot;
 import com.whenufree.model.User;
 import com.whenufree.services.TimeSlotService;
 import com.whenufree.services.UserService;
+import javax.inject.Provider;
 
 @Controller
 public class SetTimesController {
@@ -33,7 +36,8 @@ public class SetTimesController {
 	
 	private TimeSlotService timeSlotService;
 	
-	private List<String> defaultTimes = new ArrayList<String>();
+	@Autowired
+	private Provider<List<String>> defaultTimesProvider;
 	
 	//Constructor
 	@Autowired
@@ -68,7 +72,7 @@ public class SetTimesController {
 			consumes="*/*", produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<String>> getWeekTime(){
-		return new ResponseEntity<List<String>>(defaultTimes, HttpStatus.OK);
+		return new ResponseEntity<List<String>>(defaultTimesProvider.get(), HttpStatus.OK);
 	}
 	
 	//This path returns the default times of the current user
@@ -86,6 +90,7 @@ public class SetTimesController {
 	@RequestMapping(path="/setdefaulttime", method= RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity setdefaulttime(@RequestBody String weektime, Principal user){
+	List<String> defaultTimes = defaultTimesProvider.get();
 	User u = userService.findByEmail(user.getName());
 	//checks to make sure the content is not refreshed
 	System.out.println("receiving " + weektime);

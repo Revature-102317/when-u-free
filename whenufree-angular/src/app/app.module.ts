@@ -32,7 +32,7 @@ import { MessageService } from './message.service';
 @NgModule({
   declarations: [
     AppComponent,
-      LoginComponent,
+    LoginComponent,
     HomepageComponent,
     FriendgroupsComponent,
     NavbarComponent,
@@ -44,9 +44,6 @@ import { MessageService } from './message.service';
     RegistrationComponent,
     GroupUserBarComponent,
     FriendgroupsComponent,
-    SettingsComponent,
-    UserFormComponent,
-	UserInfoComponent,
     LoadingpageComponent
   ],
   imports: [
@@ -57,6 +54,7 @@ import { MessageService } from './message.service';
 	  ReactiveFormsModule
   ],
     providers: [HomepageService,
+<<<<<<< HEAD
 		UserService,
 		SettimeService,
 		AuthenticationService,
@@ -64,6 +62,13 @@ import { MessageService } from './message.service';
 		{provide: HTTP_INTERCEPTORS,
 		 useClass: SpringXsrfInterceptor,
 		 multi: true}],
+=======
+      SettimeService,
+      AuthenticationService,
+{provide: HTTP_INTERCEPTORS,
+useClass: SpringXsrfInterceptor,
+multi: true}],
+>>>>>>> 976a349e0e1f5c92f0a465cdb8a75e69e56e70cf
   bootstrap: [AppComponent]
 })
 export class AppModule { }
