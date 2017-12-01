@@ -6,9 +6,8 @@ import {User} from '../domain/user';
 @Injectable()
 export class AuthenticationService {
 
-    currentUser: User;
-
-    constructor(private http: HttpClient) { }
+    constructor(
+		private http: HttpClient) { }
 
     authenticate(username: string, password: string): Observable<object>{
         var loginUrl = 'http://localhost:8080/login';
@@ -20,15 +19,6 @@ export class AuthenticationService {
 	let options = {headers: headers, withCredentials: true}
 
 	return this.http.post(loginUrl, {}, options);
-    }
-
-    getUser(): Observable<User> {
-      let userUrl = 'http://localhost:8080/user';
-      let headers = new HttpHeaders()
-        .set('X-Requested-With', 'XMLHttpRequest'); // to suppress 401 browser popup
-
-      let options = {headers: headers, withCredentials: true};
-      return this.http.get<User>(userUrl, options);
     }
 
     logout() {

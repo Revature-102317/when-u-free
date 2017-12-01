@@ -7,5 +7,5 @@ export interface User {
   firstname: string;
   lastname: string;
   phone: string;
-  passwordHash: string;
+  password: string;
 }

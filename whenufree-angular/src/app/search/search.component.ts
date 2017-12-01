@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
-import {AuthenticationService} from '../services/authentication.service'
+import { UserService } from '../services/user.service'
 import {Named} from '../domain/named'
 import {User} from '../domain/user'
 
@@ -21,11 +21,11 @@ export class SearchComponent implements OnInit {
     searchType: string = "all";
 
     constructor(private http: HttpClient,
-		private authService: AuthenticationService) { }
+		private userService: UserService) { }
       
 
     ngOnInit() {
-	this.authService.getUser().subscribe(
+	this.userService.getUser().subscribe(
 	    data => {
 		this.currentUser = data;
 	    });

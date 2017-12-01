@@ -7,16 +7,18 @@ import {LoginComponent} from '../login/login.component';
 import {SearchComponent} from '../search/search.component';
 import {RegistrationComponent} from '../registration/registration.component';
 import {FriendgroupsComponent} from '../friendgroups/friendgroups.component';
+import {SettingsComponent} from '../settings/settings.component';
 import {SettimescheduledComponent} from "../settimescheduled/settimescheduled.component";
 import {LoadingpageComponent} from "../loadingpage/loadingpage.component";
 
 const routes: Routes = [
     {path: 'homepage', component: HomepageComponent},
     {path: 'settime', component: SettimeComponent},
-    {path: '', component: LoginComponent},
+    {path: '', component: LoginComponent, pathMatch: 'full'},
     {path: 'search', component: SearchComponent},
     {path: 'registration', component: RegistrationComponent},
     {path: 'friendgroups', component: FriendgroupsComponent},
+	{path: 'settings', component: SettingsComponent},
     {path: 'settimescheduled', component: SettimescheduledComponent},
     {path: 'loadingpage', component: LoadingpageComponent}
 ];

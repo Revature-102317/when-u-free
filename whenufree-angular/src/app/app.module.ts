@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -20,9 +20,14 @@ import { RegistrationComponent } from './registration/registration.component';
 import { GroupUserBarComponent } from './group-user-bar/group-user-bar.component';
 import {SettimeService} from './services/settime.service';
 import { FriendgroupsComponent } from './friendgroups/friendgroups.component';
+import { SettingsComponent } from './settings/settings.component';
+import { UserService } from './services/user.service';
+import { UserFormComponent } from './settings/user-form.component';
+import { UserInfoComponent } from './settings/user-form.component';
 import { SettimescheduledComponent } from './settimescheduled/settimescheduled.component';
 import { SettimenavigatorComponent } from './settimenavigator/settimenavigator.component';
 import { LoadingpageComponent } from './loadingpage/loadingpage.component';
+import { MessageService } from './message.service';
 
 @NgModule({
   declarations: [
@@ -45,14 +50,25 @@ import { LoadingpageComponent } from './loadingpage/loadingpage.component';
       BrowserModule,
       HttpClientModule,
       FormsModule,
-      WhenufreeRoutingModule
+      WhenufreeRoutingModule,
+	  ReactiveFormsModule
   ],
     providers: [HomepageService,
+<<<<<<< HEAD
+		UserService,
+		SettimeService,
+		AuthenticationService,
+		MessageService,
+		{provide: HTTP_INTERCEPTORS,
+		 useClass: SpringXsrfInterceptor,
+		 multi: true}],
+=======
       SettimeService,
       AuthenticationService,
 {provide: HTTP_INTERCEPTORS,
 useClass: SpringXsrfInterceptor,
 multi: true}],
+>>>>>>> 976a349e0e1f5c92f0a465cdb8a75e69e56e70cf
   bootstrap: [AppComponent]
 })
 export class AppModule { }
