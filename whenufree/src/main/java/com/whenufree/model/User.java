@@ -23,6 +23,9 @@ import org.hibernate.annotations.Parameter;
 
 import com.whenufree.model.PollOption;
 import com.whenufree.model.FriendsList;
+import com.whenufree.model.Connection;
+import com.whenufree.model.FriendGroup;
+import com.whenufree.model.FriendGroupStatus;
 
 @Indexed
 @Entity
@@ -37,11 +40,14 @@ public class User{
 
     private Set<PollOption> votes;
     private Set<FriendsList> friendsList; 
+    private Set<Connection> connections;
+
     
     //no args constructor
     public User() {
 	votes = new HashSet<>();
 	friendsList = new HashSet<>();
+	connections = new HashSet<>();
     }
     
     /**
@@ -186,10 +192,61 @@ public class User{
 	return this.friendsList;
     }
 
-    public void setFriendsList(Set<FriendsList> friendList) {
+    public void setFriendsList(Set<FriendsList> friendsList) {
 	this.friendsList = friendsList;
     }
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    public Set<Connection> getConnections(){
+	return this.connections;
+    }
+
+    public void setConnections(Set<Connection> connections){
+	this.connections = connections;
+    }
+
+    public void joinGroup(FriendGroup group){
+	Connection newConnection = new Connection();
+	FriendGroupStatus status = new FriendGroupStatus();
+	status.setStatusId((short)2);
+	status.setStatusName("applied");
+	newConnection.setUser(this);
+	newConnection.setFriendGroup(group);
+	newConnection.setIsAdmin(false);
+	newConnection.setFriendGroupStatus(status);
+
+	this.connections.add(newConnection);
+	//group.getConnections().add(newConnection);
+    }
+
+    public void addFriend(User friend){
+	FriendsList newEntry = new FriendsList();
+
+	FriendsListStatus status = new FriendsListStatus();
+	status.setStatusId((short)2);
+	status.setStatusName("pending");
+	newEntry.setFriendsListPK(new FriendsList.FriendsListPK());
+	newEntry.getFriendsListPK().setUserId(this.getUserId());
+	newEntry.getFriendsListPK().setFriendId(friend.getUserId());
+	newEntry.setUser(this);
+	newEntry.setFriend(friend);
+	newEntry.setStatus(status);
+	this.friendsList.add(newEntry);
+
+	FriendsList mirror = new FriendsList();
+	FriendsListStatus mirrorStatus = new FriendsListStatus();
+	mirrorStatus.setStatusId((short)3);
+	mirrorStatus.setStatusName("reverse-pending");
+	mirror.setFriendsListPK(new FriendsList.FriendsListPK());
+	mirror.getFriendsListPK().setUserId(friend.getUserId());
+	mirror.getFriendsListPK().setFriendId(this.getUserId());
+	mirror.setUser(friend);
+	mirror.setFriend(this);
+	mirror.setStatus(mirrorStatus);
+	friend.getFriendsList().add(mirror);
+	
+    }
+    
     //To String Method
     @Override
     public String toString() {

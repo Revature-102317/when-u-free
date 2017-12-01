@@ -5,8 +5,10 @@ import {HttpClientModule} from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import {HomepageService} from './services/homepage.service';
-import {AuthenticationService} from './services/authentication.service'
-import {SpringXsrfInterceptor} from './interceptors/springXsrfInterceptor'
+import {AuthenticationService} from './services/authentication.service';
+import {SpringXsrfInterceptor} from './interceptors/springXsrfInterceptor';
+import {SocialNetworkService} from './services/social-network.service';
+import {UrlService} from './services/url.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -58,15 +60,17 @@ import {GroupuserService} from "./services/groupuser.service";
       ReactiveFormsModule
   ],
     providers: [HomepageService,
-      UserService,
-      SettimeService,
-      AuthenticationService,
-      MessageService,
-      UserService,
-      GroupuserService,
-      {provide: HTTP_INTERCEPTORS,
-      useClass: SpringXsrfInterceptor,
-      multi: true}],
-      bootstrap: [AppComponent]
+		UserService,
+		SettimeService,
+		AuthenticationService,
+		SocialNetworkService,
+		UrlService,
+		MessageService,
+		UserService,
+		GroupuserService,
+		{provide: HTTP_INTERCEPTORS,
+		 useClass: SpringXsrfInterceptor,
+		 multi: true}],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

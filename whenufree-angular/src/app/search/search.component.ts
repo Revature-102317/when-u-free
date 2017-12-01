@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
-import { UserService } from '../services/user.service'
+
+import {SocialNetworkService} from '../services/social-network.service';
+import {AuthenticationService} from '../services/authentication.service'
 import {Named} from '../domain/named'
+import {FriendsList} from '../domain/friendsList'
 import {User} from '../domain/user'
 
 @Component({
@@ -21,16 +24,12 @@ export class SearchComponent implements OnInit {
     searchType: string = "all";
 
     constructor(private http: HttpClient,
-		private userService: UserService) { }
+		private userService: UserService,
+		private snService: SocialNetworkService) { }
       
 
     ngOnInit() {
-	this.userService.getUser().subscribe(
-	    data => {
-		this.currentUser = data;
-	    });
-	console.log(JSON.stringify(this.currentUser));
-    }
+	this.getCurrentUser();
 
     
     onSubmit(){
@@ -38,15 +37,63 @@ export class SearchComponent implements OnInit {
 	console.log(JSON.stringify(searchQuery));
 
 	let options = {withCredentials: true}
-	this.http.post<Named[]>("http://localhost:8085/search", searchQuery, options).subscribe(data => {
+	this.http.post<Named[]>("http://localhost:8080/search", searchQuery, options).subscribe(data => {
 	    this.results = data;
 	});
     }
 
-    onAddFriend(id){
+	getCurrentUser(){
+	    this.userService.getUser().subscribe(
+		data => {
+		    this.currentUser = data;
+	    });
+	    console.log(JSON.stringify(this.currentUser));
+	}
+    
+    displayAddFriend(n: Named){
+	let ret = true;
+	if(n.className !== 'User'){
+	    ret = false;
+	}else if(n.id === this.currentUser.userId){
+	    ret = false
+	}else{
+	    for(let fl of this.currentUser.friendsList){
+		if(n.id === fl.friendId){
+		    ret = false
+		}
+	    }
+	}
+	return ret
     }
 
-    onJoinGroup(id){
+    displayJoinGroup(n: Named){
+	let ret = true;
+	if(n.className !== 'FriendGroup'){
+	    ret = false;
+	} else{
+	    for(let conn of this.currentUser.connections){
+		if(n.id === conn.friendGroupId){
+		    ret = false;
+		}
+	    }
+	}
+	return ret;
     }
-  
+
+    onJoinGroup(n){
+	this.snService.joinGroup(n).subscribe(
+	    data => {
+		this.getCurrentUser();
+	    }
+	);
+    }
+
+    onAddFriend(n){
+	this.snService.addFriend(n).subscribe(
+	    data => {
+		this.getCurrentUser();
+	    }
+	);
+    }
+
 }
