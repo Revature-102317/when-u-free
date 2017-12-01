@@ -1,5 +1,6 @@
 package com.whenufree.model;
 
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -83,7 +84,11 @@ public class FriendGroup {
 		c.setUser(u);
 		c.setIsAdmin(false);
 		c.setFriendGroupStatus(status);
-		this.connections.add(c);
+	    this.connections.add(c);
+	}
+	
+	public void removeUser(User u){
+		this.connections.remove(u);
 	}
 
 	//to String method

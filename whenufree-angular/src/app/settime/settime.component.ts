@@ -3,7 +3,7 @@ import {TimeSlot} from '../domain/timeSlot';
 import {SettimeService} from '../services/settime.service';
 import {Times} from './times';
 import {TIMES} from './times';
-import {AuthenticationService} from '../services/authentication.service';
+import { UserService} from '../services/user.service';
 import {Router} from '@angular/router';
 import {User} from '../domain/user';
 
@@ -33,11 +33,11 @@ export class SettimeComponent implements OnInit, AfterContentInit, AfterViewInit
   currentUser: User;
 
   constructor(private settimeService: SettimeService,
-              private authService: AuthenticationService,
+              private userService: UserService,
               private router: Router) { }
 
   ngOnInit() {
-    this.authService.getUser().subscribe(
+    this.userService.getUser().subscribe(
       user => this.currentUser = user,
       error => this.router.navigate([''])
     );

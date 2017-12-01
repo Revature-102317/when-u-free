@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
+
 import {SocialNetworkService} from '../services/social-network.service';
 import {AuthenticationService} from '../services/authentication.service'
 import {Named} from '../domain/named'
@@ -23,13 +24,12 @@ export class SearchComponent implements OnInit {
     searchType: string = "all";
 
     constructor(private http: HttpClient,
-		private authService: AuthenticationService,
+		private userService: UserService,
 		private snService: SocialNetworkService) { }
       
 
     ngOnInit() {
 	this.getCurrentUser();
-    }
 
     
     onSubmit(){
@@ -42,13 +42,13 @@ export class SearchComponent implements OnInit {
 	});
     }
 
-    getCurrentUser(){
-	this.authService.getUser().subscribe(
-	    data => {
-		this.currentUser = data;
+	getCurrentUser(){
+	    this.userService.getUser().subscribe(
+		data => {
+		    this.currentUser = data;
 	    });
-	console.log(JSON.stringify(this.currentUser));
-    }
+	    console.log(JSON.stringify(this.currentUser));
+	}
     
     displayAddFriend(n: Named){
 	let ret = true;

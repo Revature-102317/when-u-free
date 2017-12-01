@@ -82,12 +82,36 @@ public class FriendGroupService {
 		return friendGroupDao.findByFriendGroupId(id);
 	}
 	
+	//Find a friend group by its id
+	public FriendGroup findByFriendGroupName(String name){
+		return friendGroupDao.findByName(name);
+	}
+	
+	//Find a list of friend groups by user
+	//The status must be approved
+	public List<FriendGroup> findByUser(User u){
+		FriendGroupStatus status = friendGroupStatusDao.findByStatusId((short) 1);
+		List<Connection> connectionList = connectionDao.findByUserAndFriendGroupStatusOrderByConnectionIdAsc(u, status);
+		List<FriendGroup> fgList = new ArrayList<FriendGroup>();
+		for (int a = 0; a < connectionList.size(); a++){
+			fgList.add(connectionList.get(a).getFriendGroup());
+		}
+		return fgList;
+	}
+	
 	//adding a user to a friendgroup AKA creating a new connection
 	public User addUser(FriendGroup fg, User u){
 		fg.addUser(u);
 		friendGroupDao.save(fg);
 		return u;
 	}
+	
+	//removing a user to a friendgroup AKA deleting a connection
+		public User removeUser(FriendGroup fg, User u){
+			fg.removeUser(u);
+			friendGroupDao.save(fg);
+			return u;
+		}
 	
 	//getting all users in a friendgroup by user ID
 	public List<User> findUsers(FriendGroup fg){

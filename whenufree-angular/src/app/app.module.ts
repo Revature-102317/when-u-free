@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -22,9 +22,15 @@ import { RegistrationComponent } from './registration/registration.component';
 import { GroupUserBarComponent } from './group-user-bar/group-user-bar.component';
 import {SettimeService} from './services/settime.service';
 import { FriendgroupsComponent } from './friendgroups/friendgroups.component';
+import { SettingsComponent } from './settings/settings.component';
+import { UserService } from './services/user.service';
+import { UserFormComponent } from './settings/user-form.component';
+import { UserInfoComponent } from './settings/user-form.component';
 import { SettimescheduledComponent } from './settimescheduled/settimescheduled.component';
 import { SettimenavigatorComponent } from './settimenavigator/settimenavigator.component';
 import { LoadingpageComponent } from './loadingpage/loadingpage.component';
+import { MessageService } from './message.service';
+import {GroupuserService} from "./services/groupuser.service";
 
 @NgModule({
   declarations: [
@@ -34,6 +40,9 @@ import { LoadingpageComponent } from './loadingpage/loadingpage.component';
     FriendgroupsComponent,
     NavbarComponent,
     SettimeComponent,
+    SettingsComponent,
+    UserFormComponent,
+    UserInfoComponent,
     SettimescheduledComponent,
     SettimenavigatorComponent,
     SearchComponent,
@@ -47,13 +56,18 @@ import { LoadingpageComponent } from './loadingpage/loadingpage.component';
       BrowserModule,
       HttpClientModule,
       FormsModule,
-      WhenufreeRoutingModule
+      WhenufreeRoutingModule,
+      ReactiveFormsModule
   ],
     providers: [HomepageService,
+		UserService,
 		SettimeService,
 		AuthenticationService,
 		SocialNetworkService,
 		UrlService,
+		MessageService,
+		UserService,
+		GroupuserService,
 		{provide: HTTP_INTERCEPTORS,
 		 useClass: SpringXsrfInterceptor,
 		 multi: true}],

@@ -93,5 +93,16 @@ public class Connection {
 				+ ", isAdmin=" + isAdmin + "]";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this.getUser().equals(((Connection) obj).getUser()) && this.getFriendGroup().equals(((Connection) obj).getFriendGroup())){
+			return true;
+		}
+		//return super.equals(obj);
+		return false;
+	}
+	
+	
+
 	
 }
