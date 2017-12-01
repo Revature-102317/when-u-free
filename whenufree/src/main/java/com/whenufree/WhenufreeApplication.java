@@ -9,9 +9,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.whenufree.services.FriendGroupService;
 import com.whenufree.services.TimeSlotService;
 import com.whenufree.services.UserService;
 import com.whenufree.model.FreeTime;
+import com.whenufree.model.FriendGroup;
+import com.whenufree.model.GroupFreeTime;
 import com.whenufree.model.TimeSlot;
 import com.whenufree.model.User;
 
@@ -25,6 +28,9 @@ public class WhenufreeApplication {
     
     @Autowired
     TimeSlotService timeSlotService;
+    
+    @Autowired
+    FriendGroupService friendGroupService;
     
   //  public TimeSlotService getTimeSlotService(){
  //   	return timeSlotService;
@@ -40,8 +46,18 @@ public class WhenufreeApplication {
     @Bean
     public CommandLineRunner runner() {
 	return args -> {
-		User u = userService.findByEmail("junjie2412@gmail.com");
-
+		User u = userService.findByUserId((long) 1);
+		FriendGroup fg = friendGroupService.findByFriendGroupId((long) 1);
+		List<TimeSlot> tsList = friendGroupService.getAllGroupTimeSlots(fg);
+		List<GroupFreeTime> gft = friendGroupService.timeSlotsToGroupFreeTimes(fg, tsList);
+		//friendGroupService.addUser(fg, u);
+		System.out.println(friendGroupService.findUsers(fg));
+		System.out.println(tsList);
+		System.out.println(tsList.size());
+		System.out.println(gft);
+		System.out.println(gft.size());
+		//friendGroupService.saveGroupFreeTimes(gft);
+		System.out.println(friendGroupService.getGroupFreeTimes(fg));
 	};
     }
 }

@@ -1,13 +1,23 @@
 package com.whenufree.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Table;
 
 import org.hibernate.search.annotations.Indexed;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.whenufree.dao.FriendGroupStatusDao;
+import com.whenufree.services.FriendGroupService;
+
 import org.hibernate.search.annotations.Field;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -17,10 +27,13 @@ import org.hibernate.annotations.Parameter;
 @Entity
 @Table(name="friendgroup", indexes = {@Index(columnList = "name")})
 public class FriendGroup {
+	
+	
 
     private Long friendGroupId;
     private String name;
 	
+    private Set<Connection> connections;
     //no args constructor
     public FriendGroup() {}
 	
@@ -52,7 +65,28 @@ public class FriendGroup {
 	this.name = name;
     }
 
-    //to String method
+    @OneToMany(mappedBy = "friendGroup", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    public Set<Connection> getConnections() {
+		return connections;
+	}
+
+	public void setConnections(Set<Connection> connections) {
+		this.connections = connections;
+	}
+	
+	public void addUser(User u){
+		Connection c = new Connection();
+		FriendGroupStatus status = new FriendGroupStatus();
+		status.setStatusId((short)1);
+		status.setStatusName("approved");
+		c.setFriendGroup(this);
+		c.setUser(u);
+		c.setIsAdmin(false);
+		c.setFriendGroupStatus(status);
+		this.connections.add(c);
+	}
+
+	//to String method
     @Override
     public String toString() {
 	return "FriendGroup [friendGroupId=" + friendGroupId + ", name=" + name + "]";
