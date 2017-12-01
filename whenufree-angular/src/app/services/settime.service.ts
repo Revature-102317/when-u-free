@@ -8,8 +8,6 @@ export class SettimeService {
 
   constructor(private http: HttpClient) { }
 
-
-
   getTimes(): Observable<TimeSlot[]> {
     return this.http.get<TimeSlot[]>('http://localhost:8080/timeslots', {withCredentials: true});
   }

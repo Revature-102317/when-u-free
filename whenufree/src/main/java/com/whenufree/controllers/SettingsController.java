@@ -24,8 +24,12 @@ public class SettingsController {
 		this.userService = userService;
 	}
 
+	/*
 	@RequestMapping( path="/user", method = RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity updateUser( @RequestBody ) {
+	public ResponseEntity updateUser(@RequestBody ) {
 		return ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}*/
+	
+}
 		
