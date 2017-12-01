@@ -28,6 +28,7 @@ import { SettimescheduledComponent } from './settimescheduled/settimescheduled.c
 import { SettimenavigatorComponent } from './settimenavigator/settimenavigator.component';
 import { LoadingpageComponent } from './loadingpage/loadingpage.component';
 import { MessageService } from './message.service';
+import {GroupuserService} from "./services/groupuser.service";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,9 @@ import { MessageService } from './message.service';
     FriendgroupsComponent,
     NavbarComponent,
     SettimeComponent,
+    SettingsComponent,
+    UserFormComponent,
+    UserInfoComponent,
     SettimescheduledComponent,
     SettimenavigatorComponent,
     SearchComponent,
@@ -51,24 +55,18 @@ import { MessageService } from './message.service';
       HttpClientModule,
       FormsModule,
       WhenufreeRoutingModule,
-	  ReactiveFormsModule
+      ReactiveFormsModule
   ],
     providers: [HomepageService,
-<<<<<<< HEAD
-		UserService,
-		SettimeService,
-		AuthenticationService,
-		MessageService,
-		{provide: HTTP_INTERCEPTORS,
-		 useClass: SpringXsrfInterceptor,
-		 multi: true}],
-=======
+      UserService,
       SettimeService,
       AuthenticationService,
-{provide: HTTP_INTERCEPTORS,
-useClass: SpringXsrfInterceptor,
-multi: true}],
->>>>>>> 976a349e0e1f5c92f0a465cdb8a75e69e56e70cf
-  bootstrap: [AppComponent]
+      MessageService,
+      UserService,
+      GroupuserService,
+      {provide: HTTP_INTERCEPTORS,
+      useClass: SpringXsrfInterceptor,
+      multi: true}],
+      bootstrap: [AppComponent]
 })
 export class AppModule { }
