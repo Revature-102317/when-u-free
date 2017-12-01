@@ -17,9 +17,9 @@ export class AuthenticationService {
           'X-Requested-With': 'XMLHttpRequest' // to suppress 401 browser popup
         });
 
-	let options = {headers: headers, withCredentials: true}
+	let options = {headers: headers, withCredentials: true};
 
-	return this.http.post(loginUrl, {}, options)
+	return this.http.post(loginUrl, {}, options);
     }
 
     getUser(): Observable<User> {

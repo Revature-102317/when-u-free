@@ -23,6 +23,7 @@ import org.hibernate.annotations.Parameter;
 
 import com.whenufree.model.PollOption;
 import com.whenufree.model.FriendsList;
+import com.whenufree.model.Connection;
 
 @Indexed
 @Entity
@@ -37,11 +38,14 @@ public class User{
 
     private Set<PollOption> votes;
     private Set<FriendsList> friendsList; 
+    private Set<Connection> connections;
+
     
     //no args constructor
     public User() {
 	votes = new HashSet<>();
 	friendsList = new HashSet<>();
+	connections = new HashSet<>();
     }
     
     /**
@@ -188,6 +192,15 @@ public class User{
 
     public void setFriendsList(Set<FriendsList> friendsList) {
 	this.friendsList = friendsList;
+    }
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    public Set<Connection> getConnections(){
+	return this.connections;
+    }
+
+    public void setConnections(Set<Connection> connections){
+	this.connections = connections;
     }
 
     //To String Method

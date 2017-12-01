@@ -5,7 +5,9 @@ import java.util.HashSet;
 
 import com.whenufree.model.User;
 import com.whenufree.model.FriendsList;
+import com.whenufree.model.Connection;
 import com.whenufree.jsonpojos.FriendsListJson;
+import com.whenufree.jsonpojos.ConnectionJson;
 
 public class UserJson{
     private Long userId;
@@ -14,7 +16,7 @@ public class UserJson{
     private String lastname;
     private String phone;
     private Set<FriendsListJson> friendsList;
-    
+    private Set<ConnectionJson> connections;
     public UserJson(){
     }
 
@@ -24,9 +26,15 @@ public class UserJson{
 	this.firstname = u.getFirstname();
 	this.lastname = u.getLastname();
 	this.phone = u.getPhone();
+	
 	this.friendsList = new HashSet<>();
 	for(FriendsList friend : u.getFriendsList()){
 	    this.friendsList.add(new FriendsListJson(friend));
+	}
+
+	this.connections = new HashSet<>();
+	for(Connection connection : u.getConnections()){
+	    this.connections.add(new ConnectionJson(connection));
 	}
     }
     
@@ -126,6 +134,14 @@ public class UserJson{
 
     public void setFriendsList(Set<FriendsListJson> fl){
 	this.friendsList = fl;
+    }
+
+    public Set<ConnectionJson> getConnections(){
+	return this.connections;
+    }
+
+    public void setConnections(Set<ConnectionJson> connections){
+	this.connections = connections;
     }
     
 }

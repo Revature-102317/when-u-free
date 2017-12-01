@@ -77,7 +77,7 @@ public class Connection {
 	}
 
     @ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "status", referencedColumnName = "statusid", nullable = false)
+    @JoinColumn(name = "status", referencedColumnName = "statusid", nullable = false)
 	public FriendGroupStatus getFriendGroupStatus() {
 		return status;
 	}
