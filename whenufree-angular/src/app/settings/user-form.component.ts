@@ -65,13 +65,11 @@ export class UserFormComponent extends UserInfoComponent implements OnDestroy {
 	onSave(): void {
 		if( this.extendForm) {
 			if( this.userForm.get('newPassword').value == this.userForm.get('confirmPassword').value)
-				this.userService.updateUserNewPassword( this.user,
-													   this.userForm.value.newPassword);
+				this.user.newPassword = userForm.get('newPassword');
 			else
 				this.messageService.add( "New passwords don't match, please try again.");
 		}
-		else
-			this.userService.updateUser( this.user);
+		this.userService.updateUser( this.user)
 	}
 
 	onDelete(): void {

@@ -7,5 +7,6 @@ export interface User {
   firstname: string;
   lastname: string;
   phone: string;
-  password: string;
+  newPassword: string;
+  friendslist: FriendsList;
 }
