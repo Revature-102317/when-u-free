@@ -4,7 +4,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 
 
 import {SocialNetworkService} from '../services/social-network.service';
-import {AuthenticationService} from '../services/authentication.service'
+import {UserService} from '../services/user.service'
 import {Named} from '../domain/named'
 import {FriendsList} from '../domain/friendsList'
 import {User} from '../domain/user'
@@ -31,7 +31,7 @@ export class SearchComponent implements OnInit {
     ngOnInit() {
 	this.getCurrentUser();
 
-    
+    }    
     onSubmit(){
 	var searchQuery = {'term': this.searchStr, 'type': this.searchType};
 	console.log(JSON.stringify(searchQuery));
@@ -42,13 +42,13 @@ export class SearchComponent implements OnInit {
 	});
     }
 
-	getCurrentUser(){
-	    this.userService.getUser().subscribe(
-		data => {
-		    this.currentUser = data;
+    getCurrentUser(){
+	this.userService.getUser().subscribe(
+	    data => {
+		this.currentUser = data;
 	    });
 	    console.log(JSON.stringify(this.currentUser));
-	}
+    }
     
     displayAddFriend(n: Named){
 	let ret = true;
