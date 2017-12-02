@@ -5,31 +5,58 @@ import java.util.HashSet;
 
 import com.whenufree.model.User;
 import com.whenufree.model.FriendsList;
+import com.whenufree.model.Connection;
 import com.whenufree.jsonpojos.FriendsListJson;
+import com.whenufree.jsonpojos.ConnectionJson;
 
 public class UserJson{
+    private Long userId;
     private String email;
     private String firstname;
     private String lastname;
     private String phone;
 	private String password;
     private Set<FriendsListJson> friendsList;
+    private Set<ConnectionJson> connections;
     
     public UserJson(){
     }
 
     public UserJson(User u){
+	this.userId = u.getUserId();
 	this.email = u.getEmail();
 	this.firstname = u.getFirstname();
 	this.lastname = u.getLastname();
 	this.phone = u.getPhone();
-	this.password = u.getPasswordHash();
 	this.friendsList = new HashSet<>();
 	for(FriendsList friend : u.getFriendsList()){
 	    this.friendsList.add(new FriendsListJson(friend));
 	}
+
+	this.connections = new HashSet<>();
+	for(Connection connection : u.getConnections()){
+	    this.connections.add(new ConnectionJson(connection));
+	}
     }
     
+    /**
+     * Gets the value of userId
+     *
+     * @return the value of userId
+     */
+    public final Long getUserId() {
+	return this.userId;
+    }
+
+    /**
+     * Sets the value of userId
+     *
+     * @param argUserId Value to assign to this.userId
+     */
+    public final void setUserId(final Long argUserId) {
+	this.userId = argUserId;
+    }
+
     /**
      * Gets the value of email
      *
@@ -128,5 +155,20 @@ public class UserJson{
 	this.friendsList = fl;
     }
 
+    public Set<ConnectionJson> getConnections(){
+	return this.connections;
+    }
+
+    public void setConnections(Set<ConnectionJson> connections){
+	this.connections = connections;
+    }
+	
+     //To String Method
+    @Override
+    public String toString() {
+	return "UserJson [userId=" + userId + ", email=" + email + ", firstname=" + firstname + ", lastname=" + lastname
+	    + ", phone=" + phone + ", password=" + password + "]";
+    }
     
-}
+}   
+ 

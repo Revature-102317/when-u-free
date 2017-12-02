@@ -12,20 +12,15 @@ import { MessageService } from '../message.service';
 	styleUrls: ['./user-info.component.css']
 })
 export class UserInfoComponent implements OnInit {
-	user: User;
+	@Input() user: User;
 	constructor( protected userService: UserService) { }
 
 	ngOnInit(): void {
-		this.getUser();
-	}
-
-	getUser(): void {
-		this.userService.getUser().subscribe( user => this.user = user);
 	}
 }
 
 @Component({
-  selector: 'app-default-user-form',
+  selector: 'app-user-form',
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.css']
 })
@@ -65,15 +60,28 @@ export class UserFormComponent extends UserInfoComponent implements OnDestroy {
 	onSave(): void {
 		if( this.extendForm) {
 			if( this.userForm.get('newPassword').value == this.userForm.get('confirmPassword').value)
-				this.user.newPassword = userForm.get('newPassword');
+				this.user.password = this.userForm.get('passwords').get('newPassword').value;
 			else
-				this.messageService.add( "New passwords don't match, please try again.");
+				//this.messageService.add( "New passwords don't match, please try again.");
+				console.log('new passwords don\'t match');
 		}
-		this.userService.updateUser( this.user)
+		this.userService.updateUser( this.user).subscribe(
+			success => {
+				this.messageService.add(" It worked!");
+			},
+			error => {
+				this.messageService.add(" Nope");
+			});
 	}
 
 	onDelete(): void {
-		//this.userService.deleteUser();
+		this.userService.deleteUser(this.user).subscribe(
+			success => {
+				this.messageService.add(" It worked!");
+			},
+			error => {
+				this.messageService.add(" Nope");
+			});
 	}
 
 	cancelEdit( clicked: boolean) {

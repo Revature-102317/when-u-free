@@ -77,7 +77,7 @@ public class Connection {
 	}
 
     @ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "status", referencedColumnName = "statusid", nullable = false)
+    @JoinColumn(name = "status", referencedColumnName = "statusid", nullable = false)
 	public FriendGroupStatus getFriendGroupStatus() {
 		return status;
 	}
@@ -92,6 +92,17 @@ public class Connection {
 		return "Connection [connectionId=" + connectionId + ", userId=" + user.getUserId() + ", friendGroupId=" + friendGroup.getFriendGroupId()
 				+ ", isAdmin=" + isAdmin + "]";
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this.getUser().equals(((Connection) obj).getUser()) && this.getFriendGroup().equals(((Connection) obj).getFriendGroup())){
+			return true;
+		}
+		//return super.equals(obj);
+		return false;
+	}
+	
+	
 
 	
 }

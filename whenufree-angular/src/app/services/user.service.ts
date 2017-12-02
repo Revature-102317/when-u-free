@@ -17,16 +17,14 @@ export class UserService {
 			   private messageService: MessageService) { }
 
 	getUser(): Observable<User> {
-		return this.http.get<User>(this.userUrl, this.options);
+		return this.http.get<User>(this.userUrl, this.options)
 	}
 
-	updateUser( user: User): void {
-		return this.http.post<User>(this.userUrl, {user}, this.options)
-		.subscribe(
-			success => {
-			},
-			error => {
-				this.messageService.add( "Error sending info over network");
-			});
+	updateUser( user: User): Observable<User> {
+		return this.http.post<User>(this.userUrl, {user}, this.options);
+	}
+
+	deleteUser( user: User): Observable<User> {
+		return this.http.post<User>(this.userUrl, {user}, this.options);
 	}
 }

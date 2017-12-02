@@ -30,11 +30,27 @@ public class SettingsController {
 		this.bCryptEnc = bCryptEnc;
 	}
 
-	@RequestMapping( path="/user", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
+	/*
+	public static class UserPOJO {
+		public Long userId;
+		public String email;	
+		public String firstname;
+		public String lastname;
+		public String phone;
+		public String password;
+		public Set<FriendsList> friendsList;
+		public Set<Connection> connections;
+		
+		public UserPOJO() {}
+	}
+	*/
+
+	@RequestMapping( path="/updateuser", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public ResponseEntity updateUser( @RequestBody UserJson userJson,
 			Principal pUser) {
 		User dBUser = userService.findByEmail( pUser.getName());
+		//System.out.println(userJson.toString());
 		if( bCryptEnc.matches( userJson.getPassword(),
 					dBUser.getPasswordHash())) {
 			dBUser.setEmail( userJson.getEmail());
@@ -46,4 +62,24 @@ public class SettingsController {
 		userService.save( dBUser);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+
+	@RequestMapping( path="/deleteuser", method= RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity deleteUser( @RequestBody UserJson userJson,
+			Principal pUser) {
+		User dBUser = userService.findByEmail( pUser.getName());
+		if( bCryptEnc.matches( userJson.getPassword(),
+					dBUser.getPaswordHash())) {
+			/*
+			 * Two Options
+			 * #1 Delete User
+			 * userService.delete( dBUser);
+			 *
+			 * or just set User to invalid leaves room for recovery
+			 * userService.setValid();
+			 */
+		}
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
 }
+
