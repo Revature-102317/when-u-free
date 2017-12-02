@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {RegistrationService} from '../services/registration.service';
+import {User} from '../domain/user';
 
 @Component({
   selector: 'app-registration',
@@ -15,21 +17,33 @@ export class RegistrationComponent implements OnInit {
 
   errorMessage: string;
 
-  constructor() {
-  }
+    constructor(private regService: RegistrationService) {
+    }
+    
+    ngOnInit() {
+    }
 
-  ngOnInit() {
-  }
+    onSubmit() {
+	var u: User = {
+	    userId: null,
+	    email: this.email,
+	    firstname: this.firstname,
+	    lastname: this.lastname,
+	    phone: this.phone,
+	    password: this.password,
+	    friendsList: null,
+	    connections: null
+	}
 
-  onSubmit() {
-    var registrationObj = {
-      'email': this.email,
-      'firstname': this.firstname,
-      'lastname': this.lastname,
-      'phone': this.phone,
-      'password': this.password
-    };
-
-    console.log(JSON.stringify(registrationObj));
-  }
+	console.log(JSON.stringify(u));
+	
+	this.regService.registerUser(u).subscribe(
+	    data => {
+		console.log("success");
+	    },
+	    error => {
+		this.errorMessage = "registration not successful, please try again";
+	    }
+	);
+    }
 }

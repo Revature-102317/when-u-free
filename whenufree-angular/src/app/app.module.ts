@@ -9,7 +9,7 @@ import {AuthenticationService} from './services/authentication.service';
 import {SpringXsrfInterceptor} from './interceptors/springXsrfInterceptor';
 import {SocialNetworkService} from './services/social-network.service';
 import {UrlService} from './services/url.service';
-
+import {RegistrationService} from './services/registration.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -68,6 +68,7 @@ import {GroupuserService} from "./services/groupuser.service";
 		MessageService,
 		UserService,
 		GroupuserService,
+		RegistrationService,
 		{provide: HTTP_INTERCEPTORS,
 		 useClass: SpringXsrfInterceptor,
 		 multi: true}],
