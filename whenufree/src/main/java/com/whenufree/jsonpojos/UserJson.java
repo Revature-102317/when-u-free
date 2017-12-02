@@ -12,6 +12,7 @@ public class UserJson{
     private String firstname;
     private String lastname;
     private String phone;
+	private String password;
     private Set<FriendsListJson> friendsList;
     
     public UserJson(){
@@ -22,6 +23,7 @@ public class UserJson{
 	this.firstname = u.getFirstname();
 	this.lastname = u.getLastname();
 	this.phone = u.getPhone();
+	this.password = u.getPasswordHash();
 	this.friendsList = new HashSet<>();
 	for(FriendsList friend : u.getFriendsList()){
 	    this.friendsList.add(new FriendsListJson(friend));
@@ -100,6 +102,24 @@ public class UserJson{
 	this.phone = argPhone;
     }
 
+	/**
+	 * Gets the value of password
+	 *
+	 * @return the value of password
+	 */
+	public final String getPassword() {
+		return this.password;
+	}
+
+	/**
+	 * Sets the value of password
+	 *
+	 * @param argPassword Value to assign to this.password
+	 */
+	public final void setPassword( final String argPassword) {
+		this.password = argPassword;
+	}
+
     public Set<FriendsListJson> getFriendsList(){
 	return this.friendsList;
     }
@@ -107,5 +127,6 @@ public class UserJson{
     public void setFriendsList(Set<FriendsListJson> fl){
 	this.friendsList = fl;
     }
+
     
 }
