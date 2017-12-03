@@ -4,11 +4,11 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 
 
 import {SocialNetworkService} from '../services/social-network.service';
-import {AuthenticationService} from '../services/authentication.service';
-import {Named} from '../domain/named';
-import {FriendsList} from '../domain/friendsList';
-import {User} from '../domain/user';
-import {UserService} from '../services/user.service';
+import {UserService} from '../services/user.service'
+import {Named} from '../domain/named'
+import {FriendsList} from '../domain/friendsList'
+import {User} from '../domain/user'
+
 
 @Component({
   selector: 'app-search',
@@ -33,25 +33,28 @@ export class SearchComponent implements OnInit {
       this.getCurrentUser();
     }
 
+
     onSubmit() {
-    var searchQuery = {'term': this.searchStr, 'type': this.searchType};
-    console.log(JSON.stringify(searchQuery));
-
-    let options = {withCredentials: true}
-    this.http.post<Named[]>("http://localhost:8080/search", searchQuery, options).subscribe(data => {
-    this.results = data;
-  });
+	var searchQuery = {'term': this.searchStr, 'type': this.searchType};
+	console.log(JSON.stringify(searchQuery));
+	
+	let options = {withCredentials: true}
+	this.http.post<Named[]>("http://localhost:8080/search", searchQuery, options).subscribe(data => {
+	    this.results = data;
+	});
     }
 
-  getCurrentUser() {
-    this.userService.getUser().subscribe(
-    data => {
-        this.currentUser = data;
-      });
-    console.log(JSON.stringify(this.currentUser));
-    }
 
-    displayAddFriend(n: Named) {
+    getCurrentUser(){
+	this.userService.getUser().subscribe(
+	    data => {
+		this.currentUser = data;
+	    });
+	    console.log(JSON.stringify(this.currentUser));
+    }
+    
+    displayAddFriend(n: Named){
+
 	let ret = true;
 	if(n.className !== 'User'){
 	    ret = false;

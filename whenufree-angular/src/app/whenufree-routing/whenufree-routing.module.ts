@@ -11,7 +11,7 @@ import {SettingsComponent} from '../settings/settings.component';
 import {SettimescheduledComponent} from '../settimescheduled/settimescheduled.component';
 import {LoadingpageComponent} from '../loadingpage/loadingpage.component';
 import {FriendgroupComponent} from '../friendgroup/friendgroup.component';
-
+import {RegistrationSuccessComponent} from '../registration-success/registration-success.component';
 const routes: Routes = [
     {path: 'homepage', component: HomepageComponent},
     {path: 'settime', component: SettimeComponent},
@@ -22,7 +22,8 @@ const routes: Routes = [
     {path: 'friendgroup', component: FriendgroupComponent},
     {path: 'settings', component: SettingsComponent},
     {path: 'settimescheduled', component: SettimescheduledComponent},
-    {path: 'loadingpage', component: LoadingpageComponent}
+    {path: 'loadingpage', component: LoadingpageComponent},
+    {path: 'registrationsuccess', component: RegistrationSuccessComponent}
 ];
 
 @NgModule({

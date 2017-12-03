@@ -63,6 +63,7 @@ public class UserService implements UserDetailsService{
 	return dao.save(u);
     }
 
+    @Override
     public UserDetails loadUserByUsername(String username)
 	throws UsernameNotFoundException{
 	User user = dao.findByEmail(username);	

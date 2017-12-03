@@ -35,4 +35,5 @@ As well as manipulating that data
   getUsers(): Observable<User[]> {
     return this.http.get<User[]> (this.url.getUrl() + '/friendgroupusers', {withCredentials: true});
   }
+
 }

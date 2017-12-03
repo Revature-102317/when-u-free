@@ -9,7 +9,7 @@ import {AuthenticationService} from './services/authentication.service';
 import {SpringXsrfInterceptor} from './interceptors/springXsrfInterceptor';
 import {SocialNetworkService} from './services/social-network.service';
 import {UrlService} from './services/url.service';
-
+import {RegistrationService} from './services/registration.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -31,27 +31,30 @@ import { SettimenavigatorComponent } from './settimenavigator/settimenavigator.c
 import { LoadingpageComponent } from './loadingpage/loadingpage.component';
 import { MessageService } from './message.service';
 import {GroupuserService} from "./services/groupuser.service";
+import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { FriendgroupComponent } from './friendgroup/friendgroup.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    HomepageComponent,
-    FriendgroupsComponent,
-    NavbarComponent,
-    SettimeComponent,
-    SettingsComponent,
-    UserFormComponent,
-    UserInfoComponent,
-    SettimescheduledComponent,
-    SettimenavigatorComponent,
-    SearchComponent,
-    GroupRightBarComponent,
-    RegistrationComponent,
-    GroupUserBarComponent,
-    LoadingpageComponent,
-    FriendgroupComponent
+      AppComponent,
+      LoginComponent,
+      HomepageComponent,
+      FriendgroupsComponent,
+      NavbarComponent,
+      SettimeComponent,
+      SettingsComponent,
+      UserFormComponent,
+      UserInfoComponent,
+      SettimescheduledComponent,
+      SettimenavigatorComponent,
+      SearchComponent,
+      GroupRightBarComponent,
+      RegistrationComponent,
+      GroupUserBarComponent,
+      FriendgroupsComponent,
+      LoadingpageComponent,
+      RegistrationSuccessComponent,
+      FriendgroupComponent
   ],
   imports: [
       BrowserModule,
@@ -69,6 +72,7 @@ import { FriendgroupComponent } from './friendgroup/friendgroup.component';
 		MessageService,
 		UserService,
 		GroupuserService,
+		RegistrationService,
 		{provide: HTTP_INTERCEPTORS,
 		 useClass: SpringXsrfInterceptor,
 		 multi: true}],
