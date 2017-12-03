@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+
 import {RegistrationService} from '../services/registration.service';
 import {User} from '../domain/user';
 
@@ -17,7 +19,8 @@ export class RegistrationComponent implements OnInit {
 
   errorMessage: string;
 
-    constructor(private regService: RegistrationService) {
+    constructor(private regService: RegistrationService,
+		private router: Router) {
     }
     
     ngOnInit() {
@@ -39,7 +42,7 @@ export class RegistrationComponent implements OnInit {
 	
 	this.regService.registerUser(u).subscribe(
 	    data => {
-		console.log("success");
+		this.router.navigate(['registrationsuccess']);
 	    },
 	    error => {
 		this.errorMessage = "registration not successful, please try again";

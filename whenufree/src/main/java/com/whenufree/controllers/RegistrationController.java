@@ -32,9 +32,9 @@ public class RegistrationController{
 
     @RequestMapping(path = "/register", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity joinGroup(@RequestBody UserJson newUser){
+    public ResponseEntity register(@RequestBody UserJson newUser){
 	User u = new User();
-	u.setEmail(newUser.getEmail());
+	u.setEmail(newUser.getEmail().toLowerCase());
 	u.setFirstname(newUser.getFirstname());
 	u.setLastname(newUser.getLastname());
 	u.setPhone(newUser.getPhone());

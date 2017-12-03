@@ -31,6 +31,7 @@ import { SettimenavigatorComponent } from './settimenavigator/settimenavigator.c
 import { LoadingpageComponent } from './loadingpage/loadingpage.component';
 import { MessageService } from './message.service';
 import {GroupuserService} from "./services/groupuser.service";
+import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import {GroupuserService} from "./services/groupuser.service";
     RegistrationComponent,
     GroupUserBarComponent,
     FriendgroupsComponent,
-    LoadingpageComponent
+    LoadingpageComponent,
+    RegistrationSuccessComponent
   ],
   imports: [
       BrowserModule,
