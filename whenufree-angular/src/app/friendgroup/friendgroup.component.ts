@@ -35,7 +35,9 @@ export class FriendgroupComponent implements OnInit {
   }
 
   getFriendGroup() {
-    this.groupuserService.getActiveFriendGroup().subscribe(friendgroup => this.currentFriendGroup = friendgroup);
+    this.groupuserService.getActiveFriendGroup().subscribe(friendgroup => {
+      this.currentFriendGroup = friendgroup;
+    });
   }
 
 }

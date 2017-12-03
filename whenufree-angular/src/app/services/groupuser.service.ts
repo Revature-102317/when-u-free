@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {Friendgroup} from '../domain/friendgroup';
 import {UrlService} from './url.service';
 import {User} from '../domain/user';
+import {GroupFreeTime} from '../domain/groupFreeTime';
 
 @Injectable()
 export class GroupuserService {
@@ -36,4 +37,8 @@ As well as manipulating that data
     return this.http.get<User[]> (this.url.getUrl() + '/friendgroupusers', {withCredentials: true});
   }
 
+  // gets the groupfreetimes
+  getGroupFreeTimes(): Observable<GroupFreeTime[]> {
+    return this.http.get<GroupFreeTime[]> (this.url.getUrl() + '/groupfreetimes', {withCredentials: true});
+}
 }

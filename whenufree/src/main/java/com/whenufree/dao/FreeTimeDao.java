@@ -17,6 +17,8 @@ public interface FreeTimeDao extends JpaRepository<FreeTime, Long>{
 	
 	public List<FreeTime> findByUser(User u);
 	
+	public List<FreeTime> findByUserAndScheduled(User u, Short s);
+	
 	public FreeTime findByUserAndTimeSlot(User u, TimeSlot t);
 	
 	public List<FreeTime> removeByUser(User u);
