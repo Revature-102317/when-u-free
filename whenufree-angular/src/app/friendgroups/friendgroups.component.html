@@ -1,0 +1,7 @@
+<app-navbar></app-navbar>
+<div style="text-align:center">
+  <h1>Your Friend Groups</h1>
+  <ul *ngFor="let friendgroup of friendgroups"  class="rounded-list">
+    <li (click)="postFriendGroup(friendgroup.name)">{{friendgroup.name}}</li>
+  </ul>
+</div>
