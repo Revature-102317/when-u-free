@@ -1,5 +1,6 @@
-import com.whenufree.model.GroupFreeTime;
+package com.whenufree.model;
 
+import com.whenufree.model.GroupFreeTime;
 import java.util.Comparator;
 
 public class GroupFreeTimeComparator implements Comparator<GroupFreeTime>{

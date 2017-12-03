@@ -28,7 +28,9 @@ export class GroupUserBarComponent implements OnInit {
   }
 
   getUsers() {
-    this.groupuserService.getUsers().subscribe(users => this.users = users);
+    this.groupuserService.getUsers().subscribe(users => {
+      this.users = users;
+    });
   }
 
 }
