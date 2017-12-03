@@ -9,6 +9,7 @@ import {Named} from '../domain/named'
 import {FriendsList} from '../domain/friendsList'
 import {User} from '../domain/user'
 
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -19,28 +20,30 @@ export class SearchComponent implements OnInit {
     results: Named[];
 
     currentUser: User;
-    
+
     searchStr: string;
-    searchType: string = "all";
+    searchType: string = 'all';
 
     constructor(private http: HttpClient,
-		private userService: UserService,
-		private snService: SocialNetworkService) { }
-      
+    private userService: UserService,
+    private snService: SocialNetworkService) { }
+
 
     ngOnInit() {
-	this.getCurrentUser();
+      this.getCurrentUser();
+    }
 
-    }    
-    onSubmit(){
+
+    onSubmit() {
 	var searchQuery = {'term': this.searchStr, 'type': this.searchType};
 	console.log(JSON.stringify(searchQuery));
-
+	
 	let options = {withCredentials: true}
 	this.http.post<Named[]>("http://localhost:8080/search", searchQuery, options).subscribe(data => {
 	    this.results = data;
 	});
     }
+
 
     getCurrentUser(){
 	this.userService.getUser().subscribe(
@@ -51,6 +54,7 @@ export class SearchComponent implements OnInit {
     }
     
     displayAddFriend(n: Named){
+
 	let ret = true;
 	if(n.className !== 'User'){
 	    ret = false;
@@ -63,7 +67,7 @@ export class SearchComponent implements OnInit {
 		}
 	    }
 	}
-	return ret
+	return ret;
     }
 
     displayJoinGroup(n: Named){

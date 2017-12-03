@@ -32,27 +32,29 @@ import { LoadingpageComponent } from './loadingpage/loadingpage.component';
 import { MessageService } from './message.service';
 import {GroupuserService} from "./services/groupuser.service";
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
+import { FriendgroupComponent } from './friendgroup/friendgroup.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    HomepageComponent,
-    FriendgroupsComponent,
-    NavbarComponent,
-    SettimeComponent,
-    SettingsComponent,
-    UserFormComponent,
-    UserInfoComponent,
-    SettimescheduledComponent,
-    SettimenavigatorComponent,
-    SearchComponent,
-    GroupRightBarComponent,
-    RegistrationComponent,
-    GroupUserBarComponent,
-    FriendgroupsComponent,
-    LoadingpageComponent,
-    RegistrationSuccessComponent
+      AppComponent,
+      LoginComponent,
+      HomepageComponent,
+      FriendgroupsComponent,
+      NavbarComponent,
+      SettimeComponent,
+      SettingsComponent,
+      UserFormComponent,
+      UserInfoComponent,
+      SettimescheduledComponent,
+      SettimenavigatorComponent,
+      SearchComponent,
+      GroupRightBarComponent,
+      RegistrationComponent,
+      GroupUserBarComponent,
+      FriendgroupsComponent,
+      LoadingpageComponent,
+      RegistrationSuccessComponent,
+      FriendgroupComponent
   ],
   imports: [
       BrowserModule,
