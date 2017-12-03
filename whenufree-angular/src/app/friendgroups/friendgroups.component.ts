@@ -35,6 +35,9 @@ export class FriendgroupsComponent implements OnInit {
   }
 
   postFriendGroup(friendgroup: string) {
-    this.groupuserService.postActiveFriendGroup(friendgroup).subscribe(data => {});
+    this.groupuserService.postActiveFriendGroup(friendgroup).subscribe(data => {
+      this.router.navigate(['friendgroup']);
+    });
+    this.router.navigate(['loadingpage']);
   }
 }
