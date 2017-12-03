@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {Friendgroup} from '../domain/friendgroup'
+import {Friendgroup} from '../domain/friendgroup';
 import {UrlService} from './url.service';
 
 @Injectable()
@@ -22,6 +22,11 @@ As well as manipulating that data
 
   // posts the current friendgroup that was clicked on to the user
   postActiveFriendGroup(friendgroup: string): Observable<Object> {
-    return this.http.post<string> (this.url.getUrl() + '/clickedfriendgroup', {friendgroup}, {withCredentials: true});
+    return this.http.post<string>(this.url.getUrl() + '/clickedfriendgroup', {friendgroup}, {withCredentials: true});
+  }
+
+  // gets the active friendgroup
+  getActiveFriendGroup(): Observable<Friendgroup> {
+    return this.http.get<Friendgroup> (this.url.getUrl() + '/friendgroup', {withCredentials: true});
   }
 }

@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {GroupuserService} from '../services/groupuser.service';
+import {User} from '../domain/user';
+import {UserService} from '../services/user.service';
+import {Router} from '@angular/router';
+import {Friendgroup} from '../domain/friendgroup';
 
 /*****
  *
@@ -13,9 +18,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FriendgroupComponent implements OnInit {
 
-  constructor() { }
+  currentUser: User;
+
+  currentFriendGroup: Friendgroup;
+
+  constructor(private groupuserService: GroupuserService,
+              private userService: UserService,
+              private router: Router) { }
 
   ngOnInit() {
+    this.userService.getUser().subscribe(
+      user => this.currentUser = user,
+      error => this.router.navigate([''])
+    );
+    this.getFriendGroup();
+  }
+
+  getFriendGroup() {
+    this.groupuserService.getActiveFriendGroup().subscribe(friendgroup => this.currentFriendGroup = friendgroup);
   }
 
 }
