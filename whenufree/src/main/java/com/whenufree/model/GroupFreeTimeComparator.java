@@ -1,3 +1,5 @@
+package com.whenufree.model;
+
 import com.whenufree.model.GroupFreeTime;
 
 import java.util.Comparator;
