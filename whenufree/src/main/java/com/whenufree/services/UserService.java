@@ -88,6 +88,16 @@ public class UserService implements UserDetailsService{
     	}
     	return timeSlotList;
     }
+    
+  //This gets all the unscheduled free times of a user
+    public List<TimeSlot> getUnScheduledFreeTimes(User u){
+    	List<TimeSlot> timeSlotList= new ArrayList<TimeSlot>();
+    	List<FreeTime> freeList = freeTimeDao.findByUserAndScheduled(u,(short) 0);
+    	for(int i = 0; i < freeList.size(); i++){
+    		timeSlotList.add(freeList.get(i).getTimeSlot());
+    	}
+    	return timeSlotList;
+    }
 
     //This method adds the default times set by the user to the database
     public List<FreeTime> setDefaultTime(User u, List<String> weektimes){

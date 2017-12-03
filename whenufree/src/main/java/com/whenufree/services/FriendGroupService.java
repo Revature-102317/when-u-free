@@ -137,7 +137,7 @@ public class FriendGroupService {
 		List<User> userList = this.findUsers(fg);
 		List<TimeSlot> timeSlotList = new ArrayList<TimeSlot>();
 		for(int a = 0; a < userList.size(); a++){
-			List<TimeSlot> userTimeSlotList = userService.getFreeTimesByUser(userList.get(a));
+			List<TimeSlot> userTimeSlotList = userService.getUnScheduledFreeTimes(userList.get(a));
 			timeSlotList.addAll(userTimeSlotList);
 		}
 		return timeSlotList;
