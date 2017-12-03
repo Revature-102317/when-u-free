@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Friendgroup} from '../domain/friendgroup';
 import {UrlService} from './url.service';
+import {User} from '../domain/user';
 
 @Injectable()
 export class GroupuserService {
@@ -28,5 +29,10 @@ As well as manipulating that data
   // gets the active friendgroup
   getActiveFriendGroup(): Observable<Friendgroup> {
     return this.http.get<Friendgroup> (this.url.getUrl() + '/friendgroup', {withCredentials: true});
+  }
+
+  // gets the users of the active friendgroup
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]> (this.url.getUrl() + '/friendgroupusers', {withCredentials: true});
   }
 }
