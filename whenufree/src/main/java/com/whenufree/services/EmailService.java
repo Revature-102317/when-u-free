@@ -12,10 +12,10 @@ public class EmailService {
 	public void send(String recipient, String title, String message){
         try{
             String host ="smtp.gmail.com" ;
-            String user = "ersproject1710";
+            String user = "whenufreerobot";
             String pass = "StaZ<+G.SSChUt88";
             String to = recipient;
-            String from = "ersproject@gmail.com";
+            String from = "whenufreerobot@gmail.com";
             String subject = title;
             String messageText = message;
             boolean sessionDebug = false;

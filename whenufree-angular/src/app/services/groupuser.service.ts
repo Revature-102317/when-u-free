@@ -23,7 +23,7 @@ As well as manipulating that data
   }
 
   // posts the current friendgroup that was clicked on to the user
-  postActiveFriendGroup(friendgroup: string): Observable<Object> {
+  postActiveFriendGroup(friendgroup: number): Observable<Object> {
     return this.http.post<string>(this.url.getUrl() + '/clickedfriendgroup', {friendgroup}, {withCredentials: true});
   }
 
