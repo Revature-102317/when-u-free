@@ -34,6 +34,7 @@ import {GroupuserService} from "./services/groupuser.service";
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { FriendgroupComponent } from './friendgroup/friendgroup.component';
 
+
 @NgModule({
   declarations: [
       AppComponent,

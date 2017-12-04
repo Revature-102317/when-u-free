@@ -50,7 +50,7 @@ export class SearchComponent implements OnInit {
 	    data => {
 		this.currentUser = data;
 	    });
-	    console.log(JSON.stringify(this.currentUser));
+	    
     }
     
     displayAddFriend(n: Named){
