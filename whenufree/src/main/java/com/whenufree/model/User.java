@@ -2,6 +2,7 @@ package com.whenufree.model;
 
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Iterator;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -187,7 +188,7 @@ public class User{
 	this.votes = votes;
     }
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<FriendsList> getFriendsList() {
 	return this.friendsList;
     }
@@ -196,7 +197,7 @@ public class User{
 	this.friendsList = friendsList;
     }
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<Connection> getConnections(){
 	return this.connections;
     }
@@ -217,6 +218,45 @@ public class User{
 
 	this.connections.add(newConnection);
 	//group.getConnections().add(newConnection);
+    }
+
+    public void acceptGroup(FriendGroup group){
+	FriendGroupStatus acceptedStatus = new FriendGroupStatus();
+	acceptedStatus.setStatusId((short)1);
+	acceptedStatus.setStatusName("approved");
+
+	for(Connection c : this.connections){
+	    if(c.getFriendGroup().getFriendGroupId()
+	       .equals(group.getFriendGroupId()) &&
+	       c.getFriendGroupStatus().getStatusName()
+	       .equals("invited")){
+		c.setFriendGroupStatus(acceptedStatus);
+		break;    
+	    }
+	} 	
+    }
+
+    public void leaveGroup(FriendGroup group){
+	Iterator<Connection> iter = this.connections.iterator();
+
+	while(iter.hasNext()){
+	    Connection current = iter.next();
+	    if(current.getFriendGroup().getFriendGroupId()
+	       .equals(group.getFriendGroupId())){
+		iter.remove();
+		break;
+	    }
+	}
+
+	iter = group.getConnections().iterator();
+	while(iter.hasNext()){
+	    Connection current = iter.next();
+	    if(current.getUser().getUserId()
+	       .equals(this.userId)){
+		iter.remove();
+		break;
+	    }
+	}
     }
 
     public void addFriend(User friend){
@@ -245,6 +285,51 @@ public class User{
 	mirror.setStatus(mirrorStatus);
 	friend.getFriendsList().add(mirror);
 	
+    }
+
+    public void acceptFriend(User friend){
+	FriendsListStatus acceptedStatus = new FriendsListStatus();
+	acceptedStatus.setStatusId((short)1);
+	acceptedStatus.setStatusName("approved");
+
+	for(FriendsList l : this.friendsList){
+	    if(l.getFriendsListPK().getFriendId().equals(friend.getUserId())
+	       && l.getStatus().getStatusName().equals("reverse-pending")){
+		l.setStatus(acceptedStatus);
+		break;
+	    }	
+	}
+
+	Set<FriendsList> mirrorList =  friend.getFriendsList(); 
+	for(FriendsList l : mirrorList){
+	    if(l.getFriendsListPK().getFriendId().equals(this.userId)){
+		l.setStatus(acceptedStatus);
+		break;
+	    }	
+	}
+    }
+
+    public void removeFriend(User friend){
+	Iterator<FriendsList> iter = this.friendsList.iterator();
+
+	while(iter.hasNext()){
+	    FriendsList current = iter.next();
+	    if(current.getFriendsListPK().getFriendId()
+	       .equals(friend.getUserId())){
+		iter.remove();
+		break;
+	    }
+	}
+
+	iter = friend.getFriendsList().iterator();
+	while(iter.hasNext()){
+	    FriendsList current = iter.next();
+	    if(current.getFriendsListPK().getFriendId()
+	       .equals(this.userId)){
+		iter.remove();
+		break;
+	    }
+	}
     }
     
     //To String Method
