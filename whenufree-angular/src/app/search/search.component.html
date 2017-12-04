@@ -1,10 +1,11 @@
+<app-navbar></app-navbar>
 <div class="container">
   <form (ngSubmit)="onSubmit()" #selectRequests="ngForm" class="form-inline">
-  
+
     <label for="searchStr" class ="control-label sr-only">Search String:</label>
       <input type="search" class="form-control" id="searchStr"
 	     [(ngModel)]="searchStr" name ="searchStr">
-    
+
       <div class="col-1">
       </div>
       <label for="searchType" class ="control-label">Filter By:</label>
@@ -13,16 +14,16 @@
 	<option value="all" selected>all</option>
 	<option value="groups">groups</option>
 	<option value="people">people</option>
-      </select>      
-    
+      </select>
+
       <div class="col-1">
       </div>
-      
+
       <button type="submit" class="btn btn-success"
 	  [disabled]="!selectRequests.form.valid">
 	Search
       </button>
-    
+
   </form>
 </div>
 <div class ="container">
