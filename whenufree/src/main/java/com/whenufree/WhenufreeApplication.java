@@ -87,6 +87,7 @@ public class WhenufreeApplication {
 		//System.out.println(friendGroupService.getTimeSlotByGroupFreeTime((long) 1));
 
 		//friendGroupService.saveGroupFreeTimes(groupFreeTimesList);
+		
 	};
     }
 }
