@@ -12,11 +12,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.whenufree.jsonpojos.Named;
 import com.whenufree.jsonpojos.UserJson;
 import com.whenufree.model.Connection;
 import com.whenufree.model.FriendGroup;
@@ -66,7 +68,7 @@ public class FriendGroupController {
 			/*
 			FriendGroup fg = friendGroupService.findByName(activeFriendGroup.get().getName());
 			fg.getConnections().removeAll(fg.getConnections());*/
-			FriendGroup fg = friendGroupService.findByName(activeFriendGroup.get().getName());
+			FriendGroup fg = friendGroupService.findByFriendGroupId(activeFriendGroup.get().getFriendGroupId());
 			fg.getConnections().removeAll(fg.getConnections());
 			return new ResponseEntity<FriendGroup>(fg, HttpStatus.OK);
 		}
@@ -75,7 +77,7 @@ public class FriendGroupController {
 		@RequestMapping(path="/friendgroupusers", method=RequestMethod.GET)
 		@ResponseBody
 		public ResponseEntity<List<UserJson>> getFriendGroupUsers(){
-			FriendGroup fg = friendGroupService.findByName(activeFriendGroup.get().getName());
+			FriendGroup fg = friendGroupService.findByFriendGroupId(activeFriendGroup.get().getFriendGroupId());
 			List<UserJson> users = new ArrayList<UserJson>();
 			//connections of that friend group
 			Set<Connection> connections = fg.getConnections();
@@ -104,16 +106,26 @@ public class FriendGroupController {
 		     }
 			return new ResponseEntity<List<UserJson>>(users, HttpStatus.OK);
 		}
+		
+		@RequestMapping(path = "/getactivefriendgroup/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	    @ResponseBody
+	    public ResponseEntity<FriendGroup> getFriendGroupById(@PathVariable("id") Long id){
+			FriendGroup fg = friendGroupService.findByFriendGroupId(id);
+			fg.getConnections().removeAll(fg.getConnections());
+			return new ResponseEntity<>(fg, HttpStatus.OK);
+	    }
 	
 	//path the post request of gotten friend group was sent to
 	@RequestMapping(path="/clickedfriendgroup", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<String> receiveClickedOnFriendGroup(@RequestBody String receivedFriendGroup){
+	public ResponseEntity<String> receiveClickedOnFriendGroup(@RequestBody String id){
 		//this is returned {"friendgroup":"name"}
 		//We will now substring this
+		System.out.println(id);
+		System.out.println(id.substring(15, id.length()-1));
 		FriendGroup fg = activeFriendGroup.get();
-		String friendgroupSubStringed = receivedFriendGroup.substring(16, receivedFriendGroup.length()-2);
-		FriendGroup fg2 = friendGroupService.findByName(friendgroupSubStringed);
+		Integer fgId = Integer.parseInt(id.substring(15, id.length()-1));
+		FriendGroup fg2 = friendGroupService.findByFriendGroupId((long) fgId);
 		fg.setConnections(fg2.getConnections());
 		fg.setFriendGroupId(fg2.getFriendGroupId());
 		fg.setName(fg2.getName());
@@ -129,6 +141,14 @@ public class FriendGroupController {
 	public ResponseEntity<List<GroupFreeTime>> getGroupFreeTimes(){
 		FriendGroup fg = friendGroupService.findByFriendGroupName(activeFriendGroup.get().getName());
 		List<GroupFreeTime> gft = friendGroupService.getGroupFreeTimes(fg);
+		//whileloop
+		//while loop
+		//++1
+		//if consecutive
+		//collapse
+		//endwhile
+		//i++
+		//endwhile
 		for(int a = 0; a < gft.size(); a++){
 			gft.get(a).getFriendGroup().getConnections().removeAll(gft.get(a).getFriendGroup().getConnections());
 		}

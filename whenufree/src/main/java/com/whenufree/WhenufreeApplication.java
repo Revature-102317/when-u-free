@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.whenufree.services.EmailService;
 import com.whenufree.services.FriendGroupService;
 import com.whenufree.services.TimeSlotService;
 import com.whenufree.services.UserService;
@@ -66,6 +67,7 @@ public class WhenufreeApplication {
 		
 		User u = userService.findByUserId((long) 1);
 		User u2 = userService.findByUserId((long) 4);
+		User u3 = userService.findByUserId((long) 5);
 		
 		FriendGroup fg = friendGroupService.findByFriendGroupId((long) 1);
 		FriendGroup fg2 = friendGroupService.findByFriendGroupId((long) 21);
@@ -87,7 +89,9 @@ public class WhenufreeApplication {
 		//System.out.println(friendGroupService.getTimeSlotByGroupFreeTime((long) 1));
 
 		//friendGroupService.saveGroupFreeTimes(groupFreeTimesList);
-		
+		//friendGroupService.addUser(fg, u3);
+		//EmailService email=new EmailService();
+		//email.send("junjie2412@gmail.com","hello", "how are you?");
 	};
     }
 }
