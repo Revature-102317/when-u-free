@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.whenufree.services.FriendGroupService;
 import com.whenufree.services.TimeSlotService;
 import com.whenufree.services.UserService;
+import com.whenufree.dao.GroupFreeTimeDao;
 import com.whenufree.model.FreeTime;
 import com.whenufree.model.FriendGroup;
 import com.whenufree.model.GroupFreeTime;
@@ -31,6 +32,9 @@ public class WhenufreeApplication {
     
     @Autowired
     FriendGroupService friendGroupService;
+    
+    @Autowired
+    GroupFreeTimeDao groupFreeTimeDao;
     
   //  public TimeSlotService getTimeSlotService(){
  //   	return timeSlotService;
@@ -59,7 +63,7 @@ public class WhenufreeApplication {
 		// //friendGroupService.saveGroupFreeTimes(gft);
 		// System.out.println(friendGroupService.getGroupFreeTimes(fg));
 
-		/*
+		
 		User u = userService.findByUserId((long) 1);
 		User u2 = userService.findByUserId((long) 4);
 		
@@ -80,7 +84,10 @@ public class WhenufreeApplication {
 		//System.out.println(fg2.getConnections());
 		//System.out.println(friendGroupService.findByUser(u));
 		//friendGroupService.addUser(fg2, u2);
-		//System.out.println(friendGroupService.getTimeSlotByGroupFreeTime((long) 1)); 
+		//System.out.println(friendGroupService.getTimeSlotByGroupFreeTime((long) 1));
+
+		//friendGroupService.saveGroupFreeTimes(groupFreeTimesList);
+		
 	};
     }
 }
