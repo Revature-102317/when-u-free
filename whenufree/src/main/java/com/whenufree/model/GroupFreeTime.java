@@ -45,7 +45,7 @@ public class GroupFreeTime {
 	 * @param groupFreeTimeId The new groupFreeTimeId value
 	 */
 	public void setGroupFreeTimeId(Long groupFreeTimeId) {
-		groupFreeTimeId = groupFreeTimeId;
+		this.groupFreeTimeId = groupFreeTimeId;
 	}
 
 	private Integer numUsers;
@@ -55,7 +55,7 @@ public class GroupFreeTime {
 	 * @return the value of numUsers
 	 */
 	@Column(name= "numusers", nullable = false)
-	public int getNumUsers() {
+	public Integer getNumUsers() {
 		return numUsers;
 	}
 	/**
