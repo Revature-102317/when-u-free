@@ -28,7 +28,6 @@ export class SettimeComponent implements OnInit, AfterContentInit, AfterViewInit
   userDefaultTimes: TimeSlot[] = [];
 
   selected = [];
-  defaultTime: string[] = [];
 
   currentUser: User;
 
