@@ -1,6 +1,17 @@
 <app-navbar></app-navbar>
 <div style="text-align:center">
-<h1>{{currentFriendGroup.name}}</h1>
-  <app-group-user-bar></app-group-user-bar>
-  <app-group-right-bar></app-group-right-bar>
+  <h1>{{currentFriendGroup.name}}</h1>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <app-group-user-bar></app-group-user-bar>
+    </div>
+    <div class="col-5">
+      FRIEND GROUP MIDDLE PART GOES HERE
+    </div>
+    <div class="col">
+      <app-group-right-bar></app-group-right-bar>
+    </div>
+  </div>
 </div>
