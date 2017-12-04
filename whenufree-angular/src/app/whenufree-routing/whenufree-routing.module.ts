@@ -23,7 +23,8 @@ const routes: Routes = [
     {path: 'settings', component: SettingsComponent},
     {path: 'settimescheduled', component: SettimescheduledComponent},
     {path: 'loadingpage', component: LoadingpageComponent},
-    {path: 'registrationsuccess', component: RegistrationSuccessComponent}
+    {path: 'registrationsuccess', component: RegistrationSuccessComponent},
+    {path: 'search', component: SearchComponent}
 ];
 
 @NgModule({
