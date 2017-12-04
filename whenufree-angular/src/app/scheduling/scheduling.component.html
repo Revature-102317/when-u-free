@@ -1,0 +1,26 @@
+<form (ngSubmit)="onSubmit()" #selectRequests="ngForm" class="form-inline">
+
+  <label for="day" class ="control-label">Day:</label>
+  <select name="day" class="form-control" id="day"
+	  [(ngModel)]="selectedDay" name ="selectedDay">
+    <option *ngFor = "let day of days" value={{day}}>{{day}}</option>
+  </select>
+  
+  <label for="startTime" class ="control-label">Start Time:</label>
+  <select name="startTime" class="form-control" id="startTime"
+	  [(ngModel)]="startTime" name ="startTime">
+    <option *ngFor = "let time of times" value={{time}}>{{time}}</option>
+  </select>
+
+  <label for="duration" class ="control-label">Duration:</label>
+  <select name="duration" class="form-control" id="duration"
+	  [(ngModel)]="selectedDuration" name ="selectedDuration">
+    <option *ngFor = "let duration of durations" value={{duration}}>{{duration}}</option>
+  </select>
+  
+  <button type="submit" class="btn"
+	  [disabled]="!selectRequests.form.valid">
+	Schedule Event
+  </button>
+  
+</form>   
