@@ -66,7 +66,7 @@ public class FriendGroupController {
 			/*
 			FriendGroup fg = friendGroupService.findByName(activeFriendGroup.get().getName());
 			fg.getConnections().removeAll(fg.getConnections());*/
-			FriendGroup fg = friendGroupService.findByName(activeFriendGroup.get().getName()); 
+			FriendGroup fg = friendGroupService.findByName(activeFriendGroup.get().getName());
 			fg.getConnections().removeAll(fg.getConnections());
 			return new ResponseEntity<FriendGroup>(fg, HttpStatus.OK);
 		}
@@ -117,6 +117,8 @@ public class FriendGroupController {
 		fg.setConnections(fg2.getConnections());
 		fg.setFriendGroupId(fg2.getFriendGroupId());
 		fg.setName(fg2.getName());
+		friendGroupService.deleteByFriendGroup(fg2);
+		friendGroupService.addToDatabase(fg2);
 		System.out.println(activeFriendGroup.get());
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

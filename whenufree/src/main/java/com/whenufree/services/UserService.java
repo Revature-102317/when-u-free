@@ -92,7 +92,7 @@ public class UserService implements UserDetailsService{
   //This gets all the unscheduled free times of a user
     public List<TimeSlot> getUnScheduledFreeTimes(User u){
     	List<TimeSlot> timeSlotList= new ArrayList<TimeSlot>();
-    	List<FreeTime> freeList = freeTimeDao.findByUserAndScheduled(u,(short) 0);
+    	List<FreeTime> freeList = freeTimeDao.findByUserAndScheduled(u,false);
     	for(int i = 0; i < freeList.size(); i++){
     		timeSlotList.add(freeList.get(i).getTimeSlot());
     	}
