@@ -35,7 +35,13 @@ export class SearchComponent implements OnInit {
 
 
     onSubmit() {
-	var searchQuery = {'term': this.searchStr, 'type': this.searchType};
+	var type = 'all';
+	if(this.searchType === 'groups'){
+	    type = 'group';
+	}else if(this.searchType === 'people'){
+	    type = 'user';
+	}
+	var searchQuery = {'term': this.searchStr, 'type': type};
 	console.log(JSON.stringify(searchQuery));
 	
 	let options = {withCredentials: true}
