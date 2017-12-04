@@ -1,6 +1,7 @@
 package com.whenufree.controllers;
 
 import com.whenufree.services.UserService;
+import com.whenufree.services.EmailService;
 import com.whenufree.services.FriendGroupService;
 import com.whenufree.model.User;
 import com.whenufree.model.FriendGroup;
@@ -23,6 +24,10 @@ import java.security.Principal;
 public class SocialNetworkController{
     private UserService userService;
     private FriendGroupService friendGroupService;
+    
+    //To send an email, just do the following:
+    //emailService.send("example@email.com", "Title of the Email", "Message Body of Email");
+    private EmailService emailService = new EmailService();
 
     @Autowired
     public SocialNetworkController(UserService userService,
