@@ -1,7 +1,6 @@
-import {FriendsList} from './friendsList';
 import {Connection} from './connection';
 
-export interface User {
+export interface UserJson {
 
 	userId: number;
 	email: string;
@@ -9,6 +8,4 @@ export interface User {
 	lastname: string;
 	phone: string;
 	password: string;
-	friendsList: FriendsList[];
-	connections: Connection[];
 }
