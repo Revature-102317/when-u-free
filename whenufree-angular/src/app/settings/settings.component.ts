@@ -25,7 +25,6 @@ export class SettingsComponent implements OnInit {
 	}
 
 	onCancel( clicked: boolean): void {
-		console.log(' the value of clicked was ' + clicked);
 		clicked ? this.editInfo = false: this.editInfo = true;
 	}
 }

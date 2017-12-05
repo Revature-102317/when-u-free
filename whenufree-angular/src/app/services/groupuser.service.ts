@@ -49,4 +49,9 @@ As well as manipulating that data
   getGroupFreeTimesBetter(): Observable<Named[]> {
     return this.http.get<Named[]> (this.url.getUrl() + '/groupfreetimesbetter', {withCredentials: true});
   }
+
+  // sendMessage
+ 
+  sendMessage(message: Message): Observable<Object> {
+	  return this.http.post<Message> (this.url
 }
