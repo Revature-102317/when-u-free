@@ -63,6 +63,7 @@ public class UserService implements UserDetailsService{
 	return dao.save(u);
     }
 
+    @Override
     public UserDetails loadUserByUsername(String username)
 	throws UsernameNotFoundException{
 	User user = dao.findByEmail(username);	
@@ -87,10 +88,39 @@ public class UserService implements UserDetailsService{
     	}
     	return timeSlotList;
     }
+    
+  //This gets all the unscheduled free times of a user
+    public List<TimeSlot> getUnScheduledFreeTimes(User u){
+    	List<TimeSlot> timeSlotList= new ArrayList<TimeSlot>();
+    	List<FreeTime> freeList = freeTimeDao.findByUserAndScheduled(u,false);
+    	for(int i = 0; i < freeList.size(); i++){
+    		timeSlotList.add(freeList.get(i).getTimeSlot());
+    	}
+    	return timeSlotList;
+    }
+    
+  //This gets all the scheduled free times of a user
+    public List<TimeSlot> getScheduledFreeTimes(User u){
+    	List<TimeSlot> timeSlotList= new ArrayList<TimeSlot>();
+    	List<FreeTime> freeList = freeTimeDao.findByUserAndScheduled(u,true);
+    	for(int i = 0; i < freeList.size(); i++){
+    		timeSlotList.add(freeList.get(i).getTimeSlot());
+    	}
+    	return timeSlotList;
+    }
+    
+  //This gets all the default free times of a user
+    public List<TimeSlot> getDefaultFreeTimes(User u){
+    	List<TimeSlot> timeSlotList= new ArrayList<TimeSlot>();
+    	List<FreeTime> freeList = freeTimeDao.findByUserAndIsDefault(u,true);
+    	for(int i = 0; i < freeList.size(); i++){
+    		timeSlotList.add(freeList.get(i).getTimeSlot());
+    	}
+    	return timeSlotList;
+    }
 
     //This method adds the default times set by the user to the database
     public List<FreeTime> setDefaultTime(User u, List<String> weektimes){
-    	List<FreeTime> ft = new ArrayList<FreeTime>();
     	for(int i = 0; i < weektimes.size(); i++){
     		FreeTime freetime = new FreeTime();
     		freetime.setIsDefault(true);
@@ -99,6 +129,29 @@ public class UserService implements UserDetailsService{
     		freetime.setUser(u);
     		if (!checkIfContains(u, timeSlotService.findByDateTime(weektimes.get(i)))){
     			freeTimeDao.save(freetime);
+    		}else{
+    			FreeTime free = freeTimeDao.getOne(freeTimeDao.findByUserAndTimeSlot(u, freetime.getTimeSlot()).getFreeTimeId());
+    			free.setIsDefault(true);
+    			freeTimeDao.save(free);
+    		}
+    	}
+    	return freeTimeDao.findByUser(u);
+    }
+    
+    //setting scheduled times
+    public List<FreeTime> setScheduledTime(User u, List<String> weektimes){
+    	for(int i = 0; i < weektimes.size(); i++){
+    		FreeTime freetime = new FreeTime();
+    		freetime.setIsDefault(false);
+    		freetime.setScheduled(true);
+    		freetime.setTimeSlot(timeSlotService.findByDateTime(weektimes.get(i)));
+    		freetime.setUser(u);
+    		if (!checkIfContains(u, timeSlotService.findByDateTime(weektimes.get(i)))){
+    			freeTimeDao.save(freetime);
+    		} else{
+    			FreeTime free = freeTimeDao.getOne(freeTimeDao.findByUserAndTimeSlot(u, freetime.getTimeSlot()).getFreeTimeId());
+    			free.setScheduled(true);
+    			freeTimeDao.save(free);
     		}
     	}
     	return freeTimeDao.findByUser(u);
@@ -118,6 +171,30 @@ public class UserService implements UserDetailsService{
     @Transactional
     public List<FreeTime> deleteByUser(User u){
     	return freeTimeDao.removeByUser(u);
+    }
+    
+    @Transactional
+    public List<FreeTime> deleteDefaultWithoutTouchingScheduled(User u){
+    	List<FreeTime> ft = freeTimeDao.findByUser(u);
+    	for(int a = 0; a < ft.size(); a++){
+    		FreeTime free = freeTimeDao.findByUserAndTimeSlot(ft.get(a).getUser(), ft.get(a).getTimeSlot());
+    		FreeTime freetime = freeTimeDao.getOne(free.getFreeTimeId());
+    		freetime.setIsDefault(false);
+    		freeTimeDao.save(freetime);
+    	}
+    	return freeTimeDao.removeByUserAndScheduled(u, false);
+    }
+    
+    @Transactional
+    public List<FreeTime> deleteScheduledWithoutTouchingDefault(User u){
+    	List<FreeTime> ft = freeTimeDao.findByUser(u);
+    	for(int a = 0; a < ft.size(); a++){
+    		FreeTime free = freeTimeDao.findByUserAndTimeSlot(ft.get(a).getUser(), ft.get(a).getTimeSlot());
+    		FreeTime freetime = freeTimeDao.getOne(free.getFreeTimeId());
+    		freetime.setScheduled(false);
+    		freeTimeDao.save(freetime);
+    	}
+    	return freeTimeDao.removeByUserAndIsDefault(u, false);
     }
     
     public ArrayList<TimeSlot> getFreeTime(String user){

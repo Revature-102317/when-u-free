@@ -9,9 +9,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.whenufree.services.EmailService;
 import com.whenufree.services.FriendGroupService;
 import com.whenufree.services.TimeSlotService;
 import com.whenufree.services.UserService;
+import com.whenufree.dao.GroupFreeTimeDao;
 import com.whenufree.model.FreeTime;
 import com.whenufree.model.FriendGroup;
 import com.whenufree.model.GroupFreeTime;
@@ -31,6 +33,9 @@ public class WhenufreeApplication {
     
     @Autowired
     FriendGroupService friendGroupService;
+    
+    @Autowired
+    GroupFreeTimeDao groupFreeTimeDao;
     
   //  public TimeSlotService getTimeSlotService(){
  //   	return timeSlotService;
@@ -59,9 +64,10 @@ public class WhenufreeApplication {
 		// //friendGroupService.saveGroupFreeTimes(gft);
 		// System.out.println(friendGroupService.getGroupFreeTimes(fg));
 
-		/*
+		
 		User u = userService.findByUserId((long) 1);
 		User u2 = userService.findByUserId((long) 4);
+		User u3 = userService.findByUserId((long) 5);
 		
 		FriendGroup fg = friendGroupService.findByFriendGroupId((long) 1);
 		FriendGroup fg2 = friendGroupService.findByFriendGroupId((long) 21);
@@ -80,6 +86,28 @@ public class WhenufreeApplication {
 		//System.out.println(fg2.getConnections());
 		//System.out.println(friendGroupService.findByUser(u));
 		//friendGroupService.addUser(fg2, u2);
+		//System.out.println(friendGroupService.getTimeSlotByGroupFreeTime((long) 1));
+
+		//friendGroupService.saveGroupFreeTimes(groupFreeTimesList);
+		//friendGroupService.addUser(fg, u3);
+		//EmailService email=new EmailService();
+		//email.send("junjie2412@gmail.com","hello", "how are you?");
+		/*
+		StringBuilder sb = new StringBuilder();
+		StringBuilder test = new StringBuilder();
+		System.out.println(sb);
+		System.out.println(sb.append("SU/10:00S-S11:00S"));
+		System.out.println(test.append(sb));
+		System.out.println(test.substring(0, 2));
+		System.out.println(test.substring(3, 11));
+		System.out.println(test.substring(11, 16));
+		sb.delete(11, 16);*/
+		/*
+		friendGroupService.sendMessage(u2, fg, "hey whats up");
+		friendGroupService.sendMessage(u, fg, "so you guys free tonight?");
+		friendGroupService.sendMessage(u2, fg, "sorry, got a huge project coming up");
+		friendGroupService.sendMessage(u, fg, "that's fine, we just finished");
+		friendGroupService.sendMessage(u2, fg, "maybe next week");*/
 	};
     }
 }

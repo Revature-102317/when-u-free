@@ -1,4 +1,5 @@
 export interface Friendgroup {
-  friendgroupid: number;
+  friendGroupId: number;
   name: string;
+  messages: Message[];
 }

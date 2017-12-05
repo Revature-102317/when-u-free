@@ -28,7 +28,6 @@ export class SettimeComponent implements OnInit, AfterContentInit, AfterViewInit
   userDefaultTimes: TimeSlot[] = [];
 
   selected = [];
-  defaultTime: string[] = [];
 
   currentUser: User;
 
@@ -62,7 +61,7 @@ export class SettimeComponent implements OnInit, AfterContentInit, AfterViewInit
            }
          });
   }
-// Setting each time individually. AJAX request
+// Setting each time individually. AJAX request. When clicking a box, this will send a request
   setDefaultTime(weektime: string) {
           this.settimeService.setDefaultTime(weektime).subscribe(data => {});
           console.log(weektime);

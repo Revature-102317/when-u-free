@@ -88,7 +88,7 @@ public class UserGroupSearch{
 	}
 	// execute search and return results (sorted by relevance as default)
 	@SuppressWarnings("unchecked")
-	    List results = jpaQuery.getResultList();
+	List results = jpaQuery.getResultList();
     
 	return results;
     }

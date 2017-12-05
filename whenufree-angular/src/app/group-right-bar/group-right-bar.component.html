@@ -1,10 +1,20 @@
 <div>
   <div>
-    Best Times:
+    Free Times (24 hour clock)
   </div>
-  <div *ngFor="let time of bestTimes">
-    {{time.day}} From {{time.startTime}} to {{time.endTime}}
-  </div>
+  <table class = "table">
+    <thead>
+    <tr>
+      <th>Time</th>
+      <th>Number of Users</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let times of greatTimes">
+      <td>{{times.name}}</td><td>{{times.id}}</td>
+    </tr>
+    </tbody>
+  </table>
 </div>
 
 <div>

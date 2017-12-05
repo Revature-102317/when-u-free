@@ -1,7 +1,52 @@
 <app-navbar></app-navbar>
 <div style="text-align:center">
   <h1>Welcome to the Homepage!</h1>
-<h2>
-  Welcome {{currentUser.firstname}} {{currentUser.lastname}}!
-</h2>
+  <h2>
+    Welcome {{currentUser.firstname}} {{currentUser.lastname}}!
+  </h2>
+</div>
+
+<div class ="container">
+  <div class="row">
+  <div class ="col-6">
+    <h3>Friend Invites</h3>
+    <table class="table">
+      <tr *ngFor="let friend of friendRequests">
+	<td>
+	  {{friend.name}}
+	</td>
+	<td>
+	<button (click)="onAcceptFriend(friend)" type="accept friend" class="btn">
+	  Accept
+	</button>
+	</td>
+	<td>
+	<button (click)="onDenyFriend(friend)" type="deny friend" class="btn">
+	  Deny
+	</button>
+	</td>
+      </tr>
+  </table>
+  </div>
+  <div class = "col-6">
+    <h3>Group Invites</h3>
+    <table class="table">
+      <tr *ngFor="let group of groupInvites">
+	<td>
+	  {{group.name}}
+	</td>
+	<td>
+	  <button (click)="onAcceptGroup(group)" type="accept group" class="btn">
+	    Accept
+	  </button>
+	</td>
+	<td>
+	  <button (click)="onDenyGroup(group)" type="deny group" class="btn">
+	    Deny
+	  </button>
+	</td>
+      </tr>
+    </table>
+  </div>
+  </div>
 </div>

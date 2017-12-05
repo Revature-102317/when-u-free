@@ -26,4 +26,9 @@ export class SettimeService {
   getUserDefaultTime(): Observable<TimeSlot[]> {
     return this.http.get<TimeSlot[]>('http://localhost:8080/mydefaulttimes', {withCredentials: true});
   }
+
+  //gets the user default timeslots
+  getUserScheduledTime(): Observable<TimeSlot[]> {
+    return this.http.get<TimeSlot[]>('http://localhost:8080/myscheduledtimes', {withCredentials: true});
+  }
 }

@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <app-settimenavigator></app-settimenavigator>
 <div style="text-align:center">
-  <h1>Set Your Schedule for this Week</h1>
+  <h1>Set your Scheduled Time for this Week</h1>
   <table class = "table">
     <thead>
     <tr>
@@ -19,14 +19,14 @@
     <tr *ngFor="let time of times">
       <td>{{time.time}}</td>
       <td *ngFor="let day of days" id={{day+time.id}}><label class="container">
-        <input type="checkbox" [(ngModel)]="this.selected[day+time.id]"
-               (click)="setDefaultTime(day+time.id)"/>
+        <input type="checkbox"
+               (click)="setDefaultTime(day+time.id+selected[day+time.id])" [(ngModel)]="this.selected[day+time.id]"/>
         <span class="checkmark"></span>
       </label></td>
     </tr>
     </tbody>
   </table>
-  <h2></h2>
+  <h2 (click)="submitDefault('scheduleScheduledTimesToTheserver');">Submit your Scheduled Times</h2>
 </div>
 <label class="container">
   <input type="checkbox">

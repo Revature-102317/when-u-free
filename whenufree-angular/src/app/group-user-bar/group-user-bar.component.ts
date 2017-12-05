@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from '../services/user.service';
+import {GroupuserService} from '../services/groupuser.service';
+import {User} from '../domain/user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-group-user-bar',
@@ -7,9 +11,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GroupUserBarComponent implements OnInit {
 
-  constructor() { }
+  currentUser: User;
+
+  users: User[] = [];
+
+  constructor(private groupuserService: GroupuserService,
+              private userService: UserService,
+              private router: Router) { }
 
   ngOnInit() {
+    this.userService.getUser().subscribe(
+      user => this.currentUser = user,
+      error => this.router.navigate([''])
+    );
+    this.getUsers();
+  }
+
+  getUsers() {
+    this.groupuserService.getUsers().subscribe(users => {
+      this.users = users;
+    });
   }
 
 }

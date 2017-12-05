@@ -69,7 +69,7 @@ public class SettingsController {
 			Principal pUser) {
 		User dBUser = userService.findByEmail( pUser.getName());
 		if( bCryptEnc.matches( userJson.getPassword(),
-					dBUser.getPaswordHash())) {
+					dBUser.getPasswordHash())) {
 			/*
 			 * Two Options
 			 * #1 Delete User

@@ -1,6 +1,7 @@
 package com.whenufree.controllers;
 
 import java.security.Principal;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -82,9 +83,19 @@ public class SetTimesController {
 		@ResponseBody
 		public ResponseEntity<List<TimeSlot>> getDefaultTimesOfCurrentUser(Principal user){
 			User u = userService.findByEmail(user.getName());
-			return new ResponseEntity<List<TimeSlot>>(userService.getFreeTimesByUser(u), HttpStatus.OK);
+			return new ResponseEntity<List<TimeSlot>>(userService.getDefaultFreeTimes(u), HttpStatus.OK);
 		}
-	
+		
+	//This path returns the default times of the current user
+	//The path that returns a timeslot by its id
+		@RequestMapping(path="/myscheduledtimes", method={RequestMethod.GET, RequestMethod.POST},
+				consumes="*/*", produces=MediaType.APPLICATION_JSON_VALUE)
+		@ResponseBody
+		public ResponseEntity<List<TimeSlot>> getScheduledTimesOfCurrentUser(Principal user){
+			User u = userService.findByEmail(user.getName());
+			return new ResponseEntity<List<TimeSlot>>(userService.getScheduledFreeTimes(u), HttpStatus.OK);
+		}
+
 	//The path that sets the default time
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(path="/setdefaulttime", method= RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
@@ -99,29 +110,25 @@ public class SetTimesController {
 		System.out.println("deleted " + weektime.substring(7, 13));
 		return null;
 	}
+	
+	//submitting default
 	if (weektime.substring(11, 17).equals("submit")){
-		userService.deleteByUser(u);
+		userService.deleteDefaultWithoutTouchingScheduled(u);
 		userService.setDefaultTime(u, defaultTimes);
-		
-//		Set d = u.getFreeTimes();
-//		Set s = new HashSet<>();
-//		for(time : defaultTimes){
-//			dbTime = new FreeTime(u, TimeSlotService.getByDateTime(time));
-//			//populate dbTime with time
-//			for(time2: d){
-//				if(time2.equals(dbTime)){
-//					dbTime.setFreeTimeId(time2.getFreeTimeId());
-//				}	
-//			}
-//			s.add(dbTime);
-//		}
-//		u.setFreeTimes(s);
-//		
-//		userService.save(u);
-		
 		defaultTimes.removeAll(defaultTimes);
 		System.out.println("submitted " + weektime.substring(11, 17));
-	} else if (weektime.substring(23, 27).equals("true")){
+	} 
+	
+	//submitting scheduled
+	else if (weektime.substring(11, 19).equals("schedule")){
+		userService.deleteScheduledWithoutTouchingDefault(u);
+		userService.setScheduledTime(u, defaultTimes);
+		defaultTimes.removeAll(defaultTimes);
+		System.out.println("scheduled " + weektime.substring(11, 19));
+	} 
+	
+	//setting the times by manipulating a string list
+	else if (weektime.substring(23, 27).equals("true")){
 		defaultTimes.remove(weektime.substring(7, 23));
 		System.out.println("removing "+ weektime.substring(7, 23));
 	} else if (weektime.substring(23, 27).equals("fals")){

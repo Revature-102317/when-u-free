@@ -21,10 +21,10 @@ export class UserService {
 	}
 
 	updateUser( user: User): Observable<User> {
-		return this.http.post<User>(this.userUrl, {user}, this.options);
+		return this.http.post<User>('http://localhost:8080//updateuser', user, this.options);
 	}
 
 	deleteUser( user: User): Observable<User> {
-		return this.http.post<User>(this.userUrl, {user}, this.options);
+		return this.http.post<User>(this.userUrl, user, this.options);
 	}
 }
