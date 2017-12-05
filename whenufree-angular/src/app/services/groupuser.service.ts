@@ -5,6 +5,7 @@ import {Friendgroup} from '../domain/friendgroup';
 import {UrlService} from './url.service';
 import {User} from '../domain/user';
 import {GroupFreeTime} from '../domain/groupFreeTime';
+import {Named} from '../domain/named';
 
 @Injectable()
 export class GroupuserService {
@@ -41,4 +42,8 @@ As well as manipulating that data
   getGroupFreeTimes(): Observable<GroupFreeTime[]> {
     return this.http.get<GroupFreeTime[]> (this.url.getUrl() + '/groupfreetimes', {withCredentials: true});
 }
+  // gets the groupfreetimes in a list of cool strings
+  getGroupFreeTimesBetter(): Observable<Named[]> {
+    return this.http.get<Named[]> (this.url.getUrl() + '/groupfreetimesbetter', {withCredentials: true});
+  }
 }

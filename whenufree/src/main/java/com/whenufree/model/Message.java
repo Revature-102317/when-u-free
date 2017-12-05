@@ -129,7 +129,7 @@ public class Message{
      *
      * @return the value of friendGroup
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "friendgroupid", referencedColumnName = "friendgroupid", nullable = false)
     public FriendGroup getFriendGroup() {
 	return this.friendGroup;

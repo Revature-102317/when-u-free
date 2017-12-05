@@ -1,4 +1,4 @@
-import {FriendsList} from './friendsList'
+import {FriendsList} from './friendsList';
 
 export interface Named {
     id: number;

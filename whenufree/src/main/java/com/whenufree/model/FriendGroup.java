@@ -35,6 +35,8 @@ public class FriendGroup {
     private String name;
 	
     private Set<Connection> connections;
+    private Set<Message> messages;
+    
     //no args constructor
     public FriendGroup() {}
 	
@@ -74,7 +76,7 @@ public class FriendGroup {
 	public void setConnections(Set<Connection> connections) {
 		this.connections = connections;
 	}
-	
+
 	public void addUser(User u){
 		Connection c = new Connection();
 		FriendGroupStatus status = new FriendGroupStatus();
@@ -85,6 +87,19 @@ public class FriendGroup {
 		c.setIsAdmin(false);
 		c.setFriendGroupStatus(status);
 	    this.connections.add(c);
+	}
+	
+	@OneToMany( mappedBy = "friendGroup", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+	public Set<Message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(Set<Message> messages) {
+		this.messages = messages;
+	}
+	
+	public void sendMessage(Message m){
+		this.messages.add(m);
 	}
 	
 	public void removeUser(User u){
