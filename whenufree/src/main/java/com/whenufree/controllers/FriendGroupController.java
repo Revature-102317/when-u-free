@@ -112,14 +112,14 @@ public class FriendGroupController {
 			return new ResponseEntity<List<UserJson>>(users, HttpStatus.OK);
 		}
 		
-		@RequestMapping(path = "/getactivefriendgroup/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	    @ResponseBody
-	    public ResponseEntity<FriendGroup> getFriendGroupById(@PathVariable("id") Long id){
-			FriendGroup fg = friendGroupService.findByFriendGroupId(id);
-			fg.getConnections().removeAll(fg.getConnections());
-			fg.getMessages().removeAll(fg.getMessages());
-			return new ResponseEntity<>(fg, HttpStatus.OK);
-	    }
+    @RequestMapping(path = "/getactivefriendgroup/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<FriendGroup> getFriendGroupById(@PathVariable("id") Long id){
+	FriendGroup fg = friendGroupService.findByFriendGroupId(id);
+	fg.getConnections().removeAll(fg.getConnections());
+	fg.getMessages().removeAll(fg.getMessages());
+	return new ResponseEntity<>(fg, HttpStatus.OK);
+    }
 	
 	//path the post request of gotten friend group was sent to
 	@RequestMapping(path="/clickedfriendgroup", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
