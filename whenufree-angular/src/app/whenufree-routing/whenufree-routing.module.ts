@@ -19,7 +19,7 @@ const routes: Routes = [
     {path: 'search', component: SearchComponent},
     {path: 'registration', component: RegistrationComponent},
     {path: 'friendgroups', component: FriendgroupsComponent},
-    {path: 'friendgroup', component: FriendgroupComponent},
+    {path: 'friendgroup/:id', component: FriendgroupComponent},
     {path: 'settings', component: SettingsComponent},
     {path: 'settimescheduled', component: SettimescheduledComponent},
     {path: 'loadingpage', component: LoadingpageComponent},

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+
 import {GroupuserService} from '../services/groupuser.service';
 import {User} from '../domain/user';
 import {UserService} from '../services/user.service';
-import {Router} from '@angular/router';
+
 import {Friendgroup} from '../domain/friendgroup';
 
 /*****
@@ -24,7 +26,8 @@ export class FriendgroupComponent implements OnInit {
 
   constructor(private groupuserService: GroupuserService,
               private userService: UserService,
-              private router: Router) { }
+              private route: ActivatedRoute,
+	      private router: Router) { }
 
   ngOnInit() {
     this.userService.getUser().subscribe(
@@ -34,10 +37,14 @@ export class FriendgroupComponent implements OnInit {
     this.getFriendGroup();
   }
 
-  getFriendGroup() {
-    this.groupuserService.getActiveFriendGroup().subscribe(friendgroup => {
-      this.currentFriendGroup = friendgroup;
-    });
+    getFriendGroup() {
+	this.route.params.subscribe(params =>{
+	    let id = +params['id'];
+	    this.groupuserService.getFriendGroup(id).subscribe(friendgroup => {
+		this.currentFriendGroup = friendgroup;
+	    });
+	});
+				    
   }
 
 }

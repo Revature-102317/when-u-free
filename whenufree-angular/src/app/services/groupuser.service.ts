@@ -33,7 +33,9 @@ As well as manipulating that data
 	return this.http.get<Friendgroup> (this.url.getUrl() + '/friendgroup', {withCredentials: true});
     }
 
-    
+    getFriendGroup(id: number): Observable<Friendgroup> {
+	return this.http.get<Friendgroup> (this.url.getUrl() + '/getactivefriendgroup' + '/' + id, {withCredentials: true});
+    }
     
 
   // gets the users of the active friendgroup
@@ -49,6 +51,8 @@ As well as manipulating that data
   getGroupFreeTimesBetter(): Observable<Named[]> {
     return this.http.get<Named[]> (this.url.getUrl() + '/groupfreetimesbetter', {withCredentials: true});
   }
+
+
 
   // sendMessage
  

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
+import {UserService} from '../services/user.service';
 import {SettimeService} from '../services/settime.service';
 import {SchedulingService} from '../services/scheduling.service';
+
 @Component({
   selector: 'app-scheduling',
   templateUrl: './scheduling.component.html',
@@ -16,11 +19,18 @@ export class SchedulingComponent implements OnInit {
     selectedDay: string = 'Sunday';
     startTime: string = '00:00';
     selectedDuration: number = 1;
+
+    isAdmin = false;
     
-    constructor(private stService: SettimeService) { }
+    constructor(private stService: SettimeService,
+	        private route: ActivatedRoute,
+		private router: Router,
+		private schService: SchedulingService,
+		private userService: UserService) { }
 
     ngOnInit() {
 	this.getTimeSlots();
+	this.getIsAdmin();
     }
 
     getTimeSlots(){
@@ -33,11 +43,37 @@ export class SchedulingComponent implements OnInit {
 	    });	
     }
 
-    onSubmit(){
-	var schedulerObj = {'day' : this.days.indexOf(this.selectedDay),
-			'time' : this.times.indexOf(this.startTime),
-			'duration' : this.selectedDuration};
+    getIsAdmin(){
+	this.route.params.subscribe(params =>{
+	    let id = +params['id'];
+	    this.userService.getUser().subscribe(
+		user => {
+		    for(let connection of user.connections){
+			if(connection.friendGroupId === id &&
+			   connection.isAdmin === true){
+			    this.isAdmin = true;
+			}
+		    }
+		}
+	    );
+	});
 	
+    }
+
+    onSubmit(){
+	console.log("entered");
+	this.route.params.subscribe(params =>{
+	    let id = +params['id'];
+	    let schedulerObj = {
+		'groupId' : id,
+		'day' : this.days.indexOf(this.selectedDay),
+		'time' : this.times.indexOf(this.startTime),
+		'duration' : this.selectedDuration};
+	    console.log(JSON.stringify(schedulerObj));
+	    this.schService.scheduleEvent(schedulerObj).subscribe(
+		data => {}
+	    );
+	});
     }
 
 }

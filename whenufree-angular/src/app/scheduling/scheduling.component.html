@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="this.isAdmin" class="container">
   <hr>
   <form (ngSubmit)="onSubmit()" #selectRequests="ngForm">
     

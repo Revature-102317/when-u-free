@@ -51,6 +51,14 @@ public class WhenufreeApplication {
     @Bean
     public CommandLineRunner runner() {
 	return args -> {
+
+	    User u = userService.findByUserId(1L);
+	    if(u != null && u.getPasswordHash().length() < 50){
+		u.setPasswordHash(bCryptPasswordEncoder.encode(u.getPasswordHash()));
+		userService.save(u);
+	    }
+	  
+	    
 		// User u = userService.findByUserId((long) 1);
 		// FriendGroup fg = friendGroupService.findByFriendGroupId((long) 1);
 		// List<TimeSlot> tsList = friendGroupService.getAllGroupTimeSlots(fg);
@@ -65,12 +73,12 @@ public class WhenufreeApplication {
 		// System.out.println(friendGroupService.getGroupFreeTimes(fg));
 
 		
-		User u = userService.findByUserId((long) 1);
-		User u2 = userService.findByUserId((long) 4);
-		User u3 = userService.findByUserId((long) 5);
+		// User u = userService.findByUserId((long) 1);
+		// User u2 = userService.findByUserId((long) 4);
+		// User u3 = userService.findByUserId((long) 5);
 		
-		FriendGroup fg = friendGroupService.findByFriendGroupId((long) 1);
-		FriendGroup fg2 = friendGroupService.findByFriendGroupId((long) 21);
+		// FriendGroup fg = friendGroupService.findByFriendGroupId((long) 1);
+		// FriendGroup fg2 = friendGroupService.findByFriendGroupId((long) 21);
 		/*
 		List<TimeSlot> tsList = friendGroupService.getAllGroupTimeSlots(fg);
 		List<GroupFreeTime> gft = friendGroupService.timeSlotsToGroupFreeTimes(fg, tsList);
