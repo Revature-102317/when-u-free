@@ -51,12 +51,12 @@ public class WhenufreeApplication {
     @Bean
     public CommandLineRunner runner() {
 	return args -> {
-
-	    User u = userService.findByUserId(1L);
+/*
+	    User u = userService.findByUserId(5L);
 	    if(u != null && u.getPasswordHash().length() < 50){
 		u.setPasswordHash(bCryptPasswordEncoder.encode(u.getPasswordHash()));
 		userService.save(u);
-	    }
+	    }*/
 	  
 	    
 		// User u = userService.findByUserId((long) 1);

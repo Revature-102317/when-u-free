@@ -16,7 +16,11 @@ import {User} from '../domain/user';
 export class FriendgroupsComponent implements OnInit {
   friendgroups: Friendgroup[] = [];
 
+  hideForm: boolean = true;
+
   currentUser: User;
+
+  text: string = '';
 
   constructor(private groupuserService: GroupuserService,
               private userService: UserService,
@@ -35,9 +39,18 @@ export class FriendgroupsComponent implements OnInit {
   }
 
   postFriendGroup(friendgroupid: number) {
-    this.groupuserService.postActiveFriendGroup(friendgroupid).subscribe(data => {
-	this.router.navigate(['friendgroup', friendgroupid]);
-    });
-    this.router.navigate(['loadingpage']);
+      this.router.navigate(['friendgroup', friendgroupid]);
+  }
+
+  createFriendGroup(id: string) {
+    this.groupuserService.createFriendGroup(id).subscribe(data => {});
+  }
+
+  showForm() {
+    if (this.hideForm === true) {
+      this.hideForm = false;
+    }else {
+      this.hideForm = true;
+    }
   }
 }

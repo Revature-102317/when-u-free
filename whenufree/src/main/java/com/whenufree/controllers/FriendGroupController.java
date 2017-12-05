@@ -68,21 +68,21 @@ public class FriendGroupController {
 	//path that returns the friendgroup that was clicked on
 		@RequestMapping(path="/friendgroup", method=RequestMethod.GET)
 		@ResponseBody
-		public ResponseEntity<FriendGroup> getFriendGroup(){
+		public ResponseEntity<FriendGroup> getFriendGroup(@PathVariable("i") Long id){
 			/*
 			FriendGroup fg = friendGroupService.findByName(activeFriendGroup.get().getName());
 			fg.getConnections().removeAll(fg.getConnections());*/
-			FriendGroup fg = friendGroupService.findByFriendGroupId(activeFriendGroup.get().getFriendGroupId());
+			FriendGroup fg = friendGroupService.findByFriendGroupId(id);
 			fg.getConnections().removeAll(fg.getConnections());
 			fg.getMessages().removeAll(fg.getMessages());
 			return new ResponseEntity<FriendGroup>(fg, HttpStatus.OK);
 		}
 		
 	//path that returns the list of users in the friend group
-		@RequestMapping(path="/friendgroupusers", method=RequestMethod.GET)
+		@RequestMapping(path="/friendgroupusers/{i}", method=RequestMethod.GET)
 		@ResponseBody
-		public ResponseEntity<List<UserJson>> getFriendGroupUsers(){
-			FriendGroup fg = friendGroupService.findByFriendGroupId(activeFriendGroup.get().getFriendGroupId());
+		public ResponseEntity<List<UserJson>> getFriendGroupUsers(@PathVariable("i") Long id){
+			FriendGroup fg = friendGroupService.findByFriendGroupId(id);
 			List<UserJson> users = new ArrayList<UserJson>();
 			//connections of that friend group
 			Set<Connection> connections = fg.getConnections();
@@ -142,10 +142,12 @@ public class FriendGroupController {
 	}
 	
 	//path that returns the group free times of the current friend group
-		@RequestMapping(path="/groupfreetimes", method=RequestMethod.GET)
+		@RequestMapping(path="/groupfreetimes/{i}", method=RequestMethod.GET)
 		@ResponseBody
-		public ResponseEntity<List<GroupFreeTime>> getGroupFreeTimes(){
-			FriendGroup fg = friendGroupService.findByFriendGroupName(activeFriendGroup.get().getName());
+		public ResponseEntity<List<GroupFreeTime>> getGroupFreeTimes(@PathVariable("i") Long id){
+			FriendGroup fg = friendGroupService.findByFriendGroupId(id);
+			friendGroupService.deleteByFriendGroup(fg);
+			friendGroupService.addToDatabase(fg);
 			List<GroupFreeTime> gft = friendGroupService.getGroupFreeTimes(fg);
 			GroupFreeTimeComparator gftCompare = new GroupFreeTimeComparator();
 			gft.sort(gftCompare);
@@ -165,10 +167,10 @@ public class FriendGroupController {
 		}
 	
 	//path that returns the group free times of the current friend group but better
-	@RequestMapping(path="/groupfreetimesbetter", method=RequestMethod.GET)
+	@RequestMapping(path="/groupfreetimesbetter/{i}", method=RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<List<Named>> getGroupFreeTimesBetter(){
-		FriendGroup fg = friendGroupService.findByFriendGroupName(activeFriendGroup.get().getName());
+	public ResponseEntity<List<Named>> getGroupFreeTimesBetter(@PathVariable("i") Long id){
+		FriendGroup fg = friendGroupService.findByFriendGroupId(id);
 		List<GroupFreeTime> gft = friendGroupService.getGroupFreeTimes(fg);
 		GroupFreeTimeComparator gftCompare = new GroupFreeTimeComparator();
 		gft.sort(gftCompare);
@@ -181,19 +183,19 @@ public class FriendGroupController {
 				//opening.append(gft.get(a).getTimeslot().getDateTime().substring(3, 11));
 				//StringBuilder ending = new StringBuilder();
 				//ending.append(gft.get(a).getTimeslot().getDateTime().substring(11, 16));
-				for(int b = a+1; b < gft.size(); b++){
-					if(gft.get(a).getTimeslot().getTimeSlotId().intValue() == gft.get(b).getTimeslot().getTimeSlotId().intValue()-1
-							&& gft.get(a).getTimeslot().getDateTime().substring(0, 2).equals(gft.get(b).getTimeslot().getDateTime().substring(0, 2))
-							&& gft.get(a).getNumUsers().equals(gft.get(b).getNumUsers())){
+				for(; a < gft.size(); a++){
+					if(gft.size() > a+1 
+							&& gft.get(a).getTimeslot().getTimeSlotId().intValue() == gft.get(a+1).getTimeslot().getTimeSlotId().intValue()-1
+							&& gft.get(a).getTimeslot().getDateTime().substring(0, 2).equals(gft.get(a+1).getTimeslot().getDateTime().substring(0, 2))
+							&& gft.get(a).getNumUsers().equals(gft.get(a+1).getNumUsers())){
 						sb.delete(8,  13);
-						sb.append(gft.get(b).getTimeslot().getDateTime().substring(11, 16));
-						a++;
+						sb.append(gft.get(a+1).getTimeslot().getDateTime().substring(11, 16));
 					}else{
 						break;
 					}
 				}
 				
-				switch(gft.get(a-1).getTimeslot().getDateTime().substring(0, 2)){
+				switch(gft.get(a).getTimeslot().getDateTime().substring(0, 2)){
 				case "SU": sb.insert(0, "Sunday: ");
 				break;
 				case "MO": sb.insert(0, "Monday: ");
@@ -210,7 +212,7 @@ public class FriendGroupController {
 				break;
 				}
 				Named named = new Named();
-				named.setId(gft.get(a-1).getNumUsers().longValue());
+				named.setId(gft.get(a).getNumUsers().longValue());
 				named.setName(sb.toString());
 				named.setClassName("greatTimes");
 				dateTimeList.add(named);
@@ -230,6 +232,15 @@ public class FriendGroupController {
 		return new ResponseEntity<List<Named>>(dateTimeList, HttpStatus.OK);
 	}
 	
+	@RequestMapping(path="/createfriendgroup", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<String> createFriendGroup(@RequestBody String message, Principal user){
+		//The 3 in the below statement should be exchanged for the json for substringing
+		User u = userService.findByEmail(user.getName());
+		String fgName = message.substring(9, message.length()-2);
+		friendGroupService.createFriendGroup(u, fgName);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
 	/*************************************************
 	 * 
 	 * Messaging stuff

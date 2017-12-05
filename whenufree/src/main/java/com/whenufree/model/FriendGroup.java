@@ -1,5 +1,6 @@
 package com.whenufree.model;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -87,6 +88,20 @@ public class FriendGroup {
 		c.setIsAdmin(false);
 		c.setFriendGroupStatus(status);
 	    this.connections.add(c);
+	}
+	
+	public void addUserAdmin(User u, FriendGroup fg){
+		Connection c = new Connection();
+		FriendGroupStatus status = new FriendGroupStatus();
+		status.setStatusId((short)1);
+		status.setStatusName("approved");
+		c.setFriendGroup(fg);
+		c.setUser(u);
+		c.setIsAdmin(true);
+		c.setFriendGroupStatus(status);
+		Set<Connection> connect = new HashSet<Connection>();
+		fg.setConnections(connect);
+	    fg.connections.add(c);
 	}
 	
 	@OneToMany( mappedBy = "friendGroup", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
