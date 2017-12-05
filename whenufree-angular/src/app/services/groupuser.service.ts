@@ -52,6 +52,5 @@ As well as manipulating that data
 
   // sendMessage
  
-  sendMessage(message: Message): Observable<Object> {
-	  return this.http.post<Message> (this.url
+  
 }

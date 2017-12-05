@@ -43,7 +43,7 @@ public class User{
     private Set<PollOption> votes;
     private Set<FriendsList> friendsList; 
     private Set<Connection> connections;
-    private set<FreeTime> freeTimes;
+    private Set<FreeTime> freeTimes;
     
     //no args constructor
     public User() {

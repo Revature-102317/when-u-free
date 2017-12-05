@@ -29,7 +29,7 @@ public class SchedulerController{
     private FriendGroupService friendGroupService;
 
     @Autowired
-    public SocialNetworkController(UserService userService,
+    public SchedulerController(UserService userService,
 				   FriendGroupService friendGroupService){
 	this.userService = userService;
 	this.friendGroupService = friendGroupService;
@@ -44,14 +44,14 @@ public class SchedulerController{
     @RequestMapping(path = "/scheduleevent", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @Transactional
-    public ResponseEntity joinGroup(@RequestBody SchdeulerJson sj){
+    public ResponseEntity joinGroup(@RequestBody SchedulerJson sj){
 	FriendGroup group = friendGroupService.findById(sj.groupId);
-	Long start = day * 24 + time;
-	Long end = start + duration;
-	for(Connection c : group.getConnections){
+	Long start = sj.day * 24 + sj.time;
+	Long end = start + sj.duration;
+	for(Connection c : group.getConnections()){
 	    User u = c.getUser();
 	    for(FreeTime t: u.getFreeTimes()) {
-	        Timeslot ts = t.getTimeSlot();
+	        TimeSlot ts = t.getTimeSlot();
 		if(start <= ts.getTimeSlotId() && ts.getTimeSlotId() < end){  
 		    t.setScheduled(true);
 		}

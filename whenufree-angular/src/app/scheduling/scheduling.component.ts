@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import {SettimeService} from '../services/settime.service';
-import {SchdeulingService} from '../services/scheduling.service';
+import {SchedulingService} from '../services/scheduling.service';
 @Component({
   selector: 'app-scheduling',
   templateUrl: './scheduling.component.html',
@@ -34,9 +34,9 @@ export class SchedulingComponent implements OnInit {
     }
 
     onSubmit(){
-	schedulerObj = {'day' : days.indexOf(this.selectedDay),
-			'time' : times.indexOf(this.startTime),
-			'duration' : selectedDuration};
+	var schedulerObj = {'day' : this.days.indexOf(this.selectedDay),
+			'time' : this.times.indexOf(this.startTime),
+			'duration' : this.selectedDuration};
 	
     }
 

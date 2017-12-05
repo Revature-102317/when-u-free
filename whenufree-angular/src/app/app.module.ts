@@ -31,7 +31,7 @@ import { SettimenavigatorComponent } from './settimenavigator/settimenavigator.c
 import { LoadingpageComponent } from './loadingpage/loadingpage.component';
 import { MessageService } from './message.service';
 import {GroupuserService} from "./services/groupuser.service";
-import {SchdeulingService} from './services/scheduling.service';
+import {SchedulingService} from './services/scheduling.service';
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { FriendgroupComponent } from './friendgroup/friendgroup.component';
 import { SchedulingComponent } from './scheduling/scheduling.component';
