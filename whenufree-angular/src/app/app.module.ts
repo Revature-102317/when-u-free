@@ -35,6 +35,9 @@ import {SchedulingService} from './services/scheduling.service';
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { FriendgroupComponent } from './friendgroup/friendgroup.component';
 import { SchedulingComponent } from './scheduling/scheduling.component';
+import { GroupInviteUserComponent } from './group-invite-user/group-invite-user.component';
+import { GroupRemoveUserComponent } from './group-remove-user/group-remove-user.component';
+import { GroupApplicationsComponent } from './group-applications/group-applications.component';
 
 
 @NgModule({
@@ -58,7 +61,10 @@ import { SchedulingComponent } from './scheduling/scheduling.component';
       LoadingpageComponent,
       RegistrationSuccessComponent,
       FriendgroupComponent,
-      SchedulingComponent
+      SchedulingComponent,
+      GroupInviteUserComponent,
+      GroupRemoveUserComponent,
+      GroupApplicationsComponent
   ],
   imports: [
       BrowserModule,
