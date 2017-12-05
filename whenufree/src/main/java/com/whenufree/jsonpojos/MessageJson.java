@@ -12,16 +12,18 @@ public class MessageJson {
     private LocalDateTime timestamp;
     private Boolean pinned;
     private Poll poll;
+    private String user;
     
     public MessageJson() {
     }
     
     public MessageJson(Message m){
-    	this.messageId=m.getMessageId();
-    	this.text=m.getText();
-    	this.timestamp=m.getTimestamp();
-    	this.pinned=m.getPinned();
-    	this.poll=m.getPoll();
+    	this.messageId = m.getMessageId();
+    	this.text = m.getText();
+    	this.timestamp = m.getTimestamp();
+    	this.pinned = m.getPinned();
+    	this.poll = m.getPoll();
+    	this.user = m.getAuthor().getFirstname()+" "+m.getAuthor().getLastname();
     }
 
 	public Long getMessageId() {
