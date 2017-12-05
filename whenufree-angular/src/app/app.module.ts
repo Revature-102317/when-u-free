@@ -31,8 +31,10 @@ import { SettimenavigatorComponent } from './settimenavigator/settimenavigator.c
 import { LoadingpageComponent } from './loadingpage/loadingpage.component';
 import { MessageService } from './message.service';
 import {GroupuserService} from "./services/groupuser.service";
+import {SchedulingService} from './services/scheduling.service';
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { FriendgroupComponent } from './friendgroup/friendgroup.component';
+import { SchedulingComponent } from './scheduling/scheduling.component';
 
 
 @NgModule({
@@ -55,7 +57,8 @@ import { FriendgroupComponent } from './friendgroup/friendgroup.component';
       FriendgroupsComponent,
       LoadingpageComponent,
       RegistrationSuccessComponent,
-      FriendgroupComponent
+      FriendgroupComponent,
+      SchedulingComponent
   ],
   imports: [
       BrowserModule,
@@ -74,6 +77,7 @@ import { FriendgroupComponent } from './friendgroup/friendgroup.component';
 		UserService,
 		GroupuserService,
 		RegistrationService,
+		SchedulingService,
 		{provide: HTTP_INTERCEPTORS,
 		 useClass: SpringXsrfInterceptor,
 		 multi: true}],

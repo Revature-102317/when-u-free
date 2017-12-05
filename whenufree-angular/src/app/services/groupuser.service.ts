@@ -28,10 +28,13 @@ As well as manipulating that data
     return this.http.post<string>(this.url.getUrl() + '/clickedfriendgroup', {friendgroup}, {withCredentials: true});
   }
 
-  // gets the active friendgroup
-  getActiveFriendGroup(): Observable<Friendgroup> {
-    return this.http.get<Friendgroup> (this.url.getUrl() + '/friendgroup', {withCredentials: true});
-  }
+    // gets the active friendgroup
+    getActiveFriendGroup(): Observable<Friendgroup> {
+	return this.http.get<Friendgroup> (this.url.getUrl() + '/friendgroup', {withCredentials: true});
+    }
+
+    
+    
 
   // gets the users of the active friendgroup
   getUsers(): Observable<User[]> {
@@ -49,6 +52,5 @@ As well as manipulating that data
 
   // sendMessage
  
-  sendMessage(message: Message): Observable<Object> {
-	  return this.http.post<Message> (this.url
+  
 }
