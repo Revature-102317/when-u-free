@@ -46,7 +46,7 @@ public class SchedulerController{
     @Transactional
     public ResponseEntity joinGroup(@RequestBody SchedulerJson sj){
 	FriendGroup group = friendGroupService.findById(sj.groupId);
-	Long start = sj.day * 24 + sj.time;
+	Long start = sj.day * 24 + sj.time + 1;
 	Long end = start + sj.duration;
 	for(Connection c : group.getConnections()){
 	    User u = c.getUser();
