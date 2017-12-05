@@ -28,10 +28,15 @@ As well as manipulating that data
     return this.http.post<string>(this.url.getUrl() + '/clickedfriendgroup', {friendgroup}, {withCredentials: true});
   }
 
-  // gets the active friendgroup
-  getActiveFriendGroup(): Observable<Friendgroup> {
-    return this.http.get<Friendgroup> (this.url.getUrl() + '/friendgroup', {withCredentials: true});
-  }
+    // gets the active friendgroup
+    getActiveFriendGroup(): Observable<Friendgroup> {
+	return this.http.get<Friendgroup> (this.url.getUrl() + '/friendgroup', {withCredentials: true});
+    }
+
+    getFriendGroup(id: number): Observable<Friendgroup> {
+	return this.http.get<Friendgroup> (this.url.getUrl() + '/getactivefriendgroup' + '/' + id, {withCredentials: true});
+    }
+    
 
   // gets the users of the active friendgroup
   getUsers(): Observable<User[]> {
@@ -46,4 +51,10 @@ As well as manipulating that data
   getGroupFreeTimesBetter(): Observable<Named[]> {
     return this.http.get<Named[]> (this.url.getUrl() + '/groupfreetimesbetter', {withCredentials: true});
   }
+
+
+
+  // sendMessage
+ 
+  
 }

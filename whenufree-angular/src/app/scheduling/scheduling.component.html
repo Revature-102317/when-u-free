@@ -1,0 +1,51 @@
+<div *ngIf="this.isAdmin" class="container">
+  <hr>
+  <form (ngSubmit)="onSubmit()" #selectRequests="ngForm">
+    
+    <div class="row">
+      <div class="col-3">
+	<label for="day" class ="control-label">Day:</label>
+      </div>
+      <div class ="col-9">
+	<select name="day" class="form-control" id="day"
+		[(ngModel)]="selectedDay" name ="selectedDay">
+	  <option *ngFor = "let day of days" value={{day}}>{{day}}</option>
+	</select>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-4">
+	<label for="startTime" class ="control-label">Start Time:</label>
+      </div>
+      <div class="col-8">
+	<select name="startTime" class="form-control" id="startTime"
+		[(ngModel)]="startTime" name ="startTime">
+	  <option *ngFor = "let time of times" value={{time}}>{{time}}</option>
+	</select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class ="col-4">
+ 	<label for="duration" class ="control-label">Duration (hours):</label>
+      </div>
+      <div class="col-2">
+      </div>
+      <div class="col-6">
+	<select name="duration" class="form-control" id="duration"
+		[(ngModel)]="selectedDuration" name ="selectedDuration">
+	  <option *ngFor = "let duration of durations" value={{duration}}>{{duration}}</option>
+	</select>
+      </div>
+ 
+    </div>
+
+  <button type="submit" class="btn"
+	  [disabled]="!selectRequests.form.valid">
+	Schedule Event
+  </button>
+  
+</form>   
+
+</div>

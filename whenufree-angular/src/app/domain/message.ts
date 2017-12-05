@@ -3,5 +3,5 @@ export interface Message {
   text: string;
   timestamp: Date;
   pinned: boolean;
-  user; string;
+  user: string;
 }

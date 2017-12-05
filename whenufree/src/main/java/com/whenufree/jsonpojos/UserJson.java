@@ -16,6 +16,7 @@ public class UserJson{
     private String lastname;
     private String phone;
     private String password;
+
     private Set<FriendsListJson> friendsList;
     private Set<ConnectionJson> connections;
     
@@ -28,7 +29,6 @@ public class UserJson{
 	this.firstname = u.getFirstname();
 	this.lastname = u.getLastname();
 	this.phone = u.getPhone();
-	
 	this.friendsList = new HashSet<>();
 	for(FriendsList friend : u.getFriendsList()){
 	    this.friendsList.add(new FriendsListJson(friend));
@@ -149,6 +149,7 @@ public class UserJson{
     }
 
 
+
     public Set<FriendsListJson> getFriendsList(){
 	return this.friendsList;
     }
@@ -164,5 +165,13 @@ public class UserJson{
     public void setConnections(Set<ConnectionJson> connections){
 	this.connections = connections;
     }
+	
+     //To String Method
+    @Override
+    public String toString() {
+	return "UserJson [userId=" + userId + ", email=" + email + ", firstname=" + firstname + ", lastname=" + lastname
+	    + ", phone=" + phone + ", password=" + password + "]";
+    }
     
-}
+}   
+ 

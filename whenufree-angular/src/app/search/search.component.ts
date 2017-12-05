@@ -2,65 +2,57 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
-
 import {SocialNetworkService} from '../services/social-network.service';
+
 import {UserService} from '../services/user.service'
 import {Named} from '../domain/named'
 import {FriendsList} from '../domain/friendsList'
 import {User} from '../domain/user'
 
 
+
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+	selector: 'app-search',
+	templateUrl: './search.component.html',
+	styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
 
+
     results: Named[];
-
+    
     currentUser: User;
-
+    
     searchStr: string;
-    searchType: string = 'all';
+    searchType: string = "all";
 
     constructor(private http: HttpClient,
-    private userService: UserService,
-    private snService: SocialNetworkService) { }
-
-
+		private userService: UserService,
+		private snService: SocialNetworkService) { }
+    
     ngOnInit() {
-      this.getCurrentUser();
+	this.getCurrentUser();
     }
-
-
+ 
     onSubmit() {
-	var type = 'all';
-	if(this.searchType === 'groups'){
-	    type = 'group';
-	}else if(this.searchType === 'people'){
-	    type = 'user';
-	}
-	var searchQuery = {'term': this.searchStr, 'type': type};
+	var searchQuery = {'term': this.searchStr, 'type': this.searchType};
 	console.log(JSON.stringify(searchQuery));
-	
-	let options = {withCredentials: true}
-	this.http.post<Named[]>("http://localhost:8080/search", searchQuery, options).subscribe(data => {
-	    this.results = data;
-	});
+	let options = {withCredentials: true};
+	this.http.post<Named[]>("http://localhost:8080/search", searchQuery, options)
+	    .subscribe(data => {
+		this.results = data;
+	    });
     }
-
-
+    
     getCurrentUser(){
 	this.userService.getUser().subscribe(
 	    data => {
 		this.currentUser = data;
 	    });
-	    
+	console.log(JSON.stringify(this.currentUser));
     }
     
     displayAddFriend(n: Named){
-
 	let ret = true;
 	if(n.className !== 'User'){
 	    ret = false;
@@ -72,9 +64,12 @@ export class SearchComponent implements OnInit {
 		    ret = false
 		}
 	    }
+	    
 	}
-	return ret;
+	return ret
     }
+
+
 
     displayJoinGroup(n: Named){
 	let ret = true;
@@ -105,5 +100,4 @@ export class SearchComponent implements OnInit {
 	    }
 	);
     }
-
 }

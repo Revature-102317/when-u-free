@@ -207,17 +207,21 @@ public class FriendGroupService {
 	 * Messaging logic
 	 */
 	
-	public Message sendMessage(User user, FriendGroup friendgroup, String text) {
-		Message message = new Message();
-		message.setAuthor(user);
-		message.setFriendGroup(friendgroup);
-		message.setPinned(false);
-		message.setPoll(null);
-		message.setText(text);
+    public Message sendMessage(User user, FriendGroup friendgroup, String text) {
+	Message message = new Message();
+	message.setAuthor(user);
+	message.setFriendGroup(friendgroup);
+	message.setPinned(false);
+	message.setPoll(null);
+	message.setText(text);
 		
 		
-		friendgroup.sendMessage(message);
-		friendGroupDao.save(friendgroup);
-		return message;
-	}
+	friendgroup.sendMessage(message);
+	friendGroupDao.save(friendgroup);
+	return message;
+    }
+    
+    public void save(FriendGroup group){
+	friendGroupDao.save(group);
+    }
 }
