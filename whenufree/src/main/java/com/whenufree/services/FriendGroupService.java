@@ -20,6 +20,7 @@ import com.whenufree.model.FreeTime;
 import com.whenufree.model.FriendGroup;
 import com.whenufree.model.FriendGroupStatus;
 import com.whenufree.model.GroupFreeTime;
+import com.whenufree.model.Message;
 import com.whenufree.model.TimeSlot;
 import com.whenufree.model.User;
 
@@ -200,5 +201,23 @@ public class FriendGroupService {
 	@Transactional
 	public void deleteByFriendGroup(FriendGroup fg){
 		groupFreeTimeDao.removeByFriendGroup(fg);
+	}
+	
+	/**************************
+	 * Messaging logic
+	 */
+	
+	public Message sendMessage(User user, FriendGroup friendgroup, String text) {
+		Message message = new Message();
+		message.setAuthor(user);
+		message.setFriendGroup(friendgroup);
+		message.setPinned(false);
+		message.setPoll(null);
+		message.setText(text);
+		
+		
+		friendgroup.sendMessage(message);
+		friendGroupDao.save(friendgroup);
+		return message;
 	}
 }

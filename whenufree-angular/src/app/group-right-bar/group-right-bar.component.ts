@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {UserService} from '../services/user.service';
 import {GroupuserService} from '../services/groupuser.service';
 import {User} from '../domain/user';
+import {Named} from '../domain/named';
 
 @Component({
   selector: 'app-group-right-bar',
@@ -21,6 +22,8 @@ export class GroupRightBarComponent implements OnInit {
 
     bestTimes: GroupBestTime[];
 
+    greatTimes: Named[] = [];
+
     constructor(private groupuserService: GroupuserService,
                 private userService: UserService,
                 private router: Router) { }
@@ -31,11 +34,18 @@ export class GroupRightBarComponent implements OnInit {
         error => this.router.navigate([''])
       );
       this.getGroupFreeTimes();
+      this.getGreatTimes();
     }
 
     getGroupFreeTimes() {
       this.groupuserService.getGroupFreeTimes().subscribe(groupfreetimes => {
         this.groupFreeTimes = groupfreetimes;
+      });
+    }
+
+    getGreatTimes() {
+      this.groupuserService.getGroupFreeTimesBetter().subscribe(greatTimes => {
+        this.greatTimes = greatTimes;
       });
     }
 
