@@ -92,6 +92,22 @@ public class WhenufreeApplication {
 		//friendGroupService.addUser(fg, u3);
 		//EmailService email=new EmailService();
 		//email.send("junjie2412@gmail.com","hello", "how are you?");
+		/*
+		StringBuilder sb = new StringBuilder();
+		StringBuilder test = new StringBuilder();
+		System.out.println(sb);
+		System.out.println(sb.append("SU/10:00S-S11:00S"));
+		System.out.println(test.append(sb));
+		System.out.println(test.substring(0, 2));
+		System.out.println(test.substring(3, 11));
+		System.out.println(test.substring(11, 16));
+		sb.delete(11, 16);*/
+		/*
+		friendGroupService.sendMessage(u2, fg, "hey whats up");
+		friendGroupService.sendMessage(u, fg, "so you guys free tonight?");
+		friendGroupService.sendMessage(u2, fg, "sorry, got a huge project coming up");
+		friendGroupService.sendMessage(u, fg, "that's fine, we just finished");
+		friendGroupService.sendMessage(u2, fg, "maybe next week");*/
 	};
     }
 }

@@ -23,4 +23,6 @@ public interface GroupFreeTimeDao extends JpaRepository<GroupFreeTime, Long>{
 	public GroupFreeTime findByGroupFreeTimeId(Long id);
 	
 	public void removeByFriendGroup(FriendGroup fg);
+	
+
 }
