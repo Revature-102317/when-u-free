@@ -27,6 +27,7 @@ import com.whenufree.model.FriendsList;
 import com.whenufree.model.Connection;
 import com.whenufree.model.FriendGroup;
 import com.whenufree.model.FriendGroupStatus;
+import com.whenufree.model.FreeTime;
 
 @Indexed
 @Entity
@@ -42,7 +43,7 @@ public class User{
     private Set<PollOption> votes;
     private Set<FriendsList> friendsList; 
     private Set<Connection> connections;
-
+    private set<FreeTime> freeTimes;
     
     //no args constructor
     public User() {
@@ -197,6 +198,15 @@ public class User{
 	this.friendsList = friendsList;
     }
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    public Set<FreeTime> getFreeTimes(){
+	return this.freeTimes;
+    }
+
+    public void setFreeTimes(Set<FreeTime> argFreeTimes){
+	this.freeTimes = argFreeTimes;
+    }
+    
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<Connection> getConnections(){
 	return this.connections;
@@ -205,7 +215,7 @@ public class User{
     public void setConnections(Set<Connection> connections){
 	this.connections = connections;
     }
-
+    
     public void joinGroup(FriendGroup group){
 	Connection newConnection = new Connection();
 	FriendGroupStatus status = new FriendGroupStatus();
