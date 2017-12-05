@@ -43,7 +43,10 @@ export class FriendgroupsComponent implements OnInit {
   }
 
   createFriendGroup(id: string) {
-    this.groupuserService.createFriendGroup(id).subscribe(data => {});
+    this.groupuserService.createFriendGroup(id).subscribe(data => {
+      this.router.navigate(['friendgroups']);
+    });
+    this.router.navigate(['loadingpage']);
   }
 
   showForm() {
