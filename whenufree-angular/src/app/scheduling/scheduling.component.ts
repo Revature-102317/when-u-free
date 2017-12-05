@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import {SettimeService} from '../services/settime.service';
-
+import {SchdeulingService} from '../services/scheduling.service';
 @Component({
   selector: 'app-scheduling',
   templateUrl: './scheduling.component.html',
@@ -13,9 +13,9 @@ export class SchedulingComponent implements OnInit {
     times: string[] = [];
     durations: number[] = [];
 
-    selectedDay: string;
-    startTime: string;
-    selectedDuration: string;
+    selectedDay: string = 'Sunday';
+    startTime: string = '00:00';
+    selectedDuration: number = 1;
     
     constructor(private stService: SettimeService) { }
 
@@ -24,13 +24,19 @@ export class SchedulingComponent implements OnInit {
     }
 
     getTimeSlots(){
-	stService.getTimes().subscribe(
+	this.stService.getTimes().subscribe(
 	    data => {
 		for(let i = 0; i < 24; i++){
-		    this.times.push(data[i].dateTime.subString(3,8));
+		    this.times.push(data[i].dateTime.substring(3,8));
 		    this.durations.push(i + 1);
 		}
-	    });
+	    });	
+    }
+
+    onSubmit(){
+	schedulerObj = {'day' : days.indexOf(this.selectedDay),
+			'time' : times.indexOf(this.startTime),
+			'duration' : selectedDuration};
 	
     }
 
