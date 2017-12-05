@@ -1,0 +1,30 @@
+<div>
+  <div>
+    Free Times (24 hour clock)
+  </div>
+  <table class = "table">
+    <thead>
+    <tr>
+      <th>Time</th>
+      <th>Number of Users</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let times of greatTimes">
+      <td>{{times.name}}</td><td>{{times.id}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <button class="btn" (click)="toGroupSettings">
+    Group Settings
+  </button>
+</div>
+
+<div>
+  <button class="btn" (click)="toScheduleEvent">
+    Schedule Event
+  </button>
+</div>

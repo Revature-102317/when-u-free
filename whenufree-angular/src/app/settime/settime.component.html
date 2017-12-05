@@ -1,0 +1,34 @@
+<app-navbar></app-navbar>
+<app-settimenavigator></app-settimenavigator>
+<div style="text-align:center">
+  <h1>Set your Default Time</h1>
+<table class = "table">
+  <thead>
+  <tr>
+    <th>Time</th>
+    <th>SUNDAY</th>
+    <th>MONDAY</th>
+    <th>TUESDAY</th>
+    <th>WEDNESDAY</th>
+    <th>THURSDAY</th>
+    <th>FRIDAY</th>
+    <th>SATURDAY</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let time of times">
+        <td>{{time.time}}</td>
+      <td *ngFor="let day of days" id={{day+time.id}}><label class="container">
+        <input type="checkbox" [(ngModel)]="this.selected[day+time.id]"
+               (click)="setDefaultTime(day+time.id+selected[day+time.id])"/>
+        <span class="checkmark"></span>
+      </label></td>
+    </tr>
+  </tbody>
+  </table>
+  <h2 (click)="submitDefault('submitDefaultTimesToTheserver');">Submit your Default Times</h2>
+</div>
+<label class="container">
+  <input type="checkbox">
+  <span class="checkmark"></span>
+</label>
