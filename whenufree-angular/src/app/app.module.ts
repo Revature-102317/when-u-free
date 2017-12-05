@@ -36,6 +36,7 @@ import { RegistrationSuccessComponent } from './registration-success/registratio
 import { FriendgroupComponent } from './friendgroup/friendgroup.component';
 import { SchedulingComponent } from './scheduling/scheduling.component';
 import { MessageComponentComponent } from './message-component/message-component.component';
+import { GroupsettingsComponent } from './groupsettings/groupsettings.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { MessageComponentComponent } from './message-component/message-component
       RegistrationSuccessComponent,
       FriendgroupComponent,
       SchedulingComponent,
-      MessageComponentComponent
+      MessageComponentComponent,
+      GroupsettingsComponent
   ],
   imports: [
       BrowserModule,
