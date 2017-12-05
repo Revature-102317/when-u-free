@@ -237,13 +237,13 @@ public class FriendGroupController {
 	 */
 	
 	//Returns a list of messages in the friendgroup
-	@RequestMapping(path="/friendgroupmessages", method=RequestMethod.GET)
+	@RequestMapping(path="/friendgroupmessages/{id}", method=RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<List<MessageJson>> getFriendGroupMessages(){
-		FriendGroup fg = friendGroupService.findByFriendGroupId(activeFriendGroup.get().getFriendGroupId());
+	public ResponseEntity<List<MessageJson>> getFriendGroupMessages(@PathVariable Long id){
+		FriendGroup fg = friendGroupService.findById(id);
 		List<MessageJson> sent = new ArrayList<MessageJson>();
 		//connections of that friend group
-		Set<Message> messages = fg.getMessages();
+		List<Message> messages = friendGroupService.grabMessages( fg);
 		Iterator<Message> it = messages.iterator();
 		while(it.hasNext()){
 			Message m = it.next();
@@ -264,4 +264,5 @@ public class FriendGroupController {
 			friendGroupService.sendMessage(u, fg, m);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
+
 }

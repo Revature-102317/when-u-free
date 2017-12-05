@@ -13,4 +13,5 @@ public interface FriendGroupDao extends JpaRepository<FriendGroup, Long>{
 	public FriendGroup findByFriendGroupId(Long id);
 	
 	public FriendGroup findByName(String name);
+
 }

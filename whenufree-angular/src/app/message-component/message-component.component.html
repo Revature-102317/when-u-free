@@ -1,0 +1,20 @@
+<head>
+<title>Chat - Customer Module</title>
+</head>
+ 
+<div id="wrapper" class="container">
+    <div id="menu">
+        <p class="welcome">Welcome, <b></b></p>
+        <p class="logout"><a id="exit" href="#">Exit Chat</a></p>
+        <div style="clear:both"></div>
+    </div>
+     
+    <div *ngIf="currentFriendGroup">
+      <div id="chatbox" *ngFor="let message of messages">{{message.text}}</div>
+    </div>
+
+    <form name="message" action="">
+        <input name="usermsg" type="text" id="usermsg" />
+        <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
+    </form>
+</div>

@@ -6,6 +6,7 @@ import {UrlService} from './url.service';
 import {User} from '../domain/user';
 import {GroupFreeTime} from '../domain/groupFreeTime';
 import {Named} from '../domain/named';
+import { Message } from '../domain/message';
 
 @Injectable()
 export class GroupuserService {
@@ -52,5 +53,9 @@ As well as manipulating that data
 
   // sendMessage
  
+  // getMessages
+  getMessages(id: number): Observable<Message[]> {
+	  return this.http.get<Message[]> (this.url.getUrl() + 'friendgroupmessages/{id}', {withCredentials: true});
+  }
   
 }

@@ -33,7 +33,8 @@ export class RegistrationComponent implements OnInit {
 	    firstname: this.firstname,
 	    lastname: this.lastname,
 	    phone: this.phone,
-	    password: this.password,
+	    currentPassword: this.password,
+		newPassword: null,
 	    friendsList: null,
 	    connections: null
 	}

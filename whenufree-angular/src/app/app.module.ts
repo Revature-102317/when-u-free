@@ -35,6 +35,7 @@ import {SchedulingService} from './services/scheduling.service';
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { FriendgroupComponent } from './friendgroup/friendgroup.component';
 import { SchedulingComponent } from './scheduling/scheduling.component';
+import { MessageComponentComponent } from './message-component/message-component.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { SchedulingComponent } from './scheduling/scheduling.component';
       LoadingpageComponent,
       RegistrationSuccessComponent,
       FriendgroupComponent,
-      SchedulingComponent
+      SchedulingComponent,
+      MessageComponentComponent
   ],
   imports: [
       BrowserModule,
