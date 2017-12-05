@@ -36,25 +36,28 @@ As well as manipulating that data
     getFriendGroup(id: number): Observable<Friendgroup> {
 	return this.http.get<Friendgroup> (this.url.getUrl() + '/getactivefriendgroup' + '/' + id, {withCredentials: true});
     }
-    
+
 
   // gets the users of the active friendgroup
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]> (this.url.getUrl() + '/friendgroupusers', {withCredentials: true});
+  getUsers(id: number): Observable<User[]> {
+    return this.http.get<User[]> (this.url.getUrl() + '/friendgroupusers/' + id, {withCredentials: true});
   }
 
   // gets the groupfreetimes
-  getGroupFreeTimes(): Observable<GroupFreeTime[]> {
-    return this.http.get<GroupFreeTime[]> (this.url.getUrl() + '/groupfreetimes', {withCredentials: true});
+  getGroupFreeTimes(id: number): Observable<GroupFreeTime[]> {
+    return this.http.get<GroupFreeTime[]> (this.url.getUrl() + '/groupfreetimes/' + id, {withCredentials: true});
 }
   // gets the groupfreetimes in a list of cool strings
-  getGroupFreeTimesBetter(): Observable<Named[]> {
-    return this.http.get<Named[]> (this.url.getUrl() + '/groupfreetimesbetter', {withCredentials: true});
+  getGroupFreeTimesBetter(id: number): Observable<Named[]> {
+    return this.http.get<Named[]> (this.url.getUrl() + '/groupfreetimesbetter/' + id, {withCredentials: true});
   }
 
-
+  // create friendgroup
+  createFriendGroup(name: string): Observable<Object> {
+    return this.http.post<string>(this.url.getUrl() + '/createfriendgroup', {name}, {withCredentials: true});
+  }
 
   // sendMessage
- 
-  
+
+
 }

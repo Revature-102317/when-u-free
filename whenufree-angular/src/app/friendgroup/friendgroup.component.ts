@@ -30,6 +30,7 @@ export class FriendgroupComponent implements OnInit {
 	      private router: Router) { }
 
   ngOnInit() {
+
     this.userService.getUser().subscribe(
       user => this.currentUser = user,
       error => this.router.navigate([''])
@@ -38,13 +39,12 @@ export class FriendgroupComponent implements OnInit {
   }
 
     getFriendGroup() {
-	this.route.params.subscribe(params =>{
+	this.route.params.subscribe(params => {
 	    let id = +params['id'];
 	    this.groupuserService.getFriendGroup(id).subscribe(friendgroup => {
-		this.currentFriendGroup = friendgroup;
+ 		    this.currentFriendGroup = friendgroup;
 	    });
 	});
-				    
   }
 
 }
