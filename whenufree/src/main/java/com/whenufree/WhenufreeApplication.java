@@ -80,6 +80,7 @@ public class WhenufreeApplication {
 		//System.out.println(fg2.getConnections());
 		//System.out.println(friendGroupService.findByUser(u));
 		//friendGroupService.addUser(fg2, u2);
+		//System.out.println(friendGroupService.getTimeSlotByGroupFreeTime((long) 1)); 
 	};
     }
 }

@@ -5,6 +5,7 @@ import {User} from '../domain/user';
 
 @Injectable()
 export class AuthenticationService {
+	isLoggedIn: boolean;
 
     constructor(
 		private http: HttpClient) { }

@@ -1,7 +1,16 @@
-<app-navbar></app-navbar>
-<div style="text-align:center">
-  <h1>Your Friend Groups</h1>
-  <ul *ngFor="let friendgroup of friendgroups"  class="rounded-list">
-    <li>{{friendgroup.name}}</li>
-  </ul>
+<!--
+<div [(ngSwitch)]="page">
+  <app-group-select
+    [page]="page" [friendgroups]="friendgroups"
+    [currentUser]="currentUser" *ngSwitchCase="SELECT"
+    (onPageChange)="onPageChange($event)"
+    (onFriendSelect)="onFriendSelect($event)">
+  </app-group-select>
+  <app-group-home
+    [page]="page" [groupName]="groupName" *ngSwitchCase="HOME"
+    (onPageChange)="onPageChange($event)">
+  </app-group-home>
+  <app-group-menu [page]="page" *ngSwitchCase="MENU"
+    (onPageChange)="onPageChange($event)"></app-group-menu>
 </div>
+-->

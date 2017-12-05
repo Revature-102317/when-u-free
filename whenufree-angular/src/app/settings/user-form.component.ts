@@ -92,4 +92,17 @@ export class UserFormComponent extends UserInfoComponent implements OnDestroy {
 	onChangePassword(): void {
 		this.extendForm = true;
 	}
+	
+//	canDeactivate(): Observable<boolean> | boolean {
+//		// Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged
+//		if (!this.user ||
+//			this.user.firstname === this.userForm.get('user').get('firstname').value ||
+//				this.user.lastname === this.userForm.get('user').get('lastname').value ||
+//					this.user.phone === this.userForm.get('user').get('phone').value ||
+//						this.user.email === this.userForm.get('user').get('email').value)
+//			return true;
+//		// Otherwise ask the user with the dialog service and return its
+//		// observable which resolves to true or false when the user decides
+//		return this.dialogService.confirm('Discard changes?');
+//	}
 }

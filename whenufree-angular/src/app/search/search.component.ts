@@ -9,6 +9,7 @@ import {Named} from '../domain/named';
 import {User} from '../domain/user';
 import {FriendsList} from '../domain/friendsList';
 
+
 @Component({
 	selector: 'app-search',
 	templateUrl: './search.component.html',
@@ -60,10 +61,11 @@ export class SearchComponent implements OnInit {
 				if(n.id === fl.friendId){
 					ret = false
 				}
-			}
 		}
 		return ret
 	}
+	return ret;
+    }
 
 	displayJoinGroup(n: Named){
 		let ret = true;

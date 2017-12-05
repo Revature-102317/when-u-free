@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
     username: string = '';
     password: string = '';
     errorMessage: string = '';
+	//isLoggedIn = false;
 
 
     constructor(private route: ActivatedRoute,
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
 	  this.authService.authenticate(this.username, this.password)
 	    .subscribe(
 		success =>{
+			//this.isLoggedIn = true;
 		    this.router.navigate(['homepage']);
 		},
 		error=> {

@@ -17,4 +17,6 @@ public interface GroupFreeTimeDao extends JpaRepository<GroupFreeTime, Long>{
 	
 	public List<GroupFreeTime> findByFriendGroupOrderByNumUsersDesc(FriendGroup fg);
 	
+	public GroupFreeTime findByGroupFreeTimeId(Long id);
+	
 }

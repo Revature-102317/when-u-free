@@ -1,0 +1,9 @@
+<form>
+  <label>Group Settings:</label><br>
+  <input type="checkbox" name="notifications" value="onNotifications" />Enable
+  Email Notifications<br>
+  <button (click)="onLeaveGroup()">Leave Group</button><br>
+  <label [hidden]="isAdmin">Group Admin Settings:</label><br>
+  <button (click)="onAddRemoveUsers()">Add/ Remove User</button><br>
+  <button (click)="onChangeName()">Change Group Name</button><br>
+</form>

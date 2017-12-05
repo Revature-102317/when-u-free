@@ -82,6 +82,11 @@ public class FriendGroupService {
 		return friendGroupDao.findByFriendGroupId(id);
 	}
 	
+	//Find a friend group by its name
+	public FriendGroup findByName(String name){
+		return friendGroupDao.findByName(name);
+	}
+	
 	//Find a friend group by its id
 	public FriendGroup findByFriendGroupName(String name){
 		return friendGroupDao.findByName(name);
@@ -132,7 +137,7 @@ public class FriendGroupService {
 		List<User> userList = this.findUsers(fg);
 		List<TimeSlot> timeSlotList = new ArrayList<TimeSlot>();
 		for(int a = 0; a < userList.size(); a++){
-			List<TimeSlot> userTimeSlotList = userService.getFreeTimesByUser(userList.get(a));
+			List<TimeSlot> userTimeSlotList = userService.getUnScheduledFreeTimes(userList.get(a));
 			timeSlotList.addAll(userTimeSlotList);
 		}
 		return timeSlotList;
@@ -163,10 +168,27 @@ public class FriendGroupService {
 		return groupFreeTimeList;
 	}
 	
+	//get a timeslot from a groupfreetime based on id
+	public TimeSlot getTimeSlotByGroupFreeTime(Long id){
+		GroupFreeTime freetime = groupFreeTimeDao.findByGroupFreeTimeId((long) id);
+		return freetime.getTimeslot();
+	}
+	
 	//Saves list of GroupFreeTimes Into the database
 	public List<GroupFreeTime> saveGroupFreeTimes(List<GroupFreeTime> gft){
 		groupFreeTimeDao.save(gft);
 		return gft;
+	}
+	
+	//does the above 3 steps:
+	//getting all user free times
+	//adding them into a list to the group free times database
+	public List<GroupFreeTime> addToDatabase(FriendGroup fg){
+		//We might have to add a remove all groupFreeTimesByFriendGroup
+		//Just so the groupFreeTimes reset everytime we try to add something in
+		List<TimeSlot> timeSlotsList = this.getAllGroupTimeSlots(fg);
+		List<GroupFreeTime> groupFreeTimesList = this.timeSlotsToGroupFreeTimes(fg, timeSlotsList);
+		return this.saveGroupFreeTimes(groupFreeTimesList);
 	}
 	
 	//returns a group free time sorted by number of users

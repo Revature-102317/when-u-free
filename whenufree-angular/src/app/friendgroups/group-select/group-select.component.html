@@ -1,0 +1,13 @@
+<div style="text-align:center">
+  <h1>Your Friend Groups</h1>
+  <ul class="items">
+    <li *ngFor="let friendgroup of friendgroups$ | async"
+      [class.selected]="friendgroup.id === selectedId" class="rounded-list">
+      <a [routerLink]="['/groups', friendgroup.friendgroupid]">
+        <span class="badge">{{friendgroup.friendgroupId}}
+        </span>{{ friendgroup.name}}
+      </a>
+    </li>
+  </ul>
+</div>
+        <!--(click)="postFriendGroup(friendgroup.friendgroupid)">{{friendgroup.name}}-->

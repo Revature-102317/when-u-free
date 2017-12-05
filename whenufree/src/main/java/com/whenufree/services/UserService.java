@@ -63,6 +63,7 @@ public class UserService implements UserDetailsService{
 	return dao.save(u);
     }
 
+    @Override
     public UserDetails loadUserByUsername(String username)
 	throws UsernameNotFoundException{
 	User user = dao.findByEmail(username);	
@@ -82,6 +83,16 @@ public class UserService implements UserDetailsService{
     public List<TimeSlot> getFreeTimesByUser(User u){
     	List<TimeSlot> timeSlotList= new ArrayList<TimeSlot>();
     	List<FreeTime> freeList = freeTimeDao.findByUser(u);
+    	for(int i = 0; i < freeList.size(); i++){
+    		timeSlotList.add(freeList.get(i).getTimeSlot());
+    	}
+    	return timeSlotList;
+    }
+    
+  //This gets all the unscheduled free times of a user
+    public List<TimeSlot> getUnScheduledFreeTimes(User u){
+    	List<TimeSlot> timeSlotList= new ArrayList<TimeSlot>();
+    	List<FreeTime> freeList = freeTimeDao.findByUserAndScheduled(u,(short) 0);
     	for(int i = 0; i < freeList.size(); i++){
     		timeSlotList.add(freeList.get(i).getTimeSlot());
     	}
