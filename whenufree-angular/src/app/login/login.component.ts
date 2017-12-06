@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
 		    this.router.navigate(['homepage']);
 		},
 		error=> {
-		    //this.errorMessage = "Wrong credentials, please try again."
-			alert(" Wrong credentials, please try again.");
+		    this.errorMessage = "Wrong credentials, please try again."
+			//alert(" Wrong credentials, please try again.");
 		});
     }
 
