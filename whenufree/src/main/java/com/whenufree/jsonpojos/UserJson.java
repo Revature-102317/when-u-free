@@ -18,7 +18,7 @@ public class UserJson{
 
     private String password;
     private String currentPassword;
-    private String oldPassword;
+    private String newPassword;
 
     private Set<FriendsListJson> friendsList;
     private Set<ConnectionJson> connections;
