@@ -3,8 +3,8 @@
         <p class="welcome">Welcome, <b></b></p>
         <div style="clear:both"></div>
     </div>
-     
-    <div id="chatbox" *ngFor="let message of messages">{{message.text}}</div>
+    <div id="chatbox" *ngFor="let message of
+    messages">{{message.user}}{{message.date}}<br>{{message.text}}</div>
 
     <form name="message" action="">
         <input name="usermsg" type="text" id="usermsg" [(ngModel)]="message"/>

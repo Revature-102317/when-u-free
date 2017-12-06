@@ -66,10 +66,11 @@ public class MessageJson {
 		this.poll = poll;
 	}
     
-   public User getUser() {
+   public String User() {
 	   return user;
    }
 
-   public void setUser(User user) {
+   public void setUser(String user) {
 	   this.user = user;
+   }
 }

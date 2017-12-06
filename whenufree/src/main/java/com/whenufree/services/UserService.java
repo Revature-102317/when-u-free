@@ -60,8 +60,12 @@ public class UserService implements UserDetailsService{
     }
 
     public User save(User u){
-	return dao.save(u);
+		return dao.save(u);
     }
+
+	public void deleteUser(User u) {
+		dao.delete(u);
+	}
 
     @Override
     public UserDetails loadUserByUsername(String username)
