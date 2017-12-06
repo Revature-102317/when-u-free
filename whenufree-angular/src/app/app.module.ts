@@ -35,6 +35,7 @@ import {SchedulingService} from './services/scheduling.service';
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { FriendgroupComponent } from './friendgroup/friendgroup.component';
 import { SchedulingComponent } from './scheduling/scheduling.component';
+import { MessageComponentComponent } from './message-component/message-component.component';
 import { GroupsettingsComponent } from './groupsettings/groupsettings.component';
 
 
@@ -60,6 +61,7 @@ import { GroupsettingsComponent } from './groupsettings/groupsettings.component'
       RegistrationSuccessComponent,
       FriendgroupComponent,
       SchedulingComponent,
+      MessageComponentComponent,
       GroupsettingsComponent
   ],
   imports: [

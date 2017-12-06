@@ -58,20 +58,16 @@ export class UserFormComponent extends UserInfoComponent implements OnDestroy {
 	}
 
 	onSave(): void {
-		if( this.extendForm) {
-			if( this.userForm.get('newPassword').value == this.userForm.get('confirmPassword').value)
-				this.user.password = this.userForm.get('passwords').get('newPassword').value;
-			else
-				//this.messageService.add( "New passwords don't match, please try again.");
-				console.log('new passwords don\'t match');
+		if( this.extendForm && this.userForm.get('passwords').get('newPassword').value == this.userForm.get('passwords').get('confirmPassword').value) 
+			this.user.newPassword = this.userForm.get('newPassword').value;
+		else
+			console.log('new passwords don\'t match');
+		if( this.userForm.get('passwords').get('currentPassword').value == this.user.currentPassword) {
+			this.userService.updateUser( this.user).subscribe(
+				success => this.messageService.add(" It worked!"),
+					error => this.messageService.add(" Nope")
+			);
 		}
-		this.userService.updateUser( this.user).subscribe(
-			success => {
-				this.messageService.add(" It worked!");
-			},
-			error => {
-				this.messageService.add(" Nope");
-			});
 	}
 
 	onDelete(): void {

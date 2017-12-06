@@ -1,0 +1,13 @@
+<div id="wrapper" class="container">
+    <div id="menu">
+        <p class="welcome">Welcome, <b></b></p>
+        <div style="clear:both"></div>
+    </div>
+     
+    <div id="chatbox" *ngFor="let message of messages">{{message.text}}</div>
+
+    <form name="message" action="">
+        <input name="usermsg" type="text" id="usermsg" [(ngModel)]="message"/>
+        <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
+    </form>
+</div>

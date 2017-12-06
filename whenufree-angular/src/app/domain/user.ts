@@ -8,7 +8,8 @@ export interface User {
 	firstname: string;
 	lastname: string;
 	phone: string;
-	password: string;
+	currentPassword: string;
+	newPassword: string;
 	friendsList: FriendsList[];
 	connections: Connection[];
 }
