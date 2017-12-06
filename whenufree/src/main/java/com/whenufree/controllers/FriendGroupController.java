@@ -266,14 +266,14 @@ public class FriendGroupController {
 	}
 	
 	//path the post request of gotten friend group was sent to
-		@RequestMapping(path="/sendmessage", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
+		@RequestMapping(path="/sendmessage/{id}", method=RequestMethod.POST)
 		@ResponseBody
-		public ResponseEntity<String> sendMessage(@RequestBody String message, Principal user){
+		public ResponseEntity<String> sendMessage(@PathVariable Long id, @RequestBody String message, Principal user){
 			//The 3 in the below statement should be exchanged for the json for substringing
+			System.out.println("Hey, I got something");
 			User u = userService.findByEmail(user.getName());
-			FriendGroup fg = friendGroupService.findByFriendGroupId(activeFriendGroup.get().getFriendGroupId());
-			String m = message.substring(3 ,message.length()-2);
-			friendGroupService.sendMessage(u, fg, m);
+			FriendGroup fg = friendGroupService.findByFriendGroupId(id);
+			friendGroupService.sendMessage(u, fg, message);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 
