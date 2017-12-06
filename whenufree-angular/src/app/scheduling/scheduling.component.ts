@@ -76,8 +76,9 @@ export class SchedulingComponent implements OnInit {
 	    console.log(JSON.stringify(schedulerObj));
 	    this.schService.scheduleEvent(schedulerObj).subscribe(data => {});
     this.groupUserService.sendMessage(id, 'scheduled an event on ' + this.selectedDay
-      + ' at ' + this.startTime + ' for ' + this.selectedDuration + ' hour(s).').subscribe(data => {});
-    window.location.reload();
+      + ' at ' + this.startTime + ' for ' + this.selectedDuration + ' hour(s).').subscribe(data => {this.router.navigate(["friendgroup", id]);});
+    //window.location.reload();
+	this.router.navigate(["loadingpage"]);
     });
 	}
 
