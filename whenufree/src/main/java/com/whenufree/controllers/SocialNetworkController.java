@@ -65,6 +65,7 @@ public class SocialNetworkController{
     @RequestMapping(path = "/leavegroup", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity leaveGroup(@RequestBody Named group, Principal user){
+    	
 	String username = user.getName();
 	User currentUser = userService.findByEmail(username);
 	FriendGroup g = friendGroupService.findById(group.getId());
