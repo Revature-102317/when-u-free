@@ -57,6 +57,11 @@ As well as manipulating that data
     return this.http.post<string>(this.url.getUrl() + '/createfriendgroup', {name}, {withCredentials: true});
   }
 
+  // leaving a group
+  leaveGroup(id: number): Observable<Object> {
+    return this.http.post<number>(this.url.getUrl() + '/leavegroup/', {id}, {withCredentials: true});
+  }
+
   // sendMessage
 
 

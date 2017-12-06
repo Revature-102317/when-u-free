@@ -57,6 +57,10 @@ export class GroupRightBarComponent implements OnInit {
     }
 
     toGroupSettings() {
+      this.route.params.subscribe(params => {
+        let id = +params['id'];
+        this.router.navigate(['groupsettings', id]);
+      });
     }
 
     toScheduleEvent() {
