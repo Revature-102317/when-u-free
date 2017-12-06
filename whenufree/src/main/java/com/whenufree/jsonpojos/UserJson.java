@@ -43,20 +43,7 @@ public class UserJson{
 	}
     }
     
-    public String getCurrentPassword(){
-	return this.currentPassword;
-    }    
-    public void setCurrentPassword(String argCurrentPassword){
-	this.currentPassword = argCurrentPassword;
-    }
-
-    public String getOldPassword(){
-	return this.oldPassword;
-    }
-    public void setOldPassword(String argOldPassword){
-	this.oldPassword = argOldPassword;
-    }
-
+    
     /**
      * Gets the value of userId
      *
@@ -179,6 +166,8 @@ public class UserJson{
 	public final void setNewPassword( final String argNewPassword) {
 		this.newPassword = argNewPassword;
 	}
+	
+
 
     public Set<FriendsListJson> getFriendsList(){
 	return this.friendsList;
