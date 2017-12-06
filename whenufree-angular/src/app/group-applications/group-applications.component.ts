@@ -29,7 +29,9 @@ export class GroupApplicationsComponent implements OnInit {
     onApprove(n: Named){
 	this.route.params.subscribe(params =>{
 	    let id = +params['id'];
-	    this.snService.approveUser(n, id).subscribe(data => {});
+	    this.snService.approveUser(n, id).subscribe(data => {
+		this.ngOnInit();
+	    });	    
 	});
     }
 }

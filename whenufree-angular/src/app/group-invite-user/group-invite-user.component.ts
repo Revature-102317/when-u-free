@@ -65,7 +65,10 @@ export class GroupInviteUserComponent implements OnInit {
     onInvite(n: Named){
 	this.route.params.subscribe(params =>{
 	    let id = +params['id'];
-	    this.snService.inviteUser(n, id).subscribe(data => {});
+	    this.snService.inviteUser(n, id).subscribe(data => {
+		this.onSubmit();
+	    });
+	    
 	});
     }
 

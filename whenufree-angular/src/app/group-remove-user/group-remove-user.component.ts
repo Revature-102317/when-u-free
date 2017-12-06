@@ -54,7 +54,9 @@ export class GroupRemoveUserComponent implements OnInit {
     onRemove(n: Named){
 	this.route.params.subscribe(params =>{
 	    let id = +params['id'];
-	    this.snService.removeUser(n, id).subscribe(data => {});
+	    this.snService.removeUser(n, id).subscribe(data => {
+	    	this.onSubmit();
+	    });
 	});
     }
     onClear(){
