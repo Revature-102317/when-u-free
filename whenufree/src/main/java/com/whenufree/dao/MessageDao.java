@@ -16,6 +16,6 @@ import java.util.HashSet;
 public interface MessageDao extends JpaRepository<Message, Long> {
 	
 	public List< Message> findByFriendGroupOrderByTimestampAsc( FriendGroup friendGroup);
-	public Set< Message> findByUser( User user);
+	public Set< Message> findByAuthor( User user);
 
 }

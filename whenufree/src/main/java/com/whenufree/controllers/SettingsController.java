@@ -69,14 +69,12 @@ public class SettingsController {
 	@ResponseBody
 	public ResponseEntity deleteUser( @RequestBody UserJson userJson,
 			Principal pUser) {
-		/*
 		System.out.println( userJson.getCurrentPassword());
 		User dBUser = userService.findByEmail( pUser.getName());
 		if( bCryptEnc.matches( userJson.getCurrentPassword(),
 					dBUser.getPasswordHash())) {
 			userService.deleteUser( dBUser);
 		}
-		*/
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }

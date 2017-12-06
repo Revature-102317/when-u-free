@@ -25,7 +25,7 @@ export class UserService {
 		return this.http.post<User>(this.url.getUrl() + '/updateuser', user, this.options);
 	}
 
-	deleteUser( user: User): Observable<User> {
-		return this.http.post<User>(this.url.getUrl() + '/deleteuser', user, this.options);
+	deleteUser( user: User): Observable<any> {
+		return this.http.post<any>(this.url.getUrl() + '/deleteuser', user, this.options);
 	}
 }

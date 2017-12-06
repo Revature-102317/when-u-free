@@ -78,7 +78,7 @@ export class UserFormComponent extends UserInfoComponent implements OnDestroy {
 		if( this.youveBeenWarned === true) {
 			this.userService.deleteUser(this.user).subscribe(
 				success => {
-					this.router.navigate(['login']);
+					this.router.navigate(['']);
 				},
 				error => {
 					alert(" Didn't type correct Password.");

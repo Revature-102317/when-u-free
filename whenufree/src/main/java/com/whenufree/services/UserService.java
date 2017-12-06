@@ -42,7 +42,7 @@ public class UserService implements UserDetailsService{
     private TimeSlotService timeSlotService;
 
     @Autowired
-    public UserService(UserDao dao, FreeTimeDao freeTimeDao, TimeSlotService timeSlotService){
+    public UserService(UserDao dao, FreeTimeDao freeTimeDao, TimeSlotService timeSlotService, MessageDao messageDao){
 	this.dao = dao;
 	this.freeTimeDao = freeTimeDao;
 	this.timeSlotService = timeSlotService;
@@ -217,7 +217,7 @@ public class UserService implements UserDetailsService{
     }
 
 	public Set< Message> getAllMessagesByUser( User u) {
-		return messageDao.findByUser(u);
+		return messageDao.findByAuthor(u);
 	}
 
 	public void deleteUser(User u) {
@@ -235,7 +235,10 @@ public class UserService implements UserDetailsService{
 		Set<FreeTime> freeTimes = u.getFreeTimes();
 		Iterator<FreeTime> iterOfFreeTimes = freeTimes.iterator();
 
-		Set< Message> allMessages = this.getAllMessagesByUser(u);
+		Set< Message> allMessages = new HashSet<>();
+		if(this.getAllMessagesByUser(u) != null )
+			allMessages = this.getAllMessagesByUser(u);
+
 		Iterator< Message> iterOfMessages = allMessages.iterator();
 
 		// This deletes all free time entries from the user
