@@ -241,6 +241,7 @@ public class FriendGroupController {
 		friendGroupService.createFriendGroup(u, fgName);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+	
 	/*************************************************
 	 * 
 	 * Messaging stuff
