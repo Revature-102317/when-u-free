@@ -44,7 +44,6 @@ import { GroupInviteUserComponent } from './group-invite-user/group-invite-user.
 import { GroupRemoveUserComponent } from './group-remove-user/group-remove-user.component';
 import { GroupApplicationsComponent } from './group-applications/group-applications.component';
 
-import { GroupsettingsComponent } from './groupsettings/groupsettings.component';
 
 @NgModule({
   declarations: [

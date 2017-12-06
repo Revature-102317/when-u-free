@@ -35,9 +35,11 @@ export class MessageComponentComponent implements OnInit {
 	  });
   }
 
+  /*
   sendMessage(message: Message) {
 	  message
 	  this.groupUserService.sendMessage(message).subscribe(
 		  success => this.message = '');
 	  }
+  */
 }

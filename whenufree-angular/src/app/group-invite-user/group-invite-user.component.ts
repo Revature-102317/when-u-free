@@ -15,7 +15,7 @@ import {Named} from '../domain/named';
 })
 export class GroupInviteUserComponent implements OnInit {
 
-    results: Named[];
+    results: Named[] = [];
     
     currentUser: User;
     
@@ -35,10 +35,24 @@ export class GroupInviteUserComponent implements OnInit {
 	var searchQuery = {'term': this.searchStr, 'type': 'user'};
 	console.log(JSON.stringify(searchQuery));
 	let options = {withCredentials: true};
-	this.http.post<Named[]>("http://localhost:8080/searchnonmembers", searchQuery, options)
-	    .subscribe(data => {
-		this.results = data;
+	this.route.params.subscribe(params =>{
+	    let id = +params['id'];
+	    this.http.post<Named[]>("http://localhost:8080/searchnonmembers/" + id, searchQuery, options)
+		.subscribe(data => {
+		    this.results = [];
+		    if(this.searchType === 'friends'){
+			for(let n of data){
+			    for(let f of this.currentUser.friendsList){
+				if(f.friendId === n.id){
+				    this.results.push(n);
+				}
+			    }
+			}
+		    } else{
+			this.results = data;
+		    }
 	    });
+	});
     }
 
     getCurrentUser(){
@@ -53,6 +67,10 @@ export class GroupInviteUserComponent implements OnInit {
 	    let id = +params['id'];
 	    this.snService.inviteUser(n, id).subscribe(data => {});
 	});
+    }
+
+    onClear(){
+	this.results = [];
     }
     
 }

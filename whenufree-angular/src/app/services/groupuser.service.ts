@@ -72,3 +72,4 @@ As well as manipulating that data
   sendMessage(message: Message): Observable<any> {
 	  return this.http.post<Message> (this.url.getUrl() + '/sendmessage', {withCredentials: true});
   }
+}

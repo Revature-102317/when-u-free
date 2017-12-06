@@ -17,16 +17,8 @@ export class GroupRemoveUserComponent implements OnInit {
 
     results: Named[];
     
-    currentUser: User;onSubmit() {
-	var searchQuery = {'term': this.searchStr, 'type': 'user'};
-	console.log(JSON.stringify(searchQuery));
-	let options = {withCredentials: true};
-	this.http.post<Named[]>("http://localhost:8080/searchmembers", searchQuery, options)
-	    .subscribe(data => {
-		this.results = data;
-	    });
-    }
-    
+    currentUser: User;
+
     searchStr: string;
     searchType: string = "all";
     
@@ -43,10 +35,13 @@ export class GroupRemoveUserComponent implements OnInit {
 	var searchQuery = {'term': this.searchStr, 'type': 'user'};
 	console.log(JSON.stringify(searchQuery));
 	let options = {withCredentials: true};
-	this.http.post<Named[]>("http://localhost:8080/searchmembers", searchQuery, options)
-	    .subscribe(data => {
-		this.results = data;
-	    });
+	this.route.params.subscribe(params =>{
+	    let id = +params['id'];
+	    this.http.post<Named[]>("http://localhost:8080/searchmembers/" + id, searchQuery, options)
+		.subscribe(data => {
+		    this.results = data;
+		});
+	});
     }
 
     getCurrentUser(){
@@ -62,5 +57,8 @@ export class GroupRemoveUserComponent implements OnInit {
 	    this.snService.removeUser(n, id).subscribe(data => {});
 	});
     }
-    
+    onClear(){
+	this.results = [];
+    }
+     
 }

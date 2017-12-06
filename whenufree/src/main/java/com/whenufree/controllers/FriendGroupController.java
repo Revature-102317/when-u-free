@@ -268,7 +268,7 @@ public class FriendGroupController {
 
     @RequestMapping(path="/removeuser/{id}", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity removeUser(@PathVariable("id") Long groupId,  Named user){
+    public ResponseEntity removeUser(@PathVariable("id") Long groupId, @RequestBody Named user){
 	FriendGroup fg = friendGroupService.findById(groupId);
 	User u = userService.findByUserId(user.getId());
 	fg.removeUser(u);
@@ -278,7 +278,7 @@ public class FriendGroupController {
     
     @RequestMapping(path="/inviteuser/{id}", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity inviteUser(@PathVariable("id") Long groupId,  Named user){
+    public ResponseEntity inviteUser(@PathVariable("id") Long groupId,  @RequestBody Named user){
 	FriendGroup fg = friendGroupService.findById(groupId);
 	User u = userService.findByUserId(user.getId());
 	fg.inviteUser(u);
@@ -288,7 +288,7 @@ public class FriendGroupController {
 
     @RequestMapping(path="/approveuser/{id}", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity approveUser(@PathVariable("id") Long groupId,  Named user){
+    public ResponseEntity approveUser(@PathVariable("id") Long groupId, @RequestBody Named user){
 	FriendGroup fg = friendGroupService.findById(groupId);
 	User u = userService.findByUserId(user.getId());
 	fg.approveUser(u);

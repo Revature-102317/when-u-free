@@ -90,6 +90,10 @@ export class SocialNetworkService {
 	return this.http.get<Named>(url, options);
     }
 
-    
+    getApplied(id: number): Observable<Named[]>{
+	let url = this.urlService.getUrl() + '/getapplied' + '/' + id;
+	let options = {headers: this.headers, withCredentials: true};
+	return this.http.get<Named[]>(url, options);
+    }
 
 }

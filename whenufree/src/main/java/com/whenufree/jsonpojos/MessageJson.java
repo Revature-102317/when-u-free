@@ -50,26 +50,29 @@ public class MessageJson {
 		this.timestamp = timestamp;
 	}
 
-	public Boolean getPinned() {
-		return pinned;
-	}
+    public Boolean getPinned() {
+	return pinned;
+    }
 
-	public void setPinned(Boolean pinned) {
-		this.pinned = pinned;
-	}
+    public void setPinned(Boolean pinned) {
+	this.pinned = pinned;
+    }
 
-	public Poll getPoll() {
-		return poll;
-	}
+    public Poll getPoll() {
+	return poll;
+    }
 
-	public void setPoll(Poll poll) {
-		this.poll = poll;
-	}
-    
+    public void setPoll(Poll poll) {
+	this.poll = poll;
+    }
+    /*
    public User getUser() {
 	   return user;
    }
-
+    */
+    /*
    public void setUser(User user) {
 	   this.user = user;
+    }
+    */
 }

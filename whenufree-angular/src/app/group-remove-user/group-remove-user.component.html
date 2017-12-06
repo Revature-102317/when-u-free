@@ -7,14 +7,17 @@
 
       <div class="col-1">
       </div>
-      <label for="searchType" class ="control-label">Filter By:</label>
-      
-      <div class="col-1">
-      </div>
 
       <button type="submit" class="btn btn-success"
 	  [disabled]="!selectRequests.form.valid">
 	Search
+      </button>
+
+      <div class="col-1">
+      </div>
+      
+      <button class="btn" (click)="onClear()">
+	Clear
       </button>
 
   </form>
