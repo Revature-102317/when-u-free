@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-
 import {GroupuserService} from '../services/groupuser.service';
 import {User} from '../domain/user';
 import {UserService} from '../services/user.service';
@@ -21,7 +20,6 @@ import {Friendgroup} from '../domain/friendgroup';
 export class FriendgroupComponent implements OnInit {
 
   currentUser: User;
-
   currentFriendGroup: Friendgroup;
 
   constructor(private groupuserService: GroupuserService,

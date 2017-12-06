@@ -6,6 +6,7 @@ import {UrlService} from './url.service';
 import {User} from '../domain/user';
 import {GroupFreeTime} from '../domain/groupFreeTime';
 import {Named} from '../domain/named';
+import { Message } from '../domain/message';
 
 @Injectable()
 export class GroupuserService {
@@ -57,7 +58,17 @@ As well as manipulating that data
     return this.http.post<string>(this.url.getUrl() + '/createfriendgroup', {name}, {withCredentials: true});
   }
 
-  // sendMessage
+  // getMessages
+  getMessages(id: number): Observable<Message[]> {
+	  return this.http.get<Message[]> (this.url.getUrl() + '/friendgroupmessages/' +id, {withCredentials: true});
+  }
 
+  // leaving a group
+  leaveGroup(id: number): Observable<Object> {
+    return this.http.post<number>(this.url.getUrl() + '/leavegroup/', {id}, {withCredentials: true});
+  }
 
-}
+  // sendMessages
+  sendMessage(message: Message): Observable<any> {
+	  return this.http.post<Message> (this.url.getUrl() + '/sendmessage', {withCredentials: true});
+  }

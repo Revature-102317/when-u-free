@@ -12,6 +12,7 @@ import {SettimescheduledComponent} from '../settimescheduled/settimescheduled.co
 import {LoadingpageComponent} from '../loadingpage/loadingpage.component';
 import {FriendgroupComponent} from '../friendgroup/friendgroup.component';
 import {RegistrationSuccessComponent} from '../registration-success/registration-success.component';
+import {GroupsettingsComponent} from '../groupsettings/groupsettings.component';
 const routes: Routes = [
     {path: 'homepage', component: HomepageComponent},
     {path: 'settime', component: SettimeComponent},
@@ -24,7 +25,8 @@ const routes: Routes = [
     {path: 'settimescheduled', component: SettimescheduledComponent},
     {path: 'loadingpage', component: LoadingpageComponent},
     {path: 'registrationsuccess', component: RegistrationSuccessComponent},
-    {path: 'search', component: SearchComponent}
+    {path: 'search', component: SearchComponent},
+    {path: 'groupsettings/:id', component: GroupsettingsComponent}
 ];
 
 @NgModule({
