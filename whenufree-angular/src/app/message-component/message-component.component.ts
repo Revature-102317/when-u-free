@@ -4,7 +4,7 @@ import { User } from '../domain/user';
 import { Friendgroup } from '../domain/friendgroup';
 import { GroupuserService } from '../services/groupuser.service';
 import { UserService } from '../services/user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -23,11 +23,21 @@ export class MessageComponentComponent implements OnInit {
   constructor(
 	  private groupUserService: GroupuserService,
 	  private userService: UserService,
-	  private router: Router) { }
+	  private router: Router,
+	  private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
-	  this.id$ = this.router.paramMap
-		.switchMap(( params: ParamMap) =>
-			this.groupUserService.getMessages( params.get('id')));
+	  this.route.params.subscribe( params => {
+		  let id = +params['id'];
+		  this.groupUserService.getMessages(id).subscribe(
+			  messages => this.messages = messages);
+	  });
   }
+
+  sendMessage(message: Message) {
+	  message
+	  this.groupUserService.sendMessage(message).subscribe(
+		  success => this.message = '');
+	  }
 }

@@ -20,7 +20,7 @@ import {Friendgroup} from '../domain/friendgroup';
 export class FriendgroupComponent implements OnInit {
 
   currentUser: User;
-  @Output() currentFriendGroup: Friendgroup;
+  currentFriendGroup: Friendgroup;
 
   constructor(private groupuserService: GroupuserService,
               private userService: UserService,

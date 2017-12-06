@@ -58,16 +58,12 @@ As well as manipulating that data
     return this.http.post<string>(this.url.getUrl() + '/createfriendgroup', {name}, {withCredentials: true});
   }
 
-  // sendMessage
-<<<<<<< HEAD
- 
   // getMessages
   getMessages(id: number): Observable<Message[]> {
-	  return this.http.get<Message[]> (this.url.getUrl() + 'friendgroupmessages/{id}', {withCredentials: true});
+	  return this.http.get<Message[]> (this.url.getUrl() + '/friendgroupmessages/' +id, {withCredentials: true});
   }
-  
-=======
 
-
->>>>>>> eafa8e24cc09043cbff28442e1a731da2a96f101
-}
+  // sendMessages
+  sendMessage(message: Message): Observable<any> {
+	  return this.http.post<Message> (this.url.getUrl() + '/sendmessage', {withCredentials: true});
+  }
