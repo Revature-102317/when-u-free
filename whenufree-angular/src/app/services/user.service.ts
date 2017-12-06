@@ -5,10 +5,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MessageService } from '../message.service';
 import { UrlService } from './url.service';
 
-
 @Injectable()
 export class UserService {
-	userUrl = 'http://localhost:8080/user';
+	
 	headers = new HttpHeaders()
 		.set('X-Requested-With', 'XMLHttpRequest'); // to suppress 401 browser popup
 	options = {headers: this.headers, withCredentials: true};
@@ -19,7 +18,7 @@ export class UserService {
 		private url: UrlService) { }
 
 	getUser(): Observable<User> {
-		return this.http.get<User>(this.userUrl, this.options)
+	    return this.http.get<User>(this.url.getUrl() + '/user', this.options)
 	}
 
 	updateUser( user: User): Observable<User> {

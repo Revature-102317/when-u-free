@@ -7,6 +7,7 @@ import {SocialNetworkService} from '../services/social-network.service';
 import {UserService} from '../services/user.service';
 import {User} from '../domain/user';
 import {Named} from '../domain/named';
+import {UrlService} from '../services/url.service';
 
 @Component({
   selector: 'app-group-invite-user',
@@ -22,7 +23,8 @@ export class GroupInviteUserComponent implements OnInit {
     searchStr: string;
     searchType: string = "all";
     
-    constructor(private http: HttpClient,
+    constructor(private url: UrlService,
+		private http: HttpClient,
 		private userService: UserService,
 		private snService: SocialNetworkService,
 		private route: ActivatedRoute) { }
@@ -37,7 +39,7 @@ export class GroupInviteUserComponent implements OnInit {
 	let options = {withCredentials: true};
 	this.route.params.subscribe(params =>{
 	    let id = +params['id'];
-	    this.http.post<Named[]>("http://localhost:8080/searchnonmembers/" + id, searchQuery, options)
+	    this.http.post<Named[]>(this.url.getUrl() + "/searchnonmembers/" + id, searchQuery, options)
 		.subscribe(data => {
 		    this.results = [];
 		    if(this.searchType === 'friends'){

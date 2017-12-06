@@ -7,6 +7,8 @@ import java.util.List;
 import org.hibernate.Hibernate;
 
 import org.springframework.stereotype.Service;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,6 +25,7 @@ import com.whenufree.model.User;
 import com.whenufree.model.FriendsList;
 
 @Service
+@EnableScheduling
 public class UserService implements UserDetailsService{
     private UserDao dao;
     private static FreeTimeDao freeTimeDao;
@@ -203,5 +206,21 @@ public class UserService implements UserDetailsService{
     
     public ArrayList<TimeSlot> getFreeTime(String user){
 		return null;
+    }
+    
+    //cron = "1 0 0 * * SUN"
+    @Scheduled(cron = "1 0 0 * * SUN")
+    public void reset(){
+	System.out.println("Refreshing Everything!");
+	List<FreeTime> freetimes = freeTimeDao.findAll();
+	for(FreeTime ft : freetimes){
+	    if(ft.getIsDefault()){
+		ft.setScheduled(false);
+		freeTimeDao.save(ft);
+	    } else{
+		freeTimeDao.delete(ft);
+	    }
+	}
+	System.out.println("Done Refreshing");
     }
 }

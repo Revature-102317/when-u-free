@@ -8,7 +8,7 @@ import {UserService} from '../services/user.service'
 import {Named} from '../domain/named'
 import {FriendsList} from '../domain/friendsList'
 import {User} from '../domain/user'
-
+import {UrlService} from '../services/url.service';
 
 
 @Component({
@@ -26,7 +26,8 @@ export class SearchComponent implements OnInit {
     searchStr: string;
     searchType: string = "all";
 
-    constructor(private http: HttpClient,
+    constructor(private url: UrlService,
+		private http: HttpClient,
 		private userService: UserService,
 		private snService: SocialNetworkService) { }
     
@@ -38,7 +39,7 @@ export class SearchComponent implements OnInit {
 	var searchQuery = {'term': this.searchStr, 'type': this.searchType};
 	
 	let options = {withCredentials: true};
-	this.http.post<Named[]>("http://localhost:8080/search", searchQuery, options)
+	this.http.post<Named[]>(this.url.getUrl() + "/search", searchQuery, options)
 	    .subscribe(data => {
 		this.results = data;
 	    });

@@ -7,6 +7,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.scheduling.annotation.EnableScheduling;
+//import org.springframework.scheduling.TaskScheduler;
+//import org.springframework.scheduling.concurrent.ConcurrentTaskExecutor;
 
 import com.whenufree.model.FriendGroup;
 
@@ -19,6 +22,7 @@ import com.whenufree.model.FriendGroup;
  */
 @EnableWebMvc
 @Configuration
+@EnableScheduling
 public class WebConfig {
 
 	@Bean
@@ -33,5 +37,10 @@ public class WebConfig {
 	public FriendGroup activeFriendGroup(){
 		return new FriendGroup();
 	}
-	
+
+    /*@Bean
+    public TaskScheduler taskScheduler() {
+	return new ConcurrentTaskScheduler(); //single threaded by default
+    }
+    */	
 }
