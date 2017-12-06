@@ -38,6 +38,7 @@ export class MessageComponentComponent implements OnInit, AfterViewInit {
     });
   }
 
+
   ngAfterViewInit() {
   }
 

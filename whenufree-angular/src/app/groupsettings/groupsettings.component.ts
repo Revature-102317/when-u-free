@@ -20,8 +20,9 @@ export class GroupsettingsComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute) {}
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+	this.getIsAdmin();
+    }
 
   leaveGroup() {
     this.route.params.subscribe(params => {

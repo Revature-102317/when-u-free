@@ -8,7 +8,7 @@ import com.whenufree.model.User;
 
 public class MessageJson {
 	
-	private Long messageId;
+    private Long messageId;
     private String text;
     private LocalDateTime timestamp;
     private Boolean pinned;
@@ -51,17 +51,18 @@ public class MessageJson {
 		this.timestamp = timestamp;
 	}
 
-	public Boolean getPinned() {
-		return pinned;
-	}
+    public Boolean getPinned() {
+	return pinned;
+    }
 
-	public void setPinned(Boolean pinned) {
-		this.pinned = pinned;
-	}
+    public void setPinned(Boolean pinned) {
+	this.pinned = pinned;
+    }
 
-	public Poll getPoll() {
-		return poll;
-	}
+    public Poll getPoll() {
+	return poll;
+    }
+
 
 	public void setPoll(Poll poll) {
 		this.poll = poll;
@@ -74,4 +75,5 @@ public class MessageJson {
 	public void setUser(String user) {
 		this.user = user;
 	}
+
 }

@@ -1,0 +1,12 @@
+<div class ="container">
+  <table class="table">
+    <tr *ngFor="let application of applications">
+      <td>{{application.name}}</td>
+      <td>
+	<button  (click)="onApprove(application)" type="approve user" class="btn">
+	  Add to group
+	</button>
+      </td>
+    </tr>
+  </table>
+</div>

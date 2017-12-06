@@ -14,7 +14,7 @@ export class UserService {
 
 
 	constructor( private http: HttpClient,
-			   private messageService: MessageService) { }
+		     private messageService: MessageService) { }
 
 	getUser(): Observable<User> {
 		return this.http.get<User>(this.userUrl, this.options)

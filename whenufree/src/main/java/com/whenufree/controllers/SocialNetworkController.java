@@ -4,6 +4,7 @@ import com.whenufree.services.UserService;
 import com.whenufree.services.EmailService;
 import com.whenufree.services.FriendGroupService;
 import com.whenufree.model.User;
+import com.whenufree.model.Connection;
 import com.whenufree.model.FriendGroup;
 import com.whenufree.jsonpojos.Named;
 
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.security.Principal;
+import java.util.List;
+import java.util.ArrayList;
 
 @Controller
 public class SocialNetworkController{
@@ -115,6 +118,19 @@ public class SocialNetworkController{
 	return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @RequestMapping(path = "/getapplied/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<Named>> getApplied(@PathVariable("id") Long id){
+	FriendGroup fg = friendGroupService.findById(id);
+	ArrayList<Named> ret = new ArrayList<>();
+	 
+	for(Connection c : fg.getConnections()){
+	    if(c.getFriendGroupStatus().getStatusName().equals("applied")){
+		ret.add(new Named(c.getUser()));
+	    }
+	}
+	return new ResponseEntity<>(ret, HttpStatus.OK);
+    }
 
     
     @RequestMapping(path = "/getuser/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
