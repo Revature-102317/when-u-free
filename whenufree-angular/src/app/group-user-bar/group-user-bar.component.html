@@ -1,5 +1,14 @@
 <div style="text-align:center">
-  <ul *ngFor="let user of users">
-    <li>{{user.firstname}} {{user.lastname}}</li>
-  </ul>
+  <table class = "table">
+    <thead>
+    <tr>
+      <th>Users</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.firstname}} {{user.lastname}}</td>
+    </tr>
+    </tbody>
+  </table>
 </div>

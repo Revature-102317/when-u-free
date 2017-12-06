@@ -7,7 +7,7 @@ import com.whenufree.model.Poll;
 
 public class MessageJson {
 	
-	private Long messageId;
+    private Long messageId;
     private String text;
     private LocalDateTime timestamp;
     private Boolean pinned;

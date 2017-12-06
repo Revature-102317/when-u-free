@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {ActivatedRoute, Router} from '@angular/router';
+
+import {SocialNetworkService} from '../services/social-network.service';
+
+import {UserService} from '../services/user.service';
+import {User} from '../domain/user';
+import {Named} from '../domain/named';
 
 @Component({
   selector: 'app-group-invite-user',
@@ -16,7 +24,8 @@ export class GroupInviteUserComponent implements OnInit {
     
     constructor(private http: HttpClient,
 		private userService: UserService,
-		private snService: SocialNetworkService) { }
+		private snService: SocialNetworkService,
+		private route: ActivatedRoute) { }
 
     ngOnInit() {
 	this.getCurrentUser();
@@ -26,7 +35,7 @@ export class GroupInviteUserComponent implements OnInit {
 	var searchQuery = {'term': this.searchStr, 'type': 'user'};
 	console.log(JSON.stringify(searchQuery));
 	let options = {withCredentials: true};
-	this.http.post<Named[]>("http://localhost:8080/search", searchQuery, options)
+	this.http.post<Named[]>("http://localhost:8080/searchnonmembers", searchQuery, options)
 	    .subscribe(data => {
 		this.results = data;
 	    });

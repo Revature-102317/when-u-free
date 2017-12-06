@@ -120,6 +120,15 @@ public class FriendGroupService {
 			return u;
 		}
 	
+	//creating a friendgroup
+	public FriendGroup createFriendGroup(User u, String name){
+		FriendGroup fg = new FriendGroup();
+		fg.setName(name);
+		fg.addUserAdmin(u, fg);
+		friendGroupDao.save(fg);
+		return fg;
+	}
+	
 	//getting all users in a friendgroup by user ID
 	public List<User> findUsers(FriendGroup fg){
 		Set<Connection> connectionList = fg.getConnections();
@@ -214,8 +223,6 @@ public class FriendGroupService {
 	message.setPinned(false);
 	message.setPoll(null);
 	message.setText(text);
-		
-		
 	friendgroup.sendMessage(message);
 	friendGroupDao.save(friendgroup);
 	return message;

@@ -30,7 +30,7 @@
     <tr *ngFor="let result of results ">
       <td>{{result.name}}</td>
       <td>
-	<button  (click)="onInvite"(result)" type="add friend" class="btn">
+	<button  (click)="onInvite(result)" type="invite user" class="btn">
 	  Invite to Group
 	</button>
       </td>
