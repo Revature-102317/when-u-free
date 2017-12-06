@@ -19,4 +19,6 @@ public interface ConnectionDao extends JpaRepository<Connection, Long>{
 	public List<Connection> findByUserOrderByConnectionIdAsc(User u);
 	
 	public List<Connection> findByUserAndFriendGroupStatusOrderByConnectionIdAsc(User u, FriendGroupStatus fgs);
+
+	public void removeByUser(User u);
 }
