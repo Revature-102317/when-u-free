@@ -1,3 +1,18 @@
-<p>
-  groupsettings works!
-</p>
+<app-navbar></app-navbar>
+<div class="container">
+<h1>Group Settings</h1>
+<input type="submit" class="btn" value="Leave this group" (click)="leaveGroup()">
+<hr>
+<h4>Admin Settings:</h4>
+<div *ngIf="this.isAdmin">
+  <hr>
+  Pending Applications:
+  <app-group-applications></app-group-applications>
+  <hr>
+  Invite Users:
+  <app-group-invite-user></app-group-invite-user>
+  <hr>
+  Remove Users:
+  <app-group-remove-user></app-group-remove-user>
+</div>
+</div>

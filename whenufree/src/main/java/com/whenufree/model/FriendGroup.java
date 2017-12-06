@@ -117,9 +117,39 @@ public class FriendGroup {
 		this.messages.add(m);
 	}
 	
-	public void removeUser(User u){
-		this.connections.remove(u);
+    public void removeUser(User u){
+	u.leaveGroup(this);
+    }
+
+    public void approveUser(User u){
+	FriendGroupStatus approvedStatus = new FriendGroupStatus();
+	approvedStatus.setStatusId((short)1);
+	approvedStatus.setStatusName("approved");
+	for(Connection c : this.connections){
+	    if(c.getUser().getUserId().equals(u.getUserId())){
+		c.setFriendGroupStatus(approvedStatus);
+	    }
 	}
+	for(Connection c : u.getConnections()){
+	    if(c.getFriendGroup().getFriendGroupId().equals(this.friendGroupId)){
+		c.setFriendGroupStatus(approvedStatus);
+	    }
+	}
+    }
+
+    public void inviteUser(User u){
+	Connection newConnection = new Connection();
+	FriendGroupStatus status = new FriendGroupStatus();
+	status.setStatusId((short)3);
+	status.setStatusName("invited");
+	newConnection.setUser(u);
+	newConnection.setFriendGroup(this);
+	newConnection.setIsAdmin(false);
+	newConnection.setFriendGroupStatus(status);
+	this.connections.add(newConnection);
+    }
+
+    
 
 	//to String method
     @Override

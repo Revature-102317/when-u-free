@@ -241,6 +241,7 @@ public class FriendGroupController {
 		friendGroupService.createFriendGroup(u, fgName);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+	
 	/*************************************************
 	 * 
 	 * Messaging stuff
@@ -264,16 +265,64 @@ public class FriendGroupController {
 		return new ResponseEntity<List<MessageJson>>(sent, HttpStatus.OK);
 	}
 	
+
+    @RequestMapping(path="/removeuser/{id}", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity removeUser(@PathVariable("id") Long groupId, @RequestBody Named user){
+	FriendGroup fg = friendGroupService.findById(groupId);
+	User u = userService.findByUserId(user.getId());
+	fg.removeUser(u);
+	friendGroupService.save(fg);
+	return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    
+    @RequestMapping(path="/inviteuser/{id}", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity inviteUser(@PathVariable("id") Long groupId,  @RequestBody Named user){
+	FriendGroup fg = friendGroupService.findById(groupId);
+	User u = userService.findByUserId(user.getId());
+	fg.inviteUser(u);
+	friendGroupService.save(fg);
+	return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(path="/approveuser/{id}", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity approveUser(@PathVariable("id") Long groupId, @RequestBody Named user){
+	FriendGroup fg = friendGroupService.findById(groupId);
+	User u = userService.findByUserId(user.getId());
+	fg.approveUser(u);
+	friendGroupService.save(fg);
+	return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+
+    @RequestMapping(path="/getapplied/{id}", method=RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<List<Named>> getApplied(@PathVariable("id") Long groupId){
+	FriendGroup fg = friendGroupService.findById(groupId);
+	List<Named> l = new ArrayList<>();
+	for(Connection c : fg.getConnections()){
+	    if(c.getFriendGroupStatus().getStatusName().equals("applied")){
+		l.add(new Named(c.getUser()));
+	    }
+	}
+	return new ResponseEntity<>(l, HttpStatus.OK);
+    }
+    
+
+
 	//path the post request of gotten friend group was sent to
-		@RequestMapping(path="/sendmessage", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
+		@RequestMapping(path="/sendmessage/{id}", method=RequestMethod.POST)
 		@ResponseBody
-		public ResponseEntity<String> sendMessage(@RequestBody String message, Principal user){
+		public ResponseEntity<String> sendMessage(@PathVariable Long id, @RequestBody String message, Principal user){
 			//The 3 in the below statement should be exchanged for the json for substringing
+			System.out.println("Hey, I got something");
 			User u = userService.findByEmail(user.getName());
-			FriendGroup fg = friendGroupService.findByFriendGroupId(activeFriendGroup.get().getFriendGroupId());
-			String m = message.substring(3 ,message.length()-2);
-			friendGroupService.sendMessage(u, fg, m);
+			FriendGroup fg = friendGroupService.findByFriendGroupId(id);
+			friendGroupService.sendMessage(u, fg, message);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
+
 
 }

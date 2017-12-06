@@ -36,7 +36,7 @@ export class SearchComponent implements OnInit {
  
     onSubmit() {
 	var searchQuery = {'term': this.searchStr, 'type': this.searchType};
-	console.log(JSON.stringify(searchQuery));
+	
 	let options = {withCredentials: true};
 	this.http.post<Named[]>("http://localhost:8080/search", searchQuery, options)
 	    .subscribe(data => {

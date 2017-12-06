@@ -55,6 +55,29 @@ export class SocialNetworkService {
 	return this.http.post(url, n, options);
     }
 
+    inviteUser(n: Named, id: number): Observable<any>{
+	let url = this.urlService.getUrl() + "/inviteuser" + "/" + id;
+	let options = {headers: this.headers, withCredentials: true};
+
+	return this.http.post(url, n, options);
+    }
+
+    removeUser(n: Named, id: number): Observable<any>{
+	let url = this.urlService.getUrl() + "/removeuser" + "/" + id;
+	let options = {headers: this.headers, withCredentials: true};
+
+	return this.http.post(url, n, options);
+    }
+
+    approveUser(n: Named, id: number): Observable<any>{
+	let url = this.urlService.getUrl() + "/approveuser" + "/" + id;
+	let options = {headers: this.headers, withCredentials: true};
+
+	return this.http.post(url, n, options);
+    }
+    
+    
+    
     getUser(id: number): Observable<Named>{
 	let url = this.urlService.getUrl() + '/getuser' + '/' + id;
 	let options = {headers: this.headers, withCredentials: true};
@@ -65,6 +88,12 @@ export class SocialNetworkService {
 	let url = this.urlService.getUrl() + '/getfriendgroup' + '/' + id;
 	let options = {headers: this.headers, withCredentials: true};
 	return this.http.get<Named>(url, options);
+    }
+
+    getApplied(id: number): Observable<Named[]>{
+	let url = this.urlService.getUrl() + '/getapplied' + '/' + id;
+	let options = {headers: this.headers, withCredentials: true};
+	return this.http.get<Named[]>(url, options);
     }
 
 }

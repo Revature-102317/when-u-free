@@ -13,7 +13,6 @@ export class UserService {
 		.set('X-Requested-With', 'XMLHttpRequest'); // to suppress 401 browser popup
 	options = {headers: this.headers, withCredentials: true};
 
-
 	constructor(
 		private http: HttpClient,
 		private messageService: MessageService,
