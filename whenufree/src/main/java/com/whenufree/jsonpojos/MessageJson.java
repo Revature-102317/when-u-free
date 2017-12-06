@@ -75,5 +75,4 @@ public class MessageJson {
 	public void setUser(String user) {
 		this.user = user;
 	}
-
 }

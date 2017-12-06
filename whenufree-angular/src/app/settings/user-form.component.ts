@@ -5,6 +5,7 @@ import { User } from '../domain/user';
 import { UserService } from '../services/user.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { MessageService } from '../message.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-user-info',
@@ -28,11 +29,13 @@ export class UserFormComponent extends UserInfoComponent implements OnDestroy {
 	@Output() onCancel = new EventEmitter<boolean>();
 	userForm: FormGroup;
 	extendForm: boolean = false;
+	youveBeenWarned: boolean = false;
 
 	constructor( private formBuilder: FormBuilder,
 				protected userService: UserService,
 			   private authService: AuthenticationService,
-			   private messageService: MessageService) {
+			   private messageService: MessageService,
+			   private router: Router) {
 		super( userService);
 		this.createForm();
 	}
@@ -58,26 +61,34 @@ export class UserFormComponent extends UserInfoComponent implements OnDestroy {
 	}
 
 	onSave(): void {
-		if( this.extendForm && this.userForm.get('passwords').get('newPassword').value == this.userForm.get('passwords').get('confirmPassword').value) 
-			this.user.newPassword = this.userForm.get('newPassword').value;
-		else
-			console.log('new passwords don\'t match');
-		if( this.userForm.get('passwords').get('currentPassword').value == this.user.currentPassword) {
-			this.userService.updateUser( this.user).subscribe(
-				success => this.messageService.add(" It worked!"),
-					error => this.messageService.add(" Nope")
-			);
-		}
+		if( this.extendForm && this.userForm.get('passwords.newPassword').value === this.userForm.get('passwords.confirmPassword').value) 
+			this.user.newPassword = this.userForm.get('passwords.newPassword').value;
+		this.userService.updateUser( this.user).subscribe(
+			success => {
+				this.router.navigate(['homepage']);
+			},
+			error => {
+				alert(" Passwords don't match");
+			}
+		);
 	}
 
 	onDelete(): void {
-		this.userService.deleteUser(this.user).subscribe(
-			success => {
-				this.messageService.add(" It worked!");
-			},
-			error => {
-				this.messageService.add(" Nope");
-			});
+		console.log(this.youveBeenWarned);
+		if( this.youveBeenWarned === true) {
+			this.userService.deleteUser(this.user).subscribe(
+				success => {
+					this.router.navigate(['']);
+				},
+				error => {
+					alert(" Didn't type correct Password.");
+				}
+			);
+		} else {
+			this.youveBeenWarned = true;
+			alert( "Correctly fill out form and click again if you are sure you want to delete your account.  You've been warned....!");
+		}
+		
 	}
 
 	cancelEdit( clicked: boolean) {
