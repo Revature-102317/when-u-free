@@ -8,7 +8,23 @@
 
 <div class ="container">
   <div class="row">
-  <div class ="col-6">
+    <div class="col-4">
+      <h3 class="h3">Friend List</h3>
+      <table class="table">
+	<tr *ngFor="let friend of friendList">
+	  <td>
+	    {{friend.name}}
+	  </td>
+	  <td>
+	    <button (click)="onRemoveFriend(friend)" type="remove friend" class="btn">
+	      Remove friend
+	    </button>
+	  </td>
+	</tr>
+      </table>
+
+    </div>
+  <div class ="col-4">
     <h3 class="h3">Friend Invites</h3>
     <table class="table">
       <tr *ngFor="let friend of friendRequests">
@@ -28,7 +44,7 @@
       </tr>
   </table>
   </div>
-  <div class = "col-6">
+  <div class = "col-4">
     <h3>Group Invites</h3>
     <table class="table">
       <tr *ngFor="let group of groupInvites">
