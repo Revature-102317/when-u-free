@@ -34,4 +34,13 @@ export class GroupApplicationsComponent implements OnInit {
 	    });	    
 	});
     }
+   onReject(n: Named){
+        this.route.params.subscribe(params =>{
+            let id = +params['id'];
+            this.snService.removeUser(n, id).subscribe(data => {
+                this.ngOnInit();
+            });
+        });
+    }
+
 }

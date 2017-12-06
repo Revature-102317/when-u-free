@@ -5,7 +5,7 @@
     </div>
 
   <div id="chatbox"class="scrollbar scrollbar-primary"><div id="cbox" class="force-overflow" *ngFor="let message of messages" >
-    <h6>{{user.firstname}}</h6> <div>{{message.text}}</div></div></div>
+    <h6>{{message.user}}</h6> <div>{{message.text}}</div></div></div>
 
     <form name="message" action="">
         <input name="usermsg" type="text" id="usermsg" [(ngModel)]="message"/>
