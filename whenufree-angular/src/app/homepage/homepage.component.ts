@@ -15,6 +15,7 @@ export class HomepageComponent implements OnInit {
     
     
     currentUser: User = null;
+    friendList: Named[] = [];
     friendRequests: Named[] = [];
     groupInvites: Named[] = [];
     
@@ -37,6 +38,16 @@ export class HomepageComponent implements OnInit {
 	}
     }
 
+    populateFriendList(){
+	this.friendList = [];
+	for(let friend of this.currentUser.friendsList){
+	    if(friend.status === "approved"){
+		this.snService.getUser(friend.friendId).subscribe(
+		    data => this.friendList.push(data));
+	    }
+	}
+    }
+
     populateInvites(){
 	this.groupInvites = [];
 	for(let conn of this.currentUser.connections){
@@ -54,6 +65,7 @@ export class HomepageComponent implements OnInit {
 		this.currentUser = user;
 		this.populateRequests();
 		this.populateInvites();
+		this.populateFriendList();
 	    },
 	    error => this.router.navigate([''])
 	);
@@ -80,6 +92,12 @@ export class HomepageComponent implements OnInit {
     }
     onDenyGroup(group: Named){
 	this.snService.leaveGroup(group).subscribe(data => {
+	    this.getUser();
+	});
+    }
+
+    onRemoveFriend(friend: Named){
+	this.snService.removeFriend(friend).subscribe(data => {
 	    this.getUser();
 	});
     }
