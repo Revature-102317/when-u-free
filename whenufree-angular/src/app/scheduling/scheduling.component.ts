@@ -80,6 +80,5 @@ export class SchedulingComponent implements OnInit {
     //window.location.reload();
 	this.router.navigate(["loadingpage"]);
     });
-	}
-
+  }
 }

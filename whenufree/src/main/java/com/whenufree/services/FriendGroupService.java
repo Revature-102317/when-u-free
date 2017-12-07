@@ -139,7 +139,10 @@ public class FriendGroupService {
 		List<User> userList = new ArrayList<User>();
 		Iterator<Connection> it = connectionList.iterator();
 	     while(it.hasNext()){
-	        userList.add(it.next().getUser());
+	    	Connection connection = it.next();
+	    	if(connection.getFriendGroupStatus().getStatusId() == 1){
+	    		userList.add(connection.getUser());
+	    	}
 	     }
 		return userList;
 	}
