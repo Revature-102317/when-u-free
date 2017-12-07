@@ -1,9 +1,15 @@
 <app-navbar></app-navbar>
 <div [(ngSwitch)]="editInfo">
-  <ng-container *ngSwitchCase="false">
-    <app-user-info [user]="user"></app-user-info>
-  <button (click)="onEdit()" *ngIf="user">Edit</button>
-  </ng-container>
+  <div class="container">
+    <div class="row">
+      <div class="col-5">
+        <ng-container *ngSwitchCase="false">
+          <app-user-info [user]="user"></app-user-info>
+          <button (click)="onEdit()" *ngIf="user">Edit</button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
   <app-user-form [user]="user" *ngSwitchCase="true" (onCancel)="onCancel($event)"></app-user-form>
 </div>
 

@@ -242,4 +242,6 @@ public class FriendGroupService {
 	public List< Message> grabMessages( FriendGroup friendGroup) {
 		return messageDao.findByFriendGroupOrderByTimestampAsc( friendGroup);
 	}
+
+	
 }

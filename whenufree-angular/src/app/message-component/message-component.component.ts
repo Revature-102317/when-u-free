@@ -38,7 +38,6 @@ export class MessageComponentComponent implements OnInit, AfterViewInit {
     });
   }
 
-
   ngAfterViewInit() {
   }
 
@@ -46,8 +45,9 @@ export class MessageComponentComponent implements OnInit, AfterViewInit {
     this.route.params.subscribe(params => {
       let id = +params['id'];
       this.groupUserService.sendMessage(id, this.message).subscribe(
-        data => {});
-      window.location.reload();
+        data => {this.router.navigate(["friendgroup", id]);});
+      //window.location.reload();
+	this.router.navigate(["loadingpage"])
     });
   }
 }

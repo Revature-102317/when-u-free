@@ -15,7 +15,10 @@ public class UserJson{
     private String firstname;
     private String lastname;
     private String phone;
+
     private String password;
+    private String currentPassword;
+    private String newPassword;
 
     private Set<FriendsListJson> friendsList;
     private Set<ConnectionJson> connections;
@@ -39,6 +42,7 @@ public class UserJson{
 	    this.connections.add(new ConnectionJson(connection));
 	}
     }
+    
     
     /**
      * Gets the value of userId
@@ -130,13 +134,20 @@ public class UserJson{
 	this.phone = argPhone;
     }
     
+	public final String getPassword() {
+		return this.password;
+	}
+
+	public final void setPassword( final String argPassword) {
+		this.password = argPassword;
+	}
     /**
      * Gets the value of password
      *
      * @return the value of password
      */
-    public final String getPassword() {
-	return this.password;
+    public final String getCurrentPassword() {
+	return this.currentPassword;
     }
 
     /**
@@ -144,10 +155,18 @@ public class UserJson{
      *
      * @param argPassword Value to assign to this.password
      */
-    public final void setPassword(final String argPassword) {
-	this.password = argPassword;
+    public final void setCurrentPassword(final String argPassword) {
+	this.currentPassword = argPassword;
     }
 
+	public final String getNewPassword() {
+		return this.newPassword;
+	}
+
+	public final void setNewPassword( final String argNewPassword) {
+		this.newPassword = argNewPassword;
+	}
+	
 
 
     public Set<FriendsListJson> getFriendsList(){
@@ -170,7 +189,7 @@ public class UserJson{
     @Override
     public String toString() {
 	return "UserJson [userId=" + userId + ", email=" + email + ", firstname=" + firstname + ", lastname=" + lastname
-	    + ", phone=" + phone + ", password=" + password + "]";
+	    + ", phone=" + phone + ", currentPassword=" + currentPassword + ", newPassword=" + newPassword + "]";
     }
     
 }   

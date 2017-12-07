@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
 		},
 		error=> {
 		    this.errorMessage = "Wrong credentials, please try again."
+			//alert(" Wrong credentials, please try again.");
 		});
     }
 
