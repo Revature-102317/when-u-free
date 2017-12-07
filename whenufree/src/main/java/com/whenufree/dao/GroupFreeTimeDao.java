@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.whenufree.model.FreeTime;
 import com.whenufree.model.FriendGroup;
+import com.whenufree.model.FriendGroupStatus;
 import com.whenufree.model.GroupFreeTime;
 import com.whenufree.model.User;
 
@@ -23,6 +24,5 @@ public interface GroupFreeTimeDao extends JpaRepository<GroupFreeTime, Long>{
 	public GroupFreeTime findByGroupFreeTimeId(Long id);
 	
 	public void removeByFriendGroup(FriendGroup fg);
-	
 
 }

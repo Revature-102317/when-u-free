@@ -79,6 +79,5 @@ export class SchedulingComponent implements OnInit {
       + ' at ' + this.startTime + ' for ' + this.selectedDuration + ' hour(s).').subscribe(data => {});
     window.location.reload();
     });
-	}
-
+  }
 }

@@ -78,9 +78,7 @@ public class WhenufreeApplication {
 		// User u3 = userService.findByUserId((long) 5);
 		/*
 		User u = userService.findByUserId((long) 1);
-		FriendGroup fg = friendGroupService.findByFriendGroupId((long) 1);
-		// FriendGroup fg2 = friendGroupService.findByFriendGroupId((long) 21);
-		friendGroupService.addUser(fg, u);
+		*/
 		/*
 		List<TimeSlot> tsList = friendGroupService.getAllGroupTimeSlots(fg);
 		List<GroupFreeTime> gft = friendGroupService.timeSlotsToGroupFreeTimes(fg, tsList);
