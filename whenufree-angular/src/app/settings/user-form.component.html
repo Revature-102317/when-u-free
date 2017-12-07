@@ -1,5 +1,4 @@
 <h2> User Info </h2>
-<h3> A FormGroup w/ multiple FormControls </h3>
 <form [formGroup]="userForm" novalidate>
   <div formGroupName= "user" id="UserFormId" *ngIf="user">
     <div class="form-group">
@@ -10,13 +9,13 @@
     </div>
     <div class="form-group">
       <label class="center-block" for="lastname">Last Name:
-        <input class="form=control" formControlName="lastname" required
+        <input class="form-control" formControlName="lastname" required
         [(ngModel)]="user.lastname" />
       </label>
     </div>
     <div class="form-group">
       <label class="center-block" for="email">E-mail Address:
-        <input class="form-contol" formControlName="email" required
+        <input class="form-control" formControlName="email" required
         [(ngModel)]="user.email" />
       </label>
     </div>
@@ -31,7 +30,7 @@
     <div class="form-group">
       <label class="center-block" for="currentPassword">Current Password:
         <input type="password" class="form-control" required
-        formControlName="currentPassword" [(ngModel)]="user.password"/>
+        formControlName="currentPassword" [(ngModel)]="user.currentPassword"/>
       </label>
     </div>
     <div class="form-group" *ngIf="extendForm">
@@ -48,7 +47,7 @@
     </div>
   </div>
   <div class="form-group-button">
-    <div (click)="onChangePassword()">Change password?</div>
+    <div (click)="onChangePassword()" *ngIf="!extendForm">Change password?</div>
   </div>
 </form>
 <div>
@@ -56,4 +55,3 @@
   <button (click)="cancelEdit(true)">Cancel</button>
   <button (click)="onSave()">Save</button>
 </div>
-  <p> FormValue: {{ userForm.value | json }}</p>

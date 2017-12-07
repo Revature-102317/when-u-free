@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.boot.CommandLineRunner;
-
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -23,6 +23,7 @@ import com.whenufree.model.User;
 import java.util.List;
 
 @SpringBootApplication
+@EnableScheduling
 public class WhenufreeApplication {
 
     @Autowired
@@ -51,12 +52,12 @@ public class WhenufreeApplication {
     @Bean
     public CommandLineRunner runner() {
 	return args -> {
-
-	    User u = userService.findByUserId(1L);
+/*
+	    User u = userService.findByUserId(5L);
 	    if(u != null && u.getPasswordHash().length() < 50){
 		u.setPasswordHash(bCryptPasswordEncoder.encode(u.getPasswordHash()));
 		userService.save(u);
-	    }
+	    }*/
 	  
 	    
 		// User u = userService.findByUserId((long) 1);
@@ -73,12 +74,14 @@ public class WhenufreeApplication {
 		// System.out.println(friendGroupService.getGroupFreeTimes(fg));
 
 		
-		// User u = userService.findByUserId((long) 1);
+		
 		// User u2 = userService.findByUserId((long) 4);
 		// User u3 = userService.findByUserId((long) 5);
-		
-		// FriendGroup fg = friendGroupService.findByFriendGroupId((long) 1);
+		/*
+		User u = userService.findByUserId((long) 1);
+		FriendGroup fg = friendGroupService.findByFriendGroupId((long) 1);
 		// FriendGroup fg2 = friendGroupService.findByFriendGroupId((long) 21);
+		friendGroupService.addUser(fg, u);
 		/*
 		List<TimeSlot> tsList = friendGroupService.getAllGroupTimeSlots(fg);
 		List<GroupFreeTime> gft = friendGroupService.timeSlotsToGroupFreeTimes(fg, tsList);

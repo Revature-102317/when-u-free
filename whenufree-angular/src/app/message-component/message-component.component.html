@@ -1,0 +1,13 @@
+<div id="wrapper" class="container">
+    <div id="menu">
+        <div style="clear:both"></div>
+    </div>
+
+  <div id="chatbox"class="scrollbar scrollbar-primary"><div id="cbox" class="force-overflow" *ngFor="let message of messages" >
+    <h6>{{message.user}}</h6> <div>{{message.text}}</div></div></div>
+
+    <form name="message" action="">
+        <input name="usermsg" type="text" id="usermsg" [(ngModel)]="message"/>
+        <input name="submitmsg" type="submit"  id="submitmsg" value="Send"  (click) = "sendMessage(message)"/>
+    </form>
+</div>

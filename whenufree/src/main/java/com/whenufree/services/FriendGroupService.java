@@ -15,6 +15,7 @@ import com.whenufree.dao.FriendGroupDao;
 import com.whenufree.dao.FriendGroupStatusDao;
 import com.whenufree.dao.GroupFreeTimeDao;
 import com.whenufree.dao.UserDao;
+import com.whenufree.dao.MessageDao;
 import com.whenufree.model.Connection;
 import com.whenufree.model.FreeTime;
 import com.whenufree.model.FriendGroup;
@@ -41,6 +42,8 @@ public class FriendGroupService {
 	
 	private GroupFreeTimeDao groupFreeTimeDao;
 	
+	private MessageDao messageDao;
+
 	public FriendGroupService(){
 	}
 	
@@ -48,7 +51,7 @@ public class FriendGroupService {
 	public FriendGroupService(UserDao userDao, FriendGroupDao friendGroupDao,
 			ConnectionDao connectionDao, FriendGroupStatusDao friendGroupStatusDao,
 			GroupFreeTimeDao groupFreeTimeDao, UserService userService,
-			TimeSlotService timeSlotService){
+			TimeSlotService timeSlotService, MessageDao messageDao){
 		this.userDao = userDao;
 		this.friendGroupDao = friendGroupDao;
 		this.connectionDao = connectionDao;
@@ -56,6 +59,7 @@ public class FriendGroupService {
 		this.userService = userService;
 		this.groupFreeTimeDao = groupFreeTimeDao;
 		this.timeSlotService = timeSlotService;
+		this.messageDao = messageDao;
 	}
 
     public FriendGroup findById(Long id){
@@ -119,6 +123,15 @@ public class FriendGroupService {
 			friendGroupDao.save(fg);
 			return u;
 		}
+	
+	//creating a friendgroup
+	public FriendGroup createFriendGroup(User u, String name){
+		FriendGroup fg = new FriendGroup();
+		fg.setName(name);
+		fg.addUserAdmin(u, fg);
+		friendGroupDao.save(fg);
+		return fg;
+	}
 	
 	//getting all users in a friendgroup by user ID
 	public List<User> findUsers(FriendGroup fg){
@@ -214,8 +227,6 @@ public class FriendGroupService {
 	message.setPinned(false);
 	message.setPoll(null);
 	message.setText(text);
-		
-		
 	friendgroup.sendMessage(message);
 	friendGroupDao.save(friendgroup);
 	return message;
@@ -224,4 +235,10 @@ public class FriendGroupService {
     public void save(FriendGroup group){
 	friendGroupDao.save(group);
     }
+
+	public List< Message> grabMessages( FriendGroup friendGroup) {
+		return messageDao.findByFriendGroupOrderByTimestampAsc( friendGroup);
+	}
+
+	
 }

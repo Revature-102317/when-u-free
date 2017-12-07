@@ -50,14 +50,16 @@ public class SettingsController {
 	public ResponseEntity updateUser( @RequestBody UserJson userJson,
 			Principal pUser) {
 		User dBUser = userService.findByEmail( pUser.getName());
-		//System.out.println(userJson.toString());
-		if( bCryptEnc.matches( userJson.getPassword(),
+		if( bCryptEnc.matches( userJson.getCurrentPassword(),
 					dBUser.getPasswordHash())) {
 			dBUser.setEmail( userJson.getEmail());
 			dBUser.setFirstname( userJson.getFirstname());
 			dBUser.setLastname( userJson.getLastname());
 			dBUser.setPhone( userJson.getPhone());
-			dBUser.setPasswordHash( userJson.getPassword());
+			if(userJson.getNewPassword() != null) 
+				dBUser.setPasswordHash( bCryptEnc.encode( userJson.getNewPassword()));
+			else
+				dBUser.setPasswordHash( bCryptEnc.encode( userJson.getCurrentPassword()));
 		}
 		userService.save( dBUser);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -67,17 +69,11 @@ public class SettingsController {
 	@ResponseBody
 	public ResponseEntity deleteUser( @RequestBody UserJson userJson,
 			Principal pUser) {
+		System.out.println( userJson.getCurrentPassword());
 		User dBUser = userService.findByEmail( pUser.getName());
-		if( bCryptEnc.matches( userJson.getPassword(),
+		if( bCryptEnc.matches( userJson.getCurrentPassword(),
 					dBUser.getPasswordHash())) {
-			/*
-			 * Two Options
-			 * #1 Delete User
-			 * userService.delete( dBUser);
-			 *
-			 * or just set User to invalid leaves room for recovery
-			 * userService.setValid();
-			 */
+			userService.deleteUser( dBUser);
 		}
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

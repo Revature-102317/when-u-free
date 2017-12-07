@@ -36,6 +36,14 @@ import { RegistrationSuccessComponent } from './registration-success/registratio
 import { FriendgroupComponent } from './friendgroup/friendgroup.component';
 import { SchedulingComponent } from './scheduling/scheduling.component';
 
+import { MessageComponentComponent } from './message-component/message-component.component';
+import { GroupsettingsComponent } from './groupsettings/groupsettings.component';
+
+
+import { GroupInviteUserComponent } from './group-invite-user/group-invite-user.component';
+import { GroupRemoveUserComponent } from './group-remove-user/group-remove-user.component';
+import { GroupApplicationsComponent } from './group-applications/group-applications.component';
+
 
 @NgModule({
   declarations: [
@@ -58,7 +66,12 @@ import { SchedulingComponent } from './scheduling/scheduling.component';
       LoadingpageComponent,
       RegistrationSuccessComponent,
       FriendgroupComponent,
-      SchedulingComponent
+      SchedulingComponent,
+      GroupInviteUserComponent,
+      GroupRemoveUserComponent,
+      GroupApplicationsComponent,
+      MessageComponentComponent,
+      GroupsettingsComponent
   ],
   imports: [
       BrowserModule,

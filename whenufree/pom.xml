@@ -28,7 +28,7 @@
     <maven.compiler.target>${java.version}</maven.compiler.target>
   </properties>
   
-  <dependencies>
+  <dependencies>   
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-aop</artifactId>
@@ -62,7 +62,7 @@
       <artifactId>spring-security-test</artifactId>
       <scope>test</scope>
     </dependency>
-
+    
     <dependency>
       <groupId>com.oracle</groupId>
       <artifactId>ojdbc7</artifactId>

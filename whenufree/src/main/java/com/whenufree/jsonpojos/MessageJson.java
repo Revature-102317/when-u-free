@@ -4,17 +4,18 @@ import java.time.LocalDateTime;
 
 import com.whenufree.model.Message;
 import com.whenufree.model.Poll;
+import com.whenufree.model.User;
 
 public class MessageJson {
 	
-	private Long messageId;
+    private Long messageId;
     private String text;
     private LocalDateTime timestamp;
     private Boolean pinned;
     private Poll poll;
     private String user;
-    
-    public MessageJson() {
+
+	public MessageJson() {
     }
     
     public MessageJson(Message m){
@@ -50,22 +51,28 @@ public class MessageJson {
 		this.timestamp = timestamp;
 	}
 
-	public Boolean getPinned() {
-		return pinned;
-	}
+    public Boolean getPinned() {
+	return pinned;
+    }
 
-	public void setPinned(Boolean pinned) {
-		this.pinned = pinned;
-	}
+    public void setPinned(Boolean pinned) {
+	this.pinned = pinned;
+    }
 
-	public Poll getPoll() {
-		return poll;
-	}
+    public Poll getPoll() {
+	return poll;
+    }
+
 
 	public void setPoll(Poll poll) {
 		this.poll = poll;
 	}
-    
-    
+	
+    public String getUser() {
+		return user;
+	}
 
+	public void setUser(String user) {
+		this.user = user;
+	}
 }

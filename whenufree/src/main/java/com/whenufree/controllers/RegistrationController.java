@@ -38,7 +38,7 @@ public class RegistrationController{
 	u.setFirstname(newUser.getFirstname());
 	u.setLastname(newUser.getLastname());
 	u.setPhone(newUser.getPhone());
-	u.setPasswordHash(passwordEncoder.encode(newUser.getPassword()));
+	u.setPasswordHash(passwordEncoder.encode(newUser.getCurrentPassword()));
 	userService.save(u);
 
 	return new ResponseEntity<>(HttpStatus.NO_CONTENT);

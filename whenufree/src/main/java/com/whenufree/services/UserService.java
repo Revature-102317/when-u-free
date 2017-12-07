@@ -1,12 +1,16 @@
 package com.whenufree.services;
 
 import java.util.ArrayList;
-
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Iterator;
 
 import org.hibernate.Hibernate;
 
 import org.springframework.stereotype.Service;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,22 +21,33 @@ import org.springframework.security.core.userdetails.User.UserBuilder;
 import com.whenufree.dao.FreeTimeDao;
 import com.whenufree.dao.TimeSlotDao;
 import com.whenufree.dao.UserDao;
+import com.whenufree.dao.ConnectionDao;
+import com.whenufree.dao.MessageDao;
+
 import com.whenufree.model.FreeTime;
 import com.whenufree.model.TimeSlot;
 import com.whenufree.model.User;
 import com.whenufree.model.FriendsList;
+import com.whenufree.model.Message;
+import com.whenufree.model.Connection;
+import com.whenufree.model.FriendGroup;
 
 @Service
+@EnableScheduling
 public class UserService implements UserDetailsService{
     private UserDao dao;
+	private ConnectionDao connectionDao;
+	private MessageDao messageDao;
     private static FreeTimeDao freeTimeDao;
     private TimeSlotService timeSlotService;
 
     @Autowired
-    public UserService(UserDao dao, FreeTimeDao freeTimeDao, TimeSlotService timeSlotService){
+    public UserService(UserDao dao, FreeTimeDao freeTimeDao, TimeSlotService timeSlotService, MessageDao messageDao){
 	this.dao = dao;
 	this.freeTimeDao = freeTimeDao;
 	this.timeSlotService = timeSlotService;
+	this.connectionDao = connectionDao;
+	this.messageDao = messageDao;
     }
 
     public List<User> findAll(){
@@ -57,10 +72,6 @@ public class UserService implements UserDetailsService{
 	for(FriendsList f : u.getFriendsList())
 	    System.out.println(f);
 	return u;
-    }
-
-    public User save(User u){
-	return dao.save(u);
     }
 
     @Override
@@ -200,4 +211,78 @@ public class UserService implements UserDetailsService{
     public ArrayList<TimeSlot> getFreeTime(String user){
 		return null;
     }
+
+	public User save(User u){
+		return dao.save(u);
+    }
+
+	public Set< Message> getAllMessagesByUser( User u) {
+		return messageDao.findByAuthor(u);
+	}
+
+	public void deleteUser(User u) {
+		User deleted = dao.findByUserId( 999999999999999999L);
+
+		Set<FriendsList> friendsList = u.getFriendsList();
+		Iterator<FriendsList> iterOfFriendsList = friendsList.iterator();
+
+		Set<User> listOfFriends = new HashSet<>();
+		Iterator<User> iterOfFriends = listOfFriends.iterator();
+
+		Set<Connection> groupList = u.getConnections();
+		Iterator<Connection> iterOfConnections = groupList.iterator();
+
+		Set<FreeTime> freeTimes = u.getFreeTimes();
+		Iterator<FreeTime> iterOfFreeTimes = freeTimes.iterator();
+
+		Set< Message> allMessages = new HashSet<>();
+		if(this.getAllMessagesByUser(u) != null )
+			allMessages = this.getAllMessagesByUser(u);
+
+		Iterator< Message> iterOfMessages = allMessages.iterator();
+
+		// This deletes all free time entries from the user
+		this.deleteByUser(u);
+
+		// This sets author to generic deleted user
+		while( iterOfMessages.hasNext()) {
+			Message current = iterOfMessages.next();
+			current.setAuthor( deleted);
+		}
+
+		while( iterOfConnections.hasNext()) {
+			FriendGroup current = iterOfConnections.next().getFriendGroup();
+				current.removeUser(u);
+		}
+
+		while( iterOfFriendsList.hasNext()) {
+			FriendsList current = iterOfFriendsList.next();
+			Long friendId = current.getFriendsListPK().getFriendId();
+			listOfFriends.add( dao.findByUserId(friendId));
+		}
+
+		while( iterOfFriends.hasNext()) {
+			u.removeFriend( iterOfFriends.next());
+		}
+		
+		dao.delete(u);
+	}
+
+	/*
+    //cron = "1 0 0 * * SUN"
+    @Scheduled(cron = "1 0 0 * * SUN")
+    public void reset(){
+	System.out.println("Refreshing Everything!");
+	List<FreeTime> freetimes = freeTimeDao.findAll();
+	for(FreeTime ft : freetimes){
+	    if(ft.getIsDefault()){
+		ft.setScheduled(false);
+		freeTimeDao.save(ft);
+	    } else{
+		freeTimeDao.delete(ft);
+	    }
+	}
+	System.out.println("Done Refreshing");
+    }
+	*/
 }

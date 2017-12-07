@@ -1,7 +1,15 @@
 <app-navbar></app-navbar>
 <div style="text-align:center">
-  <h1>Your Friend Groups</h1>
-  <ul *ngFor="let friendgroup of friendgroups"  class="rounded-list">
-    <li (click)="postFriendGroup(friendgroup.friendGroupId)">{{friendgroup.name}}</li>
-  </ul>
+  <table class = "table">
+    <thead>
+    <tr><th>Your Friend Groups</th></tr>
+    <tr><td (click)="showForm()"><img src="../../assets/plus.png" alt="plus"
+                                      width="40" height="40"></td></tr>
+    </thead>
+  <tr *ngFor="let friendgroup of friendgroups"  class="rounded-list">
+    <td (click)="postFriendGroup(friendgroup.friendGroupId)">{{friendgroup.name}}</td>
+  </tr>
+    <div [hidden]="hideForm"><input [(ngModel)]="text" value = {{text}}>
+      <input type="submit" value="Create Friend Group" (click)="createFriendGroup(text)" ></div>
+  </table>
 </div>

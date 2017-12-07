@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import {GroupBestTime} from '../domain/groupBestTime';
 import {GroupFreeTime} from '../domain/groupFreeTime';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../services/user.service';
 import {GroupuserService} from '../services/groupuser.service';
 import {User} from '../domain/user';
@@ -26,30 +26,41 @@ export class GroupRightBarComponent implements OnInit {
 
     constructor(private groupuserService: GroupuserService,
                 private userService: UserService,
-                private router: Router) { }
+                private router: Router,
+                private route: ActivatedRoute) { }
 
     ngOnInit() {
       this.userService.getUser().subscribe(
         user => this.currentUser = user,
         error => this.router.navigate([''])
       );
-      this.getGroupFreeTimes();
-      this.getGreatTimes();
+      this.getTimes();
     }
 
-    getGroupFreeTimes() {
-      this.groupuserService.getGroupFreeTimes().subscribe(groupfreetimes => {
-        this.groupFreeTimes = groupfreetimes;
+  getTimes() {
+    this.route.params.subscribe(params => {
+      let id = +params['id'];
+      this.groupuserService.getGroupFreeTimes(id).subscribe(greatTimes => {
+        this.groupFreeTimes = greatTimes;
+        this.getGreatTimes();
       });
-    }
+    });
+  }
 
     getGreatTimes() {
-      this.groupuserService.getGroupFreeTimesBetter().subscribe(greatTimes => {
-        this.greatTimes = greatTimes;
+      this.route.params.subscribe(params => {
+        let id = +params['id'];
+        this.groupuserService.getGroupFreeTimesBetter(id).subscribe(greatTimes => {
+          this.greatTimes = greatTimes;
+        });
       });
     }
 
     toGroupSettings() {
+      this.route.params.subscribe(params => {
+        let id = +params['id'];
+        this.router.navigate(['groupsettings', id]);
+      });
     }
 
     toScheduleEvent() {
